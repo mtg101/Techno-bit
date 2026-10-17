@@ -14,7 +14,7 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
-        led.plot(4, 0)
+        led.plot(4, 1)
     if "wave snare" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.NOISE,
@@ -27,7 +27,7 @@ def play_note(noteName: str):
                 InterpolationCurve.LOGARITHMIC),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
-        led.plot(3, 0)
+        led.plot(3, 1)
     if "wave lopew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
@@ -40,7 +40,7 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
-        led.plot(2, 0)
+        led.plot(2, 1)
     if "wave hipew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
@@ -53,13 +53,13 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
-        led.plot(1, 0)
+        led.plot(1, 1)
     if "fx hello" == noteName:
         music.stop_all_sounds()
         music.play(music.builtin_playable_sound_effect(soundExpression.hello),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
-        led.plot(0, 0)
+        led.plot(0, 1)
     if "tone" == noteName.split(" ")[0]:
         music.stop_all_sounds()
         play_tone(noteName.split(" ")[1],

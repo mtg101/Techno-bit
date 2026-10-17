@@ -73,6 +73,20 @@ def on_button_pressed_a():
     led_show_not_playing()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
+def play_tone(name: str, octave: number, ms: number):
+    global tone_index, tone_freq
+    tone_index = tone_name.index_of(name)
+    if tone_index < 0:
+        tone_index = tone_sharp.index_of(name)
+    if tone_index < 0:
+        tone_index = tone_flat.index_of(name)
+    if tone_index < 0:
+        basic.pause(ms)
+    else:
+        tone_freq = tone_hz[tone_index]
+        for index2 in range(octave - 3):
+            tone_freq = tone_freq * 2
+        music.play_tone(tone_freq, ms)
 def create_pattern_2():
     global pattern_2
     pattern_2 = ["fx hello"]
@@ -166,7 +180,17 @@ def create_patterns():
     create_pattern_1()
     create_pattern_2()
 pattern_2: List[str] = []
+tone_freq = 0
+tone_index = 0
 pattern_1: List[str] = []
+tone_hz: List[number] = []
+tone_flat: List[str] = []
+tone_sharp: List[str] = []
+tone_name: List[str] = []
+tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
+tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
+tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
+tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)

@@ -1,8 +1,8 @@
-def play_note(note: str):
-    if "x" == note:
+def play_note(noteName: str):
+    if "x" == noteName:
         music.stop_all_sounds()
         basic.clear_screen()
-    if "wave kick" == note:
+    if "wave kick" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 200,
@@ -15,7 +15,7 @@ def play_note(note: str):
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(4, 0)
-    if "wave snare" == note:
+    if "wave snare" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.NOISE,
                 523,
@@ -28,7 +28,7 @@ def play_note(note: str):
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(3, 0)
-    if "wave lopew" == note:
+    if "wave lopew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 1374,
@@ -41,7 +41,7 @@ def play_note(note: str):
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(2, 0)
-    if "wave hipew" == note:
+    if "wave hipew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 3789,
@@ -54,18 +54,26 @@ def play_note(note: str):
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(1, 0)
-    if "fx hello" == note:
+    if "fx hello" == noteName:
         music.stop_all_sounds()
         music.play(music.builtin_playable_sound_effect(soundExpression.hello),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(0, 0)
-    if "-" == note:
+    if "tone" == noteName.split(" ")[0]:
+        music.stop_all_sounds()
+        play_tone(noteName.split(" ")[1],
+            parse_float(noteName.split(" ")[2]),
+            1000)
         basic.clear_screen()
-def play_pattern(pattern: List[str]):
+        led.plot(0, 4)
+    if "-" == noteName:
+        basic.clear_screen()
+def play_pattern(pattern: List[any]):
     for index in range(32):
-        play_note(pattern[index])
+        play_note(convert_to_text(pattern[index]))
         basic.pause(200)
+    music.stop_all_sounds()
 
 def on_button_pressed_a():
     basic.clear_screen()
@@ -80,13 +88,11 @@ def play_tone(name: str, octave: number, ms: number):
         tone_index = tone_sharp.index_of(name)
     if tone_index < 0:
         tone_index = tone_flat.index_of(name)
-    if tone_index < 0:
-        basic.pause(ms)
-    else:
+    if tone_index >= 0:
         tone_freq = tone_hz[tone_index]
         for index2 in range(octave - 3):
             tone_freq = tone_freq * 2
-        music.play_tone(tone_freq, ms)
+        music.ring_tone(tone_freq)
 def create_pattern_2():
     global pattern_2
     pattern_2 = ["fx hello"]
@@ -179,10 +185,11 @@ input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 def create_patterns():
     create_pattern_1()
     create_pattern_2()
+    create_pattern_3()
 def create_pattern_3():
     global pattern_3
     pattern_3 = ["tone E 4"]
-    pattern_3.append("=")
+    pattern_3.append("-")
     pattern_3.append("tone B 3")
     pattern_3.append("tone C 4")
     pattern_3.append("tone D 4")

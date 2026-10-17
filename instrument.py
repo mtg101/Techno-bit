@@ -65,8 +65,6 @@ def play_note(noteName: str):
         play_tone(noteName.split(" ")[1],
             parse_float(noteName.split(" ")[2]),
             1000)
-        basic.clear_screen()
-        led.plot(0, 4)
     if "-" == noteName:
         basic.clear_screen()
 def play_pattern(pattern: List[any]):
@@ -93,6 +91,15 @@ def play_tone(name: str, octave: number, ms: number):
         for index2 in range(octave - 3):
             tone_freq = tone_freq * 2
         music.ring_tone(tone_freq)
+        basic.clear_screen()
+        if tone_index < 5:
+            led.plot(tone_index, 4)
+        else:
+            if tone_index < 10:
+                led.plot(tone_index - 5, 3)
+            else:
+                if tone_index < 15:
+                    led.plot(tone_index - 10, 2)
 def create_pattern_2():
     global pattern_2
     pattern_2 = ["fx hello"]

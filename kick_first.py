@@ -3,6 +3,7 @@ def play_note(note: str):
         music.stop_all_sounds()
         basic.clear_screen()
     if "wave kick" == note:
+        music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 200,
                 1,
@@ -15,6 +16,7 @@ def play_note(note: str):
         basic.clear_screen()
         led.plot(4, 0)
     if "wave snare" == note:
+        music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.NOISE,
                 523,
                 1,
@@ -27,29 +29,37 @@ def play_note(note: str):
         basic.clear_screen()
         led.plot(3, 0)
     if "wave lopew" == note:
+        music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 1374,
                 1,
                 255,
                 0,
-                100,
+                200,
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(2, 0)
     if "wave hipew" == note:
+        music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 3789,
                 1,
                 255,
                 0,
-                100,
+                200,
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         basic.clear_screen()
         led.plot(1, 0)
+    if "fx hello" == note:
+        music.stop_all_sounds()
+        music.play(music.builtin_playable_sound_effect(soundExpression.hello),
+            music.PlaybackMode.IN_BACKGROUND)
+        basic.clear_screen()
+        led.plot(0, 0)
     if "-" == note:
         basic.clear_screen()
 def play_pattern(pattern: List[str]):
@@ -65,7 +75,7 @@ input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def create_pattern_2():
     global pattern_2
-    pattern_2 = ["wave kick"]
+    pattern_2 = ["fx hello"]
     pattern_2.append("wave lopew")
     pattern_2.append("wave kick")
     pattern_2.append("wave lopew")
@@ -81,7 +91,7 @@ def create_pattern_2():
     pattern_2.append("wave lopew")
     pattern_2.append("wave kick")
     pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
+    pattern_2.append("fx hello")
     pattern_2.append("wave hipew")
     pattern_2.append("wave kick")
     pattern_2.append("wave hipew")

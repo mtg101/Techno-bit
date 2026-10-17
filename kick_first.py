@@ -1,6 +1,7 @@
 def play_note(note: str):
     if "x" == note:
         music.stop_all_sounds()
+        basic.clear_screen()
     if "wave kick" == note:
         music.play(music.create_sound_expression(WaveShape.SQUARE,
                 200,
@@ -11,7 +12,7 @@ def play_note(note: str):
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
-        led.unplot(3, 0)
+        basic.clear_screen()
         led.plot(4, 0)
     if "wave snare" == note:
         music.play(music.create_sound_expression(WaveShape.NOISE,
@@ -23,14 +24,37 @@ def play_note(note: str):
                 SoundExpressionEffect.WARBLE,
                 InterpolationCurve.LOGARITHMIC),
             music.PlaybackMode.IN_BACKGROUND)
-        led.unplot(4, 0)
+        basic.clear_screen()
         led.plot(3, 0)
+    if "wave lopew" == note:
+        music.play(music.create_sound_expression(WaveShape.SQUARE,
+                1374,
+                1,
+                255,
+                0,
+                100,
+                SoundExpressionEffect.NONE,
+                InterpolationCurve.CURVE),
+            music.PlaybackMode.IN_BACKGROUND)
+        basic.clear_screen()
+        led.plot(2, 0)
+    if "wave hipew" == note:
+        music.play(music.create_sound_expression(WaveShape.SQUARE,
+                3789,
+                1,
+                255,
+                0,
+                100,
+                SoundExpressionEffect.NONE,
+                InterpolationCurve.CURVE),
+            music.PlaybackMode.IN_BACKGROUND)
+        basic.clear_screen()
+        led.plot(1, 0)
     if "-" == note:
-        led.unplot(3, 0)
-        led.unplot(4, 0)
-def play_pattern(pattern: List[any]):
+        basic.clear_screen()
+def play_pattern(pattern: List[str]):
     for index in range(32):
-        play_note(pattern_1[index])
+        play_note(pattern[index])
         basic.pause(200)
 
 def on_button_pressed_a():
@@ -39,6 +63,40 @@ def on_button_pressed_a():
     led_show_not_playing()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
+def create_pattern_2():
+    global pattern_2
+    pattern_2 = ["wave kick"]
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave lopew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
+    pattern_2.append("wave kick")
+    pattern_2.append("wave hipew")
 def led_show_not_playing():
     basic.show_leds("""
         . . . # .
@@ -49,11 +107,12 @@ def led_show_not_playing():
         """)
 
 def on_button_pressed_b():
-    music.stop_all_sounds()
+    basic.clear_screen()
+    play_pattern(pattern_2)
     led_show_not_playing()
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-def create_pattern_arrays():
+def create_pattern_1():
     global pattern_1
     pattern_1 = ["wave kick"]
     pattern_1.append("-")
@@ -87,9 +146,19 @@ def create_pattern_arrays():
     pattern_1.append("wave snare")
     pattern_1.append("wave kick")
     pattern_1.append("wave snare")
+
+def on_logo_pressed():
+    music.stop_all_sounds()
+    led_show_not_playing()
+input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
+
+def create_patterns():
+    create_pattern_1()
+    create_pattern_2()
+pattern_2: List[str] = []
 pattern_1: List[str] = []
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
 led_show_not_playing()
-create_pattern_arrays()
+create_patterns()

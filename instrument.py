@@ -186,6 +186,12 @@ def create_patterns():
     create_pattern_1()
     create_pattern_2()
     create_pattern_3()
+def create_tones():
+    global tone_name, tone_sharp, tone_flat, tone_hz
+    tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
+    tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
+    tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
+    tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
 def create_pattern_3():
     global pattern_3
     pattern_3 = ["tone E 4"]
@@ -222,19 +228,16 @@ def create_pattern_3():
     pattern_3.append("-")
 pattern_3: List[str] = []
 pattern_2: List[str] = []
-tone_freq = 0
-tone_index = 0
-pattern_1: List[str] = []
 tone_hz: List[number] = []
+tone_freq = 0
 tone_flat: List[str] = []
 tone_sharp: List[str] = []
 tone_name: List[str] = []
-tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
-tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
-tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
-tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
+tone_index = 0
+pattern_1: List[str] = []
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
 led_show_not_playing()
 create_patterns()
+create_tones()

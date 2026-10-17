@@ -11,6 +11,8 @@ def play_note(note: str):
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
+        led.unplot(3, 0)
+        led.plot(4, 0)
     if "wave snare" == note:
         music.play(music.create_sound_expression(WaveShape.NOISE,
                 523,
@@ -21,6 +23,11 @@ def play_note(note: str):
                 SoundExpressionEffect.WARBLE,
                 InterpolationCurve.LOGARITHMIC),
             music.PlaybackMode.IN_BACKGROUND)
+        led.unplot(4, 0)
+        led.plot(3, 0)
+    if "-" == note:
+        led.unplot(3, 0)
+        led.unplot(4, 0)
 def play_pattern(pattern: List[any]):
     for index in range(32):
         play_note(pattern_1[index])
@@ -29,6 +36,7 @@ def play_pattern(pattern: List[any]):
 def on_button_pressed_a():
     basic.clear_screen()
     play_pattern(pattern_1)
+    led_show_not_playing()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def led_show_not_playing():

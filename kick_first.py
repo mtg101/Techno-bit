@@ -132,7 +132,7 @@ def led_show_not_playing():
 
 def on_button_pressed_b():
     basic.clear_screen()
-    play_pattern(pattern_2)
+    play_pattern(pattern_3)
     led_show_not_playing()
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
@@ -179,6 +179,41 @@ input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 def create_patterns():
     create_pattern_1()
     create_pattern_2()
+def create_pattern_3():
+    global pattern_3
+    pattern_3 = ["tone E 4"]
+    pattern_3.append("=")
+    pattern_3.append("tone B 3")
+    pattern_3.append("tone C 4")
+    pattern_3.append("tone D 4")
+    pattern_3.append("-")
+    pattern_3.append("tone C 4")
+    pattern_3.append("tone B 3")
+    pattern_3.append("tone A 3")
+    pattern_3.append("-")
+    pattern_3.append("tone A 3")
+    pattern_3.append("tone C 4")
+    pattern_3.append("tone E 4")
+    pattern_3.append("-")
+    pattern_3.append("tone D 4")
+    pattern_3.append("tone C 4")
+    pattern_3.append("tone B 3")
+    pattern_3.append("-")
+    pattern_3.append("-")
+    pattern_3.append("tone C 4")
+    pattern_3.append("tone D 4")
+    pattern_3.append("-")
+    pattern_3.append("tone E 4")
+    pattern_3.append("-")
+    pattern_3.append("tone C 4")
+    pattern_3.append("-")
+    pattern_3.append("tone A 3")
+    pattern_3.append("-")
+    pattern_3.append("tone A 3")
+    pattern_3.append("-")
+    pattern_3.append("-")
+    pattern_3.append("-")
+pattern_3: List[str] = []
 pattern_2: List[str] = []
 tone_freq = 0
 tone_index = 0

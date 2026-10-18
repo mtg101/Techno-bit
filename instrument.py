@@ -87,10 +87,12 @@ def play_pattern(pattern: List[any]):
     music.stop_all_sounds()
 
 def on_button_pressed_a():
-    basic.clear_screen()
-    led.plot(0, 0)
-    play_pattern(pattern_1)
-    led_show_not_playing()
+    global current_pattern
+    if current_pattern == num_patterns:
+        current_pattern = 1
+    else:
+        current_pattern = current_pattern + 1
+    basic.show_number(current_pattern)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def play_tone(name: str, octave: number, ms: number):
@@ -154,20 +156,17 @@ def create_pattern_2():
     pattern_2.append("wave hipew")
     pattern_2.append("wave kick")
     pattern_2.append("wave hipew")
-def led_show_not_playing():
-    basic.show_leds("""
-        . . . # .
-        . . # . .
-        . # . . .
-        # # # # #
-        # # # # #
-        """)
 
 def on_button_pressed_b():
     basic.clear_screen()
-    led.plot(2, 0)
-    play_pattern(pattern_3)
-    led_show_not_playing()
+    led.plot(current_pattern - 1, 0)
+    if current_pattern == 1:
+        play_pattern(pattern_1)
+    if current_pattern == 2:
+        play_pattern(pattern_2)
+    if current_pattern == 3:
+        play_pattern(pattern_3)
+    basic.show_number(current_pattern)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def create_pattern_1():
@@ -207,7 +206,6 @@ def create_pattern_1():
 
 def on_logo_pressed():
     music.stop_all_sounds()
-    led_show_not_playing()
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def create_patterns():
@@ -255,6 +253,7 @@ def create_pattern_3():
     pattern_3.append("-")
     pattern_3.append("-")
 pattern_3: List[str] = []
+pattern_1: List[str] = []
 pattern_2: List[str] = []
 tone_hz: List[number] = []
 tone_freq = 0
@@ -262,8 +261,9 @@ tone_flat: List[str] = []
 tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
-pattern_1: List[str] = []
 next_note_time = 0
+current_pattern = 0
+num_patterns = 0
 led_y = 0
 led_x = 0
 music.stop_all_sounds()
@@ -271,6 +271,8 @@ music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
 led_x = -1
 led_y = -1
-led_show_not_playing()
+num_patterns = 3
+current_pattern = 1
+basic.show_number(current_pattern)
 create_patterns()
 create_tones()

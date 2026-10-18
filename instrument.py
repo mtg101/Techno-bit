@@ -79,9 +79,11 @@ def play_note(noteName: str):
     if "-" == noteName:
         led.unplot(led_x, led_y)
 def play_pattern(pattern: List[any]):
+    global next_note_time
     for index in range(32):
+        next_note_time = input.running_time() + 200
         play_note(convert_to_text(pattern[index]))
-        basic.pause(200)
+        basic.pause(max(0, next_note_time - input.running_time()))
     music.stop_all_sounds()
 
 def on_button_pressed_a():
@@ -261,6 +263,7 @@ tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
 pattern_1: List[str] = []
+next_note_time = 0
 led_y = 0
 led_x = 0
 music.stop_all_sounds()

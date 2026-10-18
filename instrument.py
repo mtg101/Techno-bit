@@ -1,7 +1,8 @@
 def play_note(noteName: str):
+    global led_x, led_y
     if "x" == noteName:
         music.stop_all_sounds()
-        basic.clear_screen()
+        led.unplot(led_x, led_y)
     if "wave kick" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
@@ -13,8 +14,10 @@ def play_note(noteName: str):
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
-        basic.clear_screen()
-        led.plot(4, 1)
+        led.unplot(led_x, led_y)
+        led_x = 4
+        led_y = 1
+        led.plot(led_x, led_y)
     if "wave snare" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.NOISE,
@@ -26,8 +29,10 @@ def play_note(noteName: str):
                 SoundExpressionEffect.WARBLE,
                 InterpolationCurve.LOGARITHMIC),
             music.PlaybackMode.IN_BACKGROUND)
-        basic.clear_screen()
-        led.plot(3, 1)
+        led.unplot(led_x, led_y)
+        led_x = 3
+        led_y = 1
+        led.plot(led_x, led_y)
     if "wave lopew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
@@ -39,8 +44,10 @@ def play_note(noteName: str):
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
-        basic.clear_screen()
-        led.plot(2, 1)
+        led.unplot(led_x, led_y)
+        led_x = 2
+        led_y = 1
+        led.plot(led_x, led_y)
     if "wave hipew" == noteName:
         music.stop_all_sounds()
         music.play(music.create_sound_expression(WaveShape.SQUARE,
@@ -52,21 +59,25 @@ def play_note(noteName: str):
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
-        basic.clear_screen()
-        led.plot(1, 1)
+        led.unplot(led_x, led_y)
+        led_x = 1
+        led_y = 1
+        led.plot(led_x, led_y)
     if "fx hello" == noteName:
         music.stop_all_sounds()
         music.play(music.builtin_playable_sound_effect(soundExpression.hello),
             music.PlaybackMode.IN_BACKGROUND)
-        basic.clear_screen()
-        led.plot(0, 1)
+        led.unplot(led_x, led_y)
+        led_x = 0
+        led_y = 1
+        led.plot(led_x, led_y)
     if "tone" == noteName.split(" ")[0]:
         music.stop_all_sounds()
         play_tone(noteName.split(" ")[1],
             parse_float(noteName.split(" ")[2]),
             1000)
     if "-" == noteName:
-        basic.clear_screen()
+        led.unplot(led_x, led_y)
 def play_pattern(pattern: List[any]):
     for index in range(32):
         play_note(convert_to_text(pattern[index]))
@@ -75,12 +86,13 @@ def play_pattern(pattern: List[any]):
 
 def on_button_pressed_a():
     basic.clear_screen()
+    led.plot(0, 0)
     play_pattern(pattern_1)
     led_show_not_playing()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def play_tone(name: str, octave: number, ms: number):
-    global tone_index, tone_freq
+    global tone_index, tone_freq, led_x, led_y
     tone_index = tone_name.index_of(name)
     if tone_index < 0:
         tone_index = tone_sharp.index_of(name)
@@ -91,15 +103,21 @@ def play_tone(name: str, octave: number, ms: number):
         for index2 in range(octave - 3):
             tone_freq = tone_freq * 2
         music.ring_tone(tone_freq)
-        basic.clear_screen()
+        led.unplot(led_x, led_y)
         if tone_index < 5:
-            led.plot(tone_index, 4)
+            led_x = tone_index
+            led_y = 4
+            led.plot(led_x, led_y)
         else:
             if tone_index < 10:
-                led.plot(tone_index - 5, 3)
+                led_x = tone_index - 5
+                led_y = 3
+                led.plot(led_x, led_y)
             else:
                 if tone_index < 15:
-                    led.plot(tone_index - 10, 2)
+                    led_x = tone_index - 10
+                    led_y = 2
+                    led.plot(led_x, led_y)
 def create_pattern_2():
     global pattern_2
     pattern_2 = ["fx hello"]
@@ -145,6 +163,7 @@ def led_show_not_playing():
 
 def on_button_pressed_b():
     basic.clear_screen()
+    led.plot(2, 0)
     play_pattern(pattern_3)
     led_show_not_playing()
 input.on_button_pressed(Button.B, on_button_pressed_b)
@@ -242,9 +261,13 @@ tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
 pattern_1: List[str] = []
+led_y = 0
+led_x = 0
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
+led_x = -1
+led_y = -1
 led_show_not_playing()
 create_patterns()
 create_tones()

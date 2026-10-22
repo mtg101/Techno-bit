@@ -1,3 +1,38 @@
+def create_track_drums_1():
+    global track_drums_1
+    track_drums_1 = ["wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat"]
+
 def on_received_number(receivedNumber):
     if not (is_playing):
         if current_pattern != 0:
@@ -46,12 +81,12 @@ def play_note(noteName: str):
                 3460,
                 255,
                 0,
-                100,
+                50,
                 SoundExpressionEffect.NONE,
                 InterpolationCurve.LINEAR),
             music.PlaybackMode.IN_BACKGROUND)
         led.unplot(led_x, led_y)
-        led_x = 3
+        led_x = 2
         led_y = 1
         led.plot(led_x, led_y)
     if "wave bass" == noteName:
@@ -66,7 +101,7 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         led.unplot(led_x, led_y)
-        led_x = 3
+        led_x = 1
         led_y = 1
         led.plot(led_x, led_y)
     if "wave lopew" == noteName:
@@ -81,8 +116,8 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         led.unplot(led_x, led_y)
-        led_x = 2
-        led_y = 1
+        led_x = 4
+        led_y = 2
         led.plot(led_x, led_y)
     if "wave hipew" == noteName:
         music.stop_all_sounds()
@@ -96,8 +131,8 @@ def play_note(noteName: str):
                 InterpolationCurve.CURVE),
             music.PlaybackMode.IN_BACKGROUND)
         led.unplot(led_x, led_y)
-        led_x = 1
-        led_y = 1
+        led_x = 3
+        led_y = 2
         led.plot(led_x, led_y)
     if "fx hello" == noteName:
         music.stop_all_sounds()
@@ -132,40 +167,6 @@ def on_button_pressed_a():
         show_pattern()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
-def create_pattern_4():
-    global pattern_4
-    pattern_4 = ["tone E 4",
-        "-",
-        "tone B 3",
-        "tone C 4",
-        "tone D 4",
-        "-",
-        "tone C 4",
-        "tone B 3",
-        "tone A 3",
-        "-",
-        "tone A 3",
-        "tone C 4",
-        "tone E 4",
-        "-",
-        "tone D 4",
-        "tone C 4",
-        "tone B 3",
-        "-",
-        "-",
-        "tone C 4",
-        "tone D 4",
-        "-",
-        "tone E 4",
-        "-",
-        "tone C 4",
-        "-",
-        "tone A 3",
-        "-",
-        "tone A 3",
-        "-",
-        "-",
-        "-"]
 def play_tone(name: str, octave: number, ms: number):
     global tone_index, tone_freq, led_x, led_y
     tone_index = tone_name.index_of(name)
@@ -191,40 +192,6 @@ def play_tone(name: str, octave: number, ms: number):
             led_x = tone_index - 10
             led_y = 2
             led.plot(led_x, led_y)
-def create_pattern_2():
-    global pattern_2
-    pattern_2 = ["-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "-",
-        "wave snare",
-        "-",
-        "-",
-        "=",
-        "wave snare",
-        "-",
-        "=",
-        "-",
-        "wave snare",
-        "-"]
 def show_pattern():
     if current_pattern == 0:
         basic.show_leds("""
@@ -236,82 +203,102 @@ def show_pattern():
             """)
     else:
         basic.show_number(current_pattern)
+def create_track_metronome():
+    global track_metronome
+    track_metronome = ["wave snare",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave snare",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave snare",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave snare",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-",
+        "wave hihat",
+        "-"]
 def play_current_pattern():
     global is_playing
     is_playing = True
     basic.clear_screen()
-    led.plot(current_pattern - 1, 0)
+    led.plot(current_pattern, 0)
+    if current_pattern == 0:
+        play_pattern(track_metronome)
     if current_pattern == 1:
-        play_pattern(pattern_1)
+        play_pattern(track_drums_1)
     if current_pattern == 2:
-        play_pattern(pattern_2)
+        play_pattern(track_drums_2)
     if current_pattern == 3:
-        play_pattern(pattern_3)
+        play_pattern(track_bass)
     if current_pattern == 4:
-        play_pattern(pattern_4)
-    basic.show_number(current_pattern)
+        play_pattern(track_melody)
+    show_pattern()
     is_playing = False
+def create_track_melody():
+    global track_melody
+    track_melody = ["tone E 4",
+        "-",
+        "tone B 3",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone C 4",
+        "tone B 3",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "tone C 4",
+        "tone E 4",
+        "-",
+        "tone D 4",
+        "tone C 4",
+        "tone B 3",
+        "-",
+        "-",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone E 4",
+        "-",
+        "tone C 4",
+        "-",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "-",
+        "-",
+        "-"]
 
 def on_button_pressed_b():
     if not (is_playing):
-        if current_pattern != 0:
-            play_current_pattern()
-        else:
+        if current_pattern == 0:
             radio.send_number(0)
+        play_current_pattern()
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-def create_pattern_1():
-    global pattern_1
-    pattern_1 = ["wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat",
-        "wave kick",
-        "wave hihat"]
-def create_patterns():
-    global num_patterns, current_pattern, is_playing
-    num_patterns = 4
-    current_pattern = 0
-    is_playing = False
-    create_pattern_1()
-    create_pattern_2()
-    create_pattern_3()
-    create_pattern_4()
-def create_tones():
-    global tone_name, tone_sharp, tone_flat, tone_hz
-    tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
-    tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
-    tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
-    tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
-def create_pattern_3():
-    global pattern_3
-    pattern_3 = ["wave bass",
+def create_track_bass():
+    global track_bass
+    track_bass = ["wave bass",
         "-",
         "-",
         "-",
@@ -343,20 +330,71 @@ def create_pattern_3():
         "-",
         "-",
         "-"]
-pattern_3: List[str] = []
-pattern_1: List[str] = []
-pattern_2: List[str] = []
+def create_track_drums_2():
+    global track_drums_2
+    track_drums_2 = ["-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "=",
+        "wave snare",
+        "-",
+        "=",
+        "-",
+        "wave snare",
+        "-"]
+def create_patterns():
+    global num_patterns, current_pattern, is_playing
+    num_patterns = 4
+    current_pattern = 0
+    is_playing = False
+    create_track_metronome()
+    create_track_drums_1()
+    create_track_drums_2()
+    create_track_bass()
+    create_track_melody()
+def create_tones():
+    global tone_name, tone_sharp, tone_flat, tone_hz
+    tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
+    tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
+    tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
+    tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
+track_melody: List[str] = []
+track_bass: List[str] = []
+track_drums_2: List[str] = []
+track_metronome: List[str] = []
 tone_hz: List[number] = []
 tone_freq = 0
 tone_flat: List[str] = []
 tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
-pattern_4: List[str] = []
 num_patterns = 0
 next_note_time = 0
 current_pattern = 0
 is_playing = False
+track_drums_1: List[str] = []
 led_y = 0
 led_x = 0
 radio.set_group(23)

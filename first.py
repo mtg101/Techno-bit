@@ -1,3 +1,7 @@
+def on_received_number(receivedNumber):
+    play_current_pattern()
+radio.on_received_number(on_received_number)
+
 def play_note(noteName: str):
     global led_x, led_y
     if "x" == noteName:
@@ -112,52 +116,51 @@ def play_tone(name: str, octave: number, ms: number):
             led_x = tone_index
             led_y = 4
             led.plot(led_x, led_y)
-        else:
-            if tone_index < 10:
-                led_x = tone_index - 5
-                led_y = 3
-                led.plot(led_x, led_y)
-            else:
-                if tone_index < 15:
-                    led_x = tone_index - 10
-                    led_y = 2
-                    led.plot(led_x, led_y)
+        elif tone_index < 10:
+            led_x = tone_index - 5
+            led_y = 3
+            led.plot(led_x, led_y)
+        elif tone_index < 15:
+            led_x = tone_index - 10
+            led_y = 2
+            led.plot(led_x, led_y)
 def create_pattern_2():
     global pattern_2
-    pattern_2 = ["fx hello"]
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave lopew")
-    pattern_2.append("fx hello")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-    pattern_2.append("wave kick")
-    pattern_2.append("wave hipew")
-
-def on_button_pressed_b():
+    pattern_2 = ["fx hello",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "wave kick",
+        "wave lopew",
+        "fx hello",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew",
+        "wave kick",
+        "wave hipew"]
+def show_pattern():
+    basic.show_number(current_pattern)
+def play_current_pattern():
     basic.clear_screen()
     led.plot(current_pattern - 1, 0)
     if current_pattern == 1:
@@ -167,44 +170,48 @@ def on_button_pressed_b():
     if current_pattern == 3:
         play_pattern(pattern_3)
     basic.show_number(current_pattern)
+
+def on_button_pressed_b():
+    play_current_pattern()
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def create_pattern_1():
     global pattern_1
-    pattern_1 = ["wave kick"]
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("-")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
-    pattern_1.append("wave kick")
-    pattern_1.append("wave snare")
+    pattern_1 = ["wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "-",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare",
+        "wave kick",
+        "wave snare"]
 
 def on_logo_pressed():
+    radio.send_number(0)
     music.stop_all_sounds()
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
@@ -220,38 +227,38 @@ def create_tones():
     tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
 def create_pattern_3():
     global pattern_3
-    pattern_3 = ["tone E 4"]
-    pattern_3.append("-")
-    pattern_3.append("tone B 3")
-    pattern_3.append("tone C 4")
-    pattern_3.append("tone D 4")
-    pattern_3.append("-")
-    pattern_3.append("tone C 4")
-    pattern_3.append("tone B 3")
-    pattern_3.append("tone A 3")
-    pattern_3.append("-")
-    pattern_3.append("tone A 3")
-    pattern_3.append("tone C 4")
-    pattern_3.append("tone E 4")
-    pattern_3.append("-")
-    pattern_3.append("tone D 4")
-    pattern_3.append("tone C 4")
-    pattern_3.append("tone B 3")
-    pattern_3.append("-")
-    pattern_3.append("-")
-    pattern_3.append("tone C 4")
-    pattern_3.append("tone D 4")
-    pattern_3.append("-")
-    pattern_3.append("tone E 4")
-    pattern_3.append("-")
-    pattern_3.append("tone C 4")
-    pattern_3.append("-")
-    pattern_3.append("tone A 3")
-    pattern_3.append("-")
-    pattern_3.append("tone A 3")
-    pattern_3.append("-")
-    pattern_3.append("-")
-    pattern_3.append("-")
+    pattern_3 = ["tone E 4",
+        "-",
+        "tone B 3",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone C 4",
+        "tone B 3",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "tone C 4",
+        "tone E 4",
+        "-",
+        "tone D 4",
+        "tone C 4",
+        "tone B 3",
+        "-",
+        "-",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone E 4",
+        "-",
+        "tone C 4",
+        "-",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "-",
+        "-",
+        "-"]
 pattern_3: List[str] = []
 pattern_1: List[str] = []
 pattern_2: List[str] = []
@@ -266,6 +273,7 @@ current_pattern = 0
 num_patterns = 0
 led_y = 0
 led_x = 0
+radio.set_group(23)
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
@@ -273,6 +281,6 @@ led_x = -1
 led_y = -1
 num_patterns = 3
 current_pattern = 1
-basic.show_number(current_pattern)
+show_pattern()
 create_patterns()
 create_tones()

@@ -1,5 +1,6 @@
 def on_received_number(receivedNumber):
-    play_current_pattern()
+    if current_pattern != 0:
+        play_current_pattern()
 radio.on_received_number(on_received_number)
 
 def play_note(noteName: str):
@@ -93,10 +94,10 @@ def play_pattern(pattern: List[any]):
 def on_button_pressed_a():
     global current_pattern
     if current_pattern == num_patterns:
-        current_pattern = 1
+        current_pattern = 0
     else:
         current_pattern = current_pattern + 1
-    basic.show_number(current_pattern)
+    show_pattern()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def play_tone(name: str, octave: number, ms: number):
@@ -159,7 +160,16 @@ def create_pattern_2():
         "wave kick",
         "wave hipew"]
 def show_pattern():
-    basic.show_number(current_pattern)
+    if current_pattern == 0:
+        basic.show_leds("""
+            # . . . .
+            . # . . .
+            . . # . .
+            . . . # #
+            . . . # #
+            """)
+    else:
+        basic.show_number(current_pattern)
 def play_current_pattern():
     basic.clear_screen()
     led.plot(current_pattern - 1, 0)
@@ -172,7 +182,10 @@ def play_current_pattern():
     basic.show_number(current_pattern)
 
 def on_button_pressed_b():
-    play_current_pattern()
+    if current_pattern != 0:
+        play_current_pattern()
+    else:
+        radio.send_number(0)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def create_pattern_1():
@@ -209,12 +222,6 @@ def create_pattern_1():
         "wave snare",
         "wave kick",
         "wave snare"]
-
-def on_logo_pressed():
-    radio.send_number(0)
-    music.stop_all_sounds()
-input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
-
 def create_patterns():
     create_pattern_1()
     create_pattern_2()
@@ -280,7 +287,7 @@ music.set_volume(255)
 led_x = -1
 led_y = -1
 num_patterns = 3
-current_pattern = 1
+current_pattern = 0
 show_pattern()
 create_patterns()
 create_tones()

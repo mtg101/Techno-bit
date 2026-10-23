@@ -156,7 +156,7 @@ def on_button_pressed_a():
     global current_pattern
     if not (is_playing):
         if current_pattern == num_patterns:
-            current_pattern = 0
+            current_pattern = 1
         else:
             current_pattern = current_pattern + 1
         show_pattern()
@@ -363,10 +363,18 @@ def create_track_drums_2():
         "-",
         "wave snare",
         "-"]
+
+def on_logo_pressed():
+    global current_pattern
+    if not (is_playing):
+        current_pattern = 0
+        show_pattern()
+input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
+
 def create_patterns():
     global num_patterns, current_pattern, is_playing
     num_patterns = 4
-    current_pattern = 0
+    current_pattern = 1
     is_playing = False
     create_track_metronome()
     create_track_drums_1()
@@ -405,8 +413,8 @@ music.set_volume(255)
 led_x = -1
 led_y = -1
 start_track = False
-show_pattern()
 create_patterns()
+show_pattern()
 create_tones()
 
 def on_forever():
@@ -430,3 +438,10 @@ def on_forever2():
         play_current_pattern()
         start_track = False
 basic.forever(on_forever2)
+
+def on_forever3():
+    if input.light_level() < 30:
+        music.set_volume(0)
+    else:
+        music.set_volume(255)
+basic.forever(on_forever3)

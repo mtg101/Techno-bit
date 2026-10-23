@@ -34,9 +34,12 @@ def create_track_drums_1():
         "wave hihat"]
 
 def on_received_number(receivedNumber):
+    global start_track, is_playing
     if not (is_playing):
         if current_pattern != 0:
-            play_current_pattern()
+            start_track = True
+    else:
+        is_playing = False
 radio.on_received_number(on_received_number)
 
 def play_note(noteName: str):
@@ -150,11 +153,13 @@ def play_note(noteName: str):
     if "-" == noteName:
         led.unplot(led_x, led_y)
 def play_pattern(pattern: List[any]):
-    global next_note_time
-    for index in range(32):
+    global track_row, next_note_time
+    track_row = 0
+    while track_row < 32 and is_playing:
         next_note_time = input.running_time() + 200
-        play_note(convert_to_text(pattern[index]))
+        play_note(convert_to_text(pattern[track_row]))
         basic.pause(max(0, next_note_time - input.running_time()))
+        track_row += 1
     music.stop_all_sounds()
 
 def on_button_pressed_a():
@@ -176,7 +181,7 @@ def play_tone(name: str, octave: number, ms: number):
         tone_index = tone_flat.index_of(name)
     if tone_index >= 0:
         tone_freq = tone_hz[tone_index]
-        for index2 in range(octave - 3):
+        for index in range(octave - 3):
             tone_freq = tone_freq * 2
         music.ring_tone(tone_freq)
         led.unplot(led_x, led_y)
@@ -384,9 +389,11 @@ tone_name: List[str] = []
 tone_index = 0
 num_patterns = 0
 next_note_time = 0
+track_row = 0
 current_pattern = 0
 is_playing = False
 track_drums_1: List[str] = []
+start_track = False
 led_y = 0
 led_x = 0
 radio.set_group(23)
@@ -395,16 +402,29 @@ music.set_built_in_speaker_enabled(True)
 music.set_volume(255)
 led_x = -1
 led_y = -1
+start_track = False
 show_pattern()
 create_patterns()
 create_tones()
 
 def on_forever():
+    global start_track, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
             if current_pattern == 0:
                 radio.send_number(0)
-            play_current_pattern()
+            start_track = True
+        else:
+            if current_pattern == 0:
+                radio.send_number(0)
+            is_playing = False
         while input.button_is_pressed(Button.B):
             basic.pause(50)
 basic.forever(on_forever)
+
+def on_forever2():
+    global start_track
+    if start_track == True:
+        play_current_pattern()
+        start_track = False
+basic.forever(on_forever2)

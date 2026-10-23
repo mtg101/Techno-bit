@@ -288,14 +288,6 @@ def create_track_melody():
         "-",
         "-",
         "-"]
-
-def on_button_pressed_b():
-    if not (is_playing):
-        if current_pattern == 0:
-            radio.send_number(0)
-        play_current_pattern()
-input.on_button_pressed(Button.B, on_button_pressed_b)
-
 def create_track_bass():
     global track_bass
     track_bass = ["wave bass",
@@ -406,3 +398,13 @@ led_y = -1
 show_pattern()
 create_patterns()
 create_tones()
+
+def on_forever():
+    if input.button_is_pressed(Button.B):
+        if not (is_playing):
+            if current_pattern == 0:
+                radio.send_number(0)
+            play_current_pattern()
+        while input.button_is_pressed(Button.B):
+            basic.pause(50)
+basic.forever(on_forever)

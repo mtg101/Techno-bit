@@ -32,16 +32,6 @@ def create_track_drums_1():
         "wave hihat",
         "wave kick",
         "wave hihat"]
-
-def on_received_number(receivedNumber):
-    global start_track, is_playing
-    if not (is_playing):
-        if current_pattern != 0:
-            start_track = True
-    else:
-        is_playing = False
-radio.on_received_number(on_received_number)
-
 def play_note(noteName: str):
     global led_x, led_y
     if "x" == noteName:
@@ -293,6 +283,18 @@ def create_track_melody():
         "-",
         "-",
         "-"]
+
+def on_received_string(receivedString):
+    global start_track, is_playing
+    if receivedString == "start":
+        if not (is_playing):
+            if current_pattern != 0:
+                start_track = True
+    else:
+        if receivedString == "stop":
+            is_playing = False
+radio.on_received_string(on_received_string)
+
 def create_track_bass():
     global track_bass
     track_bass = ["wave bass",
@@ -388,10 +390,10 @@ tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
 num_patterns = 0
-next_note_time = 0
-track_row = 0
 current_pattern = 0
+next_note_time = 0
 is_playing = False
+track_row = 0
 track_drums_1: List[str] = []
 start_track = False
 led_y = 0
@@ -412,11 +414,11 @@ def on_forever():
     if input.button_is_pressed(Button.B):
         if not (is_playing):
             if current_pattern == 0:
-                radio.send_number(0)
+                radio.send_string("start")
             start_track = True
         else:
             if current_pattern == 0:
-                radio.send_number(0)
+                radio.send_string("stop")
             is_playing = False
         while input.button_is_pressed(Button.B):
             basic.pause(50)

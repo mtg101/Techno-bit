@@ -44,6 +44,14 @@ def create_track_drums_1():
 def show_track_name():
     basic.clear_screen()
     basic.show_string("" + (track_names[current_track]))
+def create_songs():
+    global song_1, song_2, current_song, num_songs, song_list, song_names
+    song_1 = [0, 1, 0, 1]
+    song_2 = [0, 0, 1, 0, 0, 1, 1]
+    current_song = 0
+    num_songs = 2
+    song_list = [song_1, song_2]
+    song_names = ["*", "+"]
 def create_track_bass_alt():
     global track_bass_alt
     track_bass_alt = ["wave bass",
@@ -203,50 +211,23 @@ def play_note(noteName: str):
             1000)
     if "-" == noteName:
         led.unplot(led_x, led_y)
-def create_track_mute():
-    global track_mute
-    track_mute = ["-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-"]
 
 def on_button_pressed_a():
-    global current_pattern, current_track
+    global current_song, current_pattern, current_track
     if not (is_playing):
         if choosing_pattern:
-            if current_pattern == num_patterns:
-                current_pattern = 0
+            if choosing_song:
+                if current_song == num_songs - 1:
+                    current_song = 0
+                else:
+                    current_song = current_song + 1
+                show_song_name()
             else:
-                current_pattern = current_pattern + 1
-            show_pattern_name()
+                if current_pattern == num_patterns - 1:
+                    current_pattern = 0
+                else:
+                    current_pattern = current_pattern + 1
+                show_pattern_name()
         else:
             if current_track == num_tracks:
                 current_track = 1
@@ -540,10 +521,18 @@ def create_track_drums_2():
         "-"]
 
 def on_logo_pressed():
-    global current_track
+    global current_track, choosing_song
     if not (is_playing):
-        current_track = 0
-        show_track_name()
+        if not (choosing_pattern):
+            current_track = 0
+            show_track_name()
+        else:
+            if current_track == 0:
+                choosing_song = not (choosing_song)
+                if choosing_song:
+                    show_song_name()
+                else:
+                    show_pattern_name()
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def create_patterns():
@@ -551,10 +540,9 @@ def create_patterns():
     num_tracks = 4
     current_track = 1
     num_patterns = 2
-    current_pattern = 1
+    current_pattern = 0
     is_playing = False
     create_track_metronome()
-    create_track_mute()
     create_track_drums_1()
     create_track_drums_2()
     create_track_bass()
@@ -563,24 +551,27 @@ def create_patterns():
     create_track_drums_2_alt()
     create_track_bass_alt()
     create_track_melody_alt()
-    patterns_metronome = [track_mute, track_metronome, track_metronome]
-    patterns_drums_1 = [track_mute, track_drums_1, track_drums_1_alt]
-    patterns_drums_2 = [track_mute, track_drums_2, track_drums_2_alt]
-    patterns_bass = [track_mute, track_bass, track_bass_alt]
-    patterns_melody = [track_mute, track_melody, track_melody_alt]
+    patterns_metronome = [track_metronome, track_metronome]
+    patterns_drums_1 = [track_drums_1, track_drums_1_alt]
+    patterns_drums_2 = [track_drums_2, track_drums_2_alt]
+    patterns_bass = [track_bass, track_bass_alt]
+    patterns_melody = [track_melody, track_melody_alt]
     song_tracks = [patterns_metronome,
         patterns_drums_1,
         patterns_drums_2,
         patterns_bass,
         patterns_melody]
     track_names = ["0", "1", "2", "3", "4"]
-    pattern_names = ["X", "A", "B"]
+    pattern_names = ["A", "B"]
 def create_tones():
     global tone_name, tone_sharp, tone_flat, tone_hz
     tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
     tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
     tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
     tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
+def show_song_name():
+    basic.clear_screen()
+    basic.show_string("" + (song_names[current_song]))
 def show_pattern_name():
     basic.clear_screen()
     basic.show_string("" + (pattern_names[current_pattern]))
@@ -607,8 +598,14 @@ track_drums_2_alt: List[str] = []
 num_tracks = 0
 num_patterns = 0
 current_pattern = 0
-track_mute: List[str] = []
+choosing_song = False
 track_bass_alt: List[str] = []
+song_names: List[str] = []
+song_list: List[List[number]] = []
+num_songs = 0
+current_song = 0
+song_2: List[number] = []
+song_1: List[number] = []
 current_track = 0
 track_names: List[str] = []
 track_drums_1: List[str] = []
@@ -630,6 +627,7 @@ choosing_pattern = False
 create_patterns()
 show_track_name()
 create_tones()
+create_songs()
 
 def on_forever():
     global start_track, choosing_pattern, is_playing

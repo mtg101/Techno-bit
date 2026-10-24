@@ -7,3 +7,39 @@ To build manually in VSCode:
 - use normal commands from the palatte like "Put-this-file" to send to Micro:bit
 
 AI has been used in areas of this project, not for the code (beyond conversing with LLMs for advice), but for some of the musical and visual assets. I'm here to be creative with the code, and I've never meed able to make a good tracker tune :( Others are free to use this code or the idea to make their own music :)
+
+
+## Techno:bit controls
+
+### Playing Patterns
+On startup the Techno:bit shows the current 'track' or instrument it's going to play. 
+
+Press the A button to cycle between the tracks/instruments:
+- 1 = Drums 1
+- 2 = Drums 2
+- 3 = Bass
+- 4 = Melody
+
+Press the B button to select the track/instrument. Then the Techno:bit will show which pattern it's going to play.
+
+Now press the A button to cycle between the patterns:
+- A = normal pattern
+- B = alt pattern
+
+Now press the B button to play that pattern using that track/instrument.
+
+While playing press the B button to stop playing.
+
+### Conducting via Radio
+When in track/instrument selection, press the Micro:bit logo to enter Conductor mode. The track/instrument number will now show 0.
+
+WHen you press the B button and select the track with B again, it will play a metronome track, but also broadcast to all Techno:bits to play that pattern using their currently selected track/instrument. 
+
+So with 5 Techno:bits... one conductor makes the other 4 play each of the tracks for that pattern!
+
+#### Songs
+When in pattern selection as the conductor, press the logo again and you'll flip to Song selection. When you press B to conduct this is will make all the Techno:bits play a series of pattens to make the song!
+
+### Cover LEDs to mute
+The LEDs on the Micro:bit also have a light sensor. So if you cover the LEDs the ode will notice and mute that Micro:bit.
+

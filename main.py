@@ -305,16 +305,7 @@ def play_current_pattern():
     is_playing = True
     basic.clear_screen()
     led.plot(current_track, 0)
-    if current_track == 0:
-        play_track(track_metronome)
-    if current_track == 1:
-        play_track(track_drums_1)
-    if current_track == 2:
-        play_track(track_drums_2)
-    if current_track == 3:
-        play_track(track_bass)
-    if current_track == 4:
-        play_track(track_melody)
+    play_track(song_tracks[current_track][current_pattern])
     show_pattern()
     is_playing = False
 def create_track_melody():
@@ -508,9 +499,11 @@ def on_logo_pressed():
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def create_patterns():
-    global num_tracks, current_track, is_playing, patterns_metronome, patterns_drums_1, patterns_drums_2, patterns_bass, patterns_melody, song_tracks, track_names, pattern_names
+    global num_tracks, current_track, num_patterns, current_pattern, is_playing, patterns_metronome, patterns_drums_1, patterns_drums_2, patterns_bass, patterns_melody, song_tracks, track_names, pattern_names
     num_tracks = 4
     current_track = 1
+    num_patterns = 2
+    current_pattern = 1
     is_playing = False
     create_track_metronome()
     create_track_drums_1()
@@ -541,17 +534,19 @@ def create_tones():
     tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
 pattern_names: List[str] = []
 track_names: List[str] = []
-song_tracks: List[List[List[str]]] = []
 patterns_melody: List[List[str]] = []
 patterns_bass: List[List[str]] = []
 patterns_drums_2: List[List[str]] = []
 patterns_drums_1: List[List[str]] = []
 patterns_metronome: List[List[str]] = []
+num_patterns = 0
+track_drums_2: List[str] = []
+track_bass: List[str] = []
 track_melody_alt: List[str] = []
 track_drums_1_alt: List[str] = []
 track_melody: List[str] = []
-track_bass: List[str] = []
-track_drums_2: List[str] = []
+current_pattern = 0
+song_tracks: List[List[List[str]]] = []
 track_metronome: List[str] = []
 tone_hz: List[number] = []
 tone_freq = 0

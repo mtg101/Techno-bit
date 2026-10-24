@@ -1,6 +1,6 @@
 Messing about with Micro:bits https://microbit.org/ to make tracker music, like back in the good old Amiga days. But with each Micro:bit playing a single track, and a conductor broadcasting radio signals to play patterns.
 
-The python saved here is taken from the Makecode site https://makecode.microbit.org/ with the intention to keep it block compatible. I'm just putting it here in GitHub for version control. OK it turns out that the Makecode site does that... But with multiple Microbits needed for this project, it's nice to collect everything here in one place. 
+The python saved here is taken from the Makecode project https://makecode.microbit.org/S26000-11508-29408-02742 which I'm making in blocks so anyone can understand it. I'm just putting it here in GitHub for version control. OK it turns out that the Makecode site does that... kinda - I trust this more. Plus I can document and have multiple block projects collected here if I want. 
 
 To build manually in VSCode:
 - check "from microbit import *" is at the  start of main.py (I copy & paste over from MakeCode a lot abd forget...)

@@ -33,7 +33,7 @@ While playing press the B button to stop playing.
 ### Conducting via Radio
 When in track/instrument selection, press the Micro:bit logo to enter Conductor mode. The track/instrument number will now show 0.
 
-WHen you press the B button and select the track with B again, it will play a metronome track, but also broadcast to all Techno:bits to play that pattern using their currently selected track/instrument. 
+When you press the B button and select the track with B again, it will play a metronome track, but also broadcast to all Techno:bits to play that pattern using their currently selected track/instrument. 
 
 So with 5 Techno:bits... one conductor makes the other 4 play each of the tracks for that pattern!
 

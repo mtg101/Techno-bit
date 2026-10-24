@@ -392,13 +392,14 @@ def create_track_melody():
         "-"]
 
 def on_received_string(receivedString):
-    global start_track, is_playing
-    if receivedString == "start":
+    global is_playing, current_pattern, start_track
+    if receivedString == "stop":
+        is_playing = False
+    else:
         if not (is_playing):
             if current_track != 0:
+                current_pattern = parse_float(receivedString)
                 start_track = True
-    elif receivedString == "stop":
-        is_playing = False
 radio.on_received_string(on_received_string)
 
 def create_track_drums_1_alt():
@@ -636,7 +637,7 @@ def on_forever():
         if not (is_playing):
             if choosing_pattern:
                 if current_track == 0:
-                    radio.send_string("start")
+                    radio.send_string(convert_to_text(current_pattern))
                 start_track = True
             else:
                 choosing_pattern = True

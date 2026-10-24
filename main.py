@@ -1,3 +1,12 @@
+def play_track(track: List[any]):
+    global track_row, next_note_time
+    track_row = 0
+    while track_row < 32 and is_playing:
+        next_note_time = input.running_time() + 200
+        play_note(convert_to_text(track[track_row]))
+        basic.pause(max(0, next_note_time - input.running_time()))
+        track_row += 1
+    music.stop_all_sounds()
 def create_track_drums_1():
     global track_drums_1
     track_drums_1 = ["wave kick",
@@ -32,6 +41,40 @@ def create_track_drums_1():
         "wave hihat",
         "wave kick",
         "wave hihat"]
+def create_track_bass_alt():
+    global track_bass_alt
+    track_bass_alt = ["wave bass",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "wave bass",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "wave bass",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "wave bass",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"]
 def play_note(noteName: str):
     global led_x, led_y
     if "x" == noteName:
@@ -142,26 +185,51 @@ def play_note(noteName: str):
             1000)
     if "-" == noteName:
         led.unplot(led_x, led_y)
-def play_pattern(pattern: List[any]):
-    global track_row, next_note_time
-    track_row = 0
-    while track_row < 32 and is_playing:
-        next_note_time = input.running_time() + 200
-        play_note(convert_to_text(pattern[track_row]))
-        basic.pause(max(0, next_note_time - input.running_time()))
-        track_row += 1
-    music.stop_all_sounds()
 
 def on_button_pressed_a():
-    global current_pattern
+    global current_track
     if not (is_playing):
-        if current_pattern == num_patterns:
-            current_pattern = 1
+        if current_track == num_tracks:
+            current_track = 1
         else:
-            current_pattern = current_pattern + 1
+            current_track = current_track + 1
         show_pattern()
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
+def create_track_drums_2_alt():
+    global track_drums_2_alt
+    track_drums_2_alt = ["-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "-",
+        "wave snare",
+        "-",
+        "-",
+        "=",
+        "wave snare",
+        "-",
+        "=",
+        "-",
+        "wave snare",
+        "-"]
 def play_tone(name: str, octave: number, ms: number):
     global tone_index, tone_freq, led_x, led_y
     tone_index = tone_name.index_of(name)
@@ -180,15 +248,15 @@ def play_tone(name: str, octave: number, ms: number):
             led_y = 4
             led.plot(led_x, led_y)
         elif tone_index < 10:
-            led_x = tone_index - 5
+            led_x = 0 - 5
             led_y = 3
-            led.plot(led_x, led_y)
-        elif tone_index < 15:
+            led.plot(0, led_y)
+        elif True:
             led_x = tone_index - 10
             led_y = 2
             led.plot(led_x, led_y)
 def show_pattern():
-    if current_pattern == 0:
+    if current_track == 0:
         basic.show_leds("""
             # . . . .
             . # . . .
@@ -197,7 +265,7 @@ def show_pattern():
             . . . # #
             """)
     else:
-        basic.show_number(current_pattern)
+        basic.show_number(current_track)
 def create_track_metronome():
     global track_metronome
     track_metronome = ["wave snare",
@@ -236,17 +304,17 @@ def play_current_pattern():
     global is_playing
     is_playing = True
     basic.clear_screen()
-    led.plot(current_pattern, 0)
-    if current_pattern == 0:
-        play_pattern(track_metronome)
-    if current_pattern == 1:
-        play_pattern(track_drums_1)
-    if current_pattern == 2:
-        play_pattern(track_drums_2)
-    if current_pattern == 3:
-        play_pattern(track_bass)
-    if current_pattern == 4:
-        play_pattern(track_melody)
+    led.plot(current_track, 0)
+    if current_track == 0:
+        play_track(track_metronome)
+    if current_track == 1:
+        play_track(track_drums_1)
+    if current_track == 2:
+        play_track(track_drums_2)
+    if current_track == 3:
+        play_track(track_bass)
+    if current_track == 4:
+        play_track(track_melody)
     show_pattern()
     is_playing = False
 def create_track_melody():
@@ -288,13 +356,81 @@ def on_received_string(receivedString):
     global start_track, is_playing
     if receivedString == "start":
         if not (is_playing):
-            if current_pattern != 0:
+            if current_track != 0:
                 start_track = True
     else:
         if receivedString == "stop":
             is_playing = False
 radio.on_received_string(on_received_string)
 
+def create_track_drums_1_alt():
+    global track_drums_1_alt
+    track_drums_1_alt = ["wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat",
+        "wave kick",
+        "wave hihat"]
+def create_track_melody_alt():
+    global track_melody_alt
+    track_melody_alt = ["tone E 4",
+        "-",
+        "tone B 3",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone C 4",
+        "tone B 3",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "tone C 4",
+        "tone E 4",
+        "-",
+        "tone D 4",
+        "tone C 4",
+        "tone B 3",
+        "-",
+        "-",
+        "tone C 4",
+        "tone D 4",
+        "-",
+        "tone E 4",
+        "-",
+        "tone C 4",
+        "-",
+        "tone A 3",
+        "-",
+        "tone A 3",
+        "-",
+        "-",
+        "-"]
 def create_track_bass():
     global track_bass
     track_bass = ["wave bass",
@@ -365,28 +501,54 @@ def create_track_drums_2():
         "-"]
 
 def on_logo_pressed():
-    global current_pattern
+    global current_track
     if not (is_playing):
-        current_pattern = 0
+        current_track = 0
         show_pattern()
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def create_patterns():
-    global num_patterns, current_pattern, is_playing
-    num_patterns = 4
-    current_pattern = 1
+    global num_tracks, current_track, is_playing, patterns_metronome, patterns_drums_1, patterns_drums_2, patterns_bass, patterns_melody, song_tracks, track_names, pattern_names
+    num_tracks = 4
+    current_track = 1
     is_playing = False
     create_track_metronome()
     create_track_drums_1()
     create_track_drums_2()
     create_track_bass()
     create_track_melody()
+    create_track_drums_1_alt()
+    create_track_drums_2_alt()
+    create_track_bass_alt()
+    create_track_melody_alt()
+    patterns_metronome = [track_metronome, track_metronome]
+    patterns_drums_1 = [track_drums_1, track_drums_1_alt]
+    patterns_drums_2 = [track_drums_2, track_drums_2_alt]
+    patterns_bass = [track_bass, track_bass_alt]
+    patterns_melody = [track_melody, track_melody_alt]
+    song_tracks = [patterns_metronome,
+        patterns_drums_1,
+        patterns_drums_2,
+        patterns_bass,
+        patterns_melody]
+    track_names = ["Metronome", "Drums 1", "Drums 2", "Bass", "Melody"]
+    pattern_names = ["Stopped", "Main", "Alt"]
 def create_tones():
     global tone_name, tone_sharp, tone_flat, tone_hz
     tone_name = ["C", "", "D", "", "E", "F", "", "G", "", "A", "", "B"]
     tone_sharp = ["", "C#", "", "D#", "", "", "F#", "", "G#", "", "A#", ""]
     tone_flat = ["", "Db", "", "Eb", "", "", "Gb", "", "Ab", "", "Bb", ""]
     tone_hz = [131, 139, 147, 156, 165, 175, 185, 196, 208, 220, 233, 247]
+pattern_names: List[str] = []
+track_names: List[str] = []
+song_tracks: List[List[List[str]]] = []
+patterns_melody: List[List[str]] = []
+patterns_bass: List[List[str]] = []
+patterns_drums_2: List[List[str]] = []
+patterns_drums_1: List[List[str]] = []
+patterns_metronome: List[List[str]] = []
+track_melody_alt: List[str] = []
+track_drums_1_alt: List[str] = []
 track_melody: List[str] = []
 track_bass: List[str] = []
 track_drums_2: List[str] = []
@@ -397,12 +559,14 @@ tone_flat: List[str] = []
 tone_sharp: List[str] = []
 tone_name: List[str] = []
 tone_index = 0
-num_patterns = 0
-current_pattern = 0
+track_drums_2_alt: List[str] = []
+num_tracks = 0
+current_track = 0
+track_bass_alt: List[str] = []
+track_drums_1: List[str] = []
 next_note_time = 0
 is_playing = False
 track_row = 0
-track_drums_1: List[str] = []
 start_track = False
 led_y = 0
 led_x = 0
@@ -421,11 +585,11 @@ def on_forever():
     global start_track, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
-            if current_pattern == 0:
+            if current_track == 0:
                 radio.send_string("start")
             start_track = True
         else:
-            if current_pattern == 0:
+            if current_track == 0:
                 radio.send_string("stop")
             is_playing = False
         while input.button_is_pressed(Button.B):
@@ -433,15 +597,15 @@ def on_forever():
 basic.forever(on_forever)
 
 def on_forever2():
-    global start_track
-    if start_track == True:
-        play_current_pattern()
-        start_track = False
-basic.forever(on_forever2)
-
-def on_forever3():
     if input.light_level() < 30:
         music.set_volume(0)
     else:
         music.set_volume(255)
+basic.forever(on_forever2)
+
+def on_forever3():
+    global start_track
+    if start_track == True:
+        play_current_pattern()
+        start_track = False
 basic.forever(on_forever3)

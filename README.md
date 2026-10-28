@@ -37,7 +37,7 @@ When you press the B button and select the track with B again, it will play a me
 
 So with 5 Techno:bits... one conductor makes the other 4 play each of the tracks for that pattern!
 
-To play songs, press the logo again. The way I set things up tracks are numbers, patterns are letters, and songs are symbols. 
+To play songs, when in conductor mode selecting the track, press the logo again. (the way I set it up tracks are numbers, patterns are letters, and songs are symbols on the LEDs)
 
 #### Songs
 When in pattern selection as the conductor, press the logo again and you'll flip to Song selection. When you press B to conduct this is will make all the Techno:bits play a series of pattens to make the song!

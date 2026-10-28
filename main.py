@@ -576,6 +576,7 @@ def show_pattern_name():
     basic.clear_screen()
     basic.show_string("" + (pattern_names[current_pattern]))
 current_song_position = 0
+playing_song = False
 pattern_names: List[str] = []
 patterns_melody: List[List[str]] = []
 patterns_bass: List[List[str]] = []
@@ -647,15 +648,17 @@ def on_forever2():
 basic.forever(on_forever2)
 
 def on_forever3():
-    global current_song_position, start_track, choosing_pattern, is_playing
+    global playing_song, current_song_position, start_track, choosing_pattern, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
             if choosing_pattern:
                 if current_track == 0:
                     if choosing_song:
+                        playing_song = True
                         current_song_position = 0
                         radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                     else:
+                        playing_song = False
                         radio.send_string(convert_to_text(current_pattern))
                 start_track = True
             else:

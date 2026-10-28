@@ -47,7 +47,7 @@ def show_track_name():
 def create_songs():
     global song_1, song_2, current_song, num_songs, song_list, song_names
     song_1 = [0, 1, 0, 1]
-    song_2 = [0, 0, 1, 0, 0, 1, 1]
+    song_2 = [1, 0, 1, 0]
     current_song = 0
     num_songs = 2
     song_list = [song_1, song_2]
@@ -575,6 +575,7 @@ def show_song_name():
 def show_pattern_name():
     basic.clear_screen()
     basic.show_string("" + (pattern_names[current_pattern]))
+current_song_position = 0
 pattern_names: List[str] = []
 patterns_melody: List[List[str]] = []
 patterns_bass: List[List[str]] = []
@@ -630,12 +631,32 @@ create_tones()
 create_songs()
 
 def on_forever():
-    global start_track, choosing_pattern, is_playing
+    global start_track, choosing_pattern
+    if start_track:
+        play_current_pattern()
+        start_track = False
+        choosing_pattern = False
+        show_track_name()
+basic.forever(on_forever)
+
+def on_forever2():
+    if input.light_level() < 30:
+        music.set_volume(0)
+    else:
+        music.set_volume(255)
+basic.forever(on_forever2)
+
+def on_forever3():
+    global current_song_position, start_track, choosing_pattern, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
             if choosing_pattern:
                 if current_track == 0:
-                    radio.send_string(convert_to_text(current_pattern))
+                    if choosing_song:
+                        current_song_position = 0
+                        radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
+                    else:
+                        radio.send_string(convert_to_text(current_pattern))
                 start_track = True
             else:
                 choosing_pattern = True
@@ -647,20 +668,4 @@ def on_forever():
             choosing_pattern = False
         while input.button_is_pressed(Button.B):
             basic.pause(50)
-basic.forever(on_forever)
-
-def on_forever2():
-    global start_track, choosing_pattern
-    if start_track:
-        play_current_pattern()
-        start_track = False
-        choosing_pattern = False
-        show_track_name()
-basic.forever(on_forever2)
-
-def on_forever3():
-    if input.light_level() < 30:
-        music.set_volume(0)
-    else:
-        music.set_volume(255)
 basic.forever(on_forever3)

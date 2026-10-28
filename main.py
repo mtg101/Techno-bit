@@ -632,9 +632,16 @@ create_tones()
 create_songs()
 
 def on_forever():
-    global start_track, choosing_pattern
+    global current_pattern, current_song_position, start_track, choosing_pattern
     if start_track:
-        play_current_pattern()
+        if playing_song:
+            while current_song_position < len(song_list[current_song]) and playing_song:
+                radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
+                current_pattern = 0
+                play_current_pattern()
+                current_song_position += 1
+        else:
+            play_current_pattern()
         start_track = False
         choosing_pattern = False
         show_track_name()
@@ -667,6 +674,7 @@ def on_forever3():
         else:
             if current_track == 0:
                 radio.send_string("stop")
+            playing_song = False
             is_playing = False
             choosing_pattern = False
         while input.button_is_pressed(Button.B):

@@ -380,11 +380,10 @@ def on_received_string(receivedString):
         receiving_song = True
     elif receivedString == "end song":
         receiving_song = False
-    else:
-        if not (is_playing):
-            if current_track != 0:
-                current_pattern = parse_float(receivedString)
-                start_track = True
+    elif not (is_playing):
+        if current_track != 0:
+            current_pattern = parse_float(receivedString)
+            start_track = True
 radio.on_received_string(on_received_string)
 
 def create_track_drums_1_alt():
@@ -637,28 +636,6 @@ create_tones()
 create_songs()
 
 def on_forever():
-    global current_pattern, current_song_position, start_track, choosing_pattern
-    if start_track:
-        if playing_song:
-            while current_song_position < len(song_list[current_song]) and playing_song:
-                if current_track == 0:
-                    if current_song_position == len(song_list[current_song]) - 1:
-                        radio.send_string("end song")
-                    radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
-                current_pattern = song_list[current_song][current_song_position]
-                play_current_pattern()
-                current_song_position += 1
-                if current_track == 0:
-                    control.wait_micros(5000)
-        else:
-            play_current_pattern()
-        start_track = False
-        choosing_pattern = False
-        if not (receiving_song):
-            show_track_name()
-basic.forever(on_forever)
-
-def on_forever2():
     global playing_song, current_song_position, start_track, choosing_pattern, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
@@ -685,4 +662,26 @@ def on_forever2():
             choosing_pattern = False
         while input.button_is_pressed(Button.B):
             basic.pause(50)
+basic.forever(on_forever)
+
+def on_forever2():
+    global current_pattern, current_song_position, start_track, choosing_pattern
+    if start_track:
+        if playing_song:
+            while current_song_position < len(song_list[current_song]) and playing_song:
+                if current_track == 0:
+                    if current_song_position == len(song_list[current_song]) - 1:
+                        radio.send_string("end song")
+                    radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
+                current_pattern = song_list[current_song][current_song_position]
+                play_current_pattern()
+                current_song_position += 1
+                if current_track == 0:
+                    control.wait_micros(50000)
+        else:
+            play_current_pattern()
+        start_track = False
+        choosing_pattern = False
+        if not (receiving_song):
+            show_track_name()
 basic.forever(on_forever2)

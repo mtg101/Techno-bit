@@ -138,14 +138,14 @@ def play_note(noteName: str):
         led.plot(led_x, led_y)
     if "wave bass" == noteName:
         music.stop_all_sounds()
-        music.play(music.create_sound_expression(WaveShape.SINE,
-                210,
+        music.play(music.create_sound_expression(WaveShape.TRIANGLE,
+                539,
                 1,
                 255,
-                0,
-                5000,
-                SoundExpressionEffect.WARBLE,
-                InterpolationCurve.CURVE),
+                255,
+                2000,
+                SoundExpressionEffect.VIBRATO,
+                InterpolationCurve.LOGARITHMIC),
             music.PlaybackMode.IN_BACKGROUND)
         led.unplot(led_x, led_y)
         led_x = 0

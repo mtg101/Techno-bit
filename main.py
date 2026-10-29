@@ -335,7 +335,6 @@ def play_current_pattern():
     basic.clear_screen()
     led.plot(current_track, 0)
     play_track(song_tracks[current_track][current_pattern])
-    show_track_name()
     is_playing = False
 def create_track_melody():
     global track_melody

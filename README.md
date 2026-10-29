@@ -26,22 +26,21 @@ Now press the A button to cycle between the patterns:
 - A = normal pattern
 - B = alt pattern
 
-Now press the B button to play that pattern using that track/instrument.
+Press the Micro:bit logo to switch to playing songs:
+- * = first song
+- + = second sone
+
+Now press the B button to play that pattern/song using that track/instrument.
 
 While playing press the B button to stop playing.
 
 ### Conducting via Radio
 When in track/instrument selection, press the Micro:bit logo to enter Conductor mode. The track/instrument number will now show 0.
 
-When you press the B button and select the track with B again, it will play a metronome track, but also broadcast to all Techno:bits to play that pattern using their currently selected track/instrument. 
+Now when you select a pattern/song the microbit will brodcast for other microbits to start playing their tracks, which this microbit plays a metronome beat.
 
-So with 5 Techno:bits... one conductor makes the other 4 play each of the tracks for that pattern!
-
-To play songs, when in conductor mode selecting the track, press the logo again. (the way I set it up tracks are numbers, patterns are letters, and songs are symbols on the LEDs)
-
-#### Songs
-When in pattern selection as the conductor, press the logo again and you'll flip to Song selection. When you press B to conduct this is will make all the Techno:bits play a series of pattens to make the song!
+So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the pattern/song!
 
 ### Cover LEDs to mute
-The LEDs on the Micro:bit also have a light sensor. So if you cover the LEDs the ode will notice and mute that Micro:bit.
+The LEDs on the Micro:bit also have a light sensor. So if you cover the LEDs the ode will notice and mute that Micro:bit. You can use to mute different tracks while playing songs, plus it's a way to show off another sensor built-in to the Micro:bit.
 

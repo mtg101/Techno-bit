@@ -527,12 +527,11 @@ def on_logo_pressed():
             current_track = 0
             show_track_name()
         else:
-            if current_track == 0:
-                choosing_song = not (choosing_song)
-                if choosing_song:
-                    show_song_name()
-                else:
-                    show_pattern_name()
+            choosing_song = not (choosing_song)
+            if choosing_song:
+                show_song_name()
+            else:
+                show_pattern_name()
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def create_patterns():
@@ -636,8 +635,9 @@ def on_forever():
     if start_track:
         if playing_song:
             while current_song_position < len(song_list[current_song]) and playing_song:
-                radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
-                current_pattern = 0
+                if current_track == 0:
+                    radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
+                current_pattern = song_list[current_song][current_song_position]
                 play_current_pattern()
                 current_song_position += 1
         else:
@@ -659,13 +659,14 @@ def on_forever3():
     if input.button_is_pressed(Button.B):
         if not (is_playing):
             if choosing_pattern:
-                if current_track == 0:
-                    if choosing_song:
-                        playing_song = True
-                        current_song_position = 0
+                if choosing_song:
+                    playing_song = True
+                    current_song_position = 0
+                    if current_track == 0:
                         radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
-                    else:
-                        playing_song = False
+                else:
+                    playing_song = False
+                    if current_track == 0:
                         radio.send_string(convert_to_text(current_pattern))
                 start_track = True
             else:

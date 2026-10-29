@@ -28,7 +28,7 @@ Now press the A button to cycle between the patterns:
 
 Press the Micro:bit logo to switch to playing songs:
 - \* = first song
-- \+ = second sone
+- \+ = second song
 
 Now press the B button to play that pattern/song using that track/instrument.
 

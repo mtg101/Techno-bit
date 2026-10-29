@@ -372,9 +372,14 @@ def create_track_melody():
         "-"]
 
 def on_received_string(receivedString):
-    global is_playing, current_pattern, start_track
+    global receiving_song, is_playing, current_pattern, start_track
     if receivedString == "stop":
+        receiving_song = False
         is_playing = False
+    elif receivedString == "start song":
+        receiving_song = True
+    elif receivedString == "end song":
+        receiving_song = False
     else:
         if not (is_playing):
             if current_track != 0:
@@ -612,6 +617,7 @@ track_drums_1: List[str] = []
 next_note_time = 0
 is_playing = False
 track_row = 0
+receiving_song = False
 choosing_pattern = False
 start_track = False
 led_y = 0
@@ -624,6 +630,7 @@ led_x = -1
 led_y = -1
 start_track = False
 choosing_pattern = False
+receiving_song = False
 create_patterns()
 show_track_name()
 create_tones()
@@ -635,15 +642,20 @@ def on_forever():
         if playing_song:
             while current_song_position < len(song_list[current_song]) and playing_song:
                 if current_track == 0:
+                    if current_song_position == len(song_list[current_song]) - 1:
+                        radio.send_string("end song")
                     radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                 current_pattern = song_list[current_song][current_song_position]
                 play_current_pattern()
                 current_song_position += 1
+                if current_track == 0:
+                    control.wait_micros(5000)
         else:
             play_current_pattern()
         start_track = False
         choosing_pattern = False
-        show_track_name()
+        if not (receiving_song):
+            show_track_name()
 basic.forever(on_forever)
 
 def on_forever2():
@@ -662,6 +674,7 @@ def on_forever3():
                     playing_song = True
                     current_song_position = 0
                     if current_track == 0:
+                        radio.send_string("start song")
                         radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                 else:
                     playing_song = False

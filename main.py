@@ -659,13 +659,6 @@ def on_forever():
 basic.forever(on_forever)
 
 def on_forever2():
-    if input.light_level() < 30:
-        music.set_volume(0)
-    else:
-        music.set_volume(255)
-basic.forever(on_forever2)
-
-def on_forever3():
     global playing_song, current_song_position, start_track, choosing_pattern, is_playing
     if input.button_is_pressed(Button.B):
         if not (is_playing):
@@ -692,4 +685,4 @@ def on_forever3():
             choosing_pattern = False
         while input.button_is_pressed(Button.B):
             basic.pause(50)
-basic.forever(on_forever3)
+basic.forever(on_forever2)

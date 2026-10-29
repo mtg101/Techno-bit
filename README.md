@@ -41,6 +41,4 @@ Now when you select a pattern/song the microbit will brodcast for other microbit
 
 So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the pattern/song!
 
-### Cover LEDs to mute
-The LEDs on the Micro:bit also have a light sensor. So if you cover the LEDs the ode will notice and mute that Micro:bit. You can use to mute different tracks while playing songs, plus it's a way to show off another sensor built-in to the Micro:bit.
 

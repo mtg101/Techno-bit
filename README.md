@@ -1,5 +1,7 @@
 Messing about with Micro:bits https://microbit.org/ to make tracker music, like back in the good old Amiga days. But with each Micro:bit playing a single track, and a conductor broadcasting radio signals to play patterns.
 
+Plus I think it makes a cool demo to show the students at our local coding club what you can do with a few cheap Micro:bits. (and so I've got a good tune to demo with I'm enlisting some help from an AI to create a track to test this with that I can use to demo - I'll be creative after I've inspirce them :smile: )
+
 The python saved here is taken from the Makecode project https://makecode.microbit.org/S26000-11508-29408-02742 which I'm making in blocks so anyone can understand it. I'm just putting it here in GitHub for version control. OK it turns out that the Makecode site does that... kinda - I trust this more. Plus I can document and have multiple block projects collected here if I want. 
 
 To use in MakeCode:
@@ -10,7 +12,6 @@ To build manually in VSCode:
 - check "from microbit import *" is at the  start of main.py (I copy & paste over from MakeCode a lot and I won't be adding this all the time...)
 - use normal commands from the palatte like "Put-this-file" to send to Micro:bit
 
-AI has been used in areas of this project, not for the code (beyond conversing with LLMs for advice), but for some of the musical and visual assets. I'm here to be creative with the code, and I've never meed able to make a good tracker tune :( Others are free to use this code or the idea to make their own music :)
 
 
 ## Techno:bit controls
@@ -46,3 +47,7 @@ Now when you select a pattern/song the microbit will brodcast for other microbit
 So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the pattern/song!
 
 
+## AI Use
+Gemini was used to investigate the timings for the sounds, radio, leds, etc, which included examples of Makecode Blocks I could use to implement the timings.
+
+Claude was used to produce the XM music files, and some Python code for how that mod file can be used in Makecode (waveforms, note pitches, sequences, tracks, etc). Generated files are all under the Claude folder in this project. 

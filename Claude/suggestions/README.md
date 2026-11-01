@@ -12,10 +12,20 @@ To build manually in VSCode:
 - check "from microbit import *" is at the  start of main.py (I copy & paste over from MakeCode a lot and I won't be adding this all the time...)
 - use normal commands from the palette like "Put-this-file" to send to Micro:bit
 
+### Demo
 
-## The tune and the tracker format
 
-The tune is a techno version of the traditional folk tune Korobeiniki (the one behind Tetris), arranged for 4 channels: `Claude/mods/korobeiniki_techno_4ch_microbit.xm`. You can open the .xm file in a tracker such as [OpenMPT](https://openmpt.org/) and change it.
+https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
+
+
+
+## The tunes and the tracker format
+
+There are two tunes, both arranged for the same 4 channels and the same 10 instruments:
+- a techno version of the traditional folk tune Korobeiniki (the one behind Tetris): `Claude/mods/korobeiniki_techno_4ch_microbit.xm`
+- a bhangra techno version of Pachelbel's Canon in D (from about 1700, so out of copyright): `Claude/mods/canon_bhangra_4ch_microbit.xm`
+
+You can open the .xm files in a tracker such as [OpenMPT](https://openmpt.org/) and change them.
 
 The music on the Micro:bits is stored in a very simple tracker format, with one row every 200ms (an eighth note at 150 BPM) and 32 rows to a pattern. It is described for students in [Claude/microbit_tracker_format_students.md](Claude/microbit_tracker_format_students.md): how notes (`tone D-6`), sounds (`wave kick`), silence (`x`) and rests (`-`) are written, and how the Micro:bit plays them.
 
@@ -33,10 +43,11 @@ Press the A button to cycle between the tracks:
 
 Press the B button to select the track. Then the Techno:bit will show which pattern it's going to play.
 
-Now press the A button to cycle between the 16 patterns, A to P (see the format document for what each one is).
+Now press the A button to cycle between the 32 patterns: A to P are Korobeiniki's, a to p are the Canon's (see the format document for what each one is).
 
-Press the Micro:bit logo to switch to playing the song:
-- \* = the whole song (64 patterns, about 6m50s)
+Press the Micro:bit logo to switch to playing a whole song, then press A to choose which:
+- \* = Korobeiniki (Tetris theme)
+- \+ = Pachelbel's Canon in D
 
 Now press the B button to play that pattern/song using that track.
 
@@ -64,4 +75,4 @@ Claude Code has been used to create the .XM file conversion app, and associated 
 
 The intention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 
 
-Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, and wrote the 12 sound functions and the hardcoded version of the tune. Its drafts are in `Claude/suggestions`.
+Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, wrote the 12 sound functions and the hardcoded versions of both tunes, created the Canon in D .xm file, fixed the radio timing between patterns, and shrank the demo video. Its drafts are in `Claude/suggestions` and its .xm files in `Claude/mods`.

@@ -42,7 +42,8 @@ Press the B button to select the track. Then the Techno:bit will show which patt
 Now press the A button to cycle between the 16 patterns, A to P (see the format document for what each one is).
 
 Press the Micro:bit logo to switch to playing the song:
-- \* = the whole song (64 patterns, about 6m50s)
+- \* = Korobeiniki (Tetris theme)
+- \+ = Pachebel's Canon in D
 
 Now press the B button to play that pattern/song using that track.
 

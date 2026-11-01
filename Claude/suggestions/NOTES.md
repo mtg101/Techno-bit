@@ -9,8 +9,13 @@ Last updated: 1 November 2026.
 
 ## Ground rules
 
-- Claude **reads** the whole project but **writes only to `Claude/suggestions`**. The `Claude` folder is the
-  record of what has been agreed and is read-only for Claude. Git is the safety net.
+- Claude **reads** the whole project. The `Claude` folder is the record of what has been agreed and is
+  read-only for Claude, with two exceptions where Claude may write:
+  - **`Claude/suggestions`**: suggested code, docs and notes. Code here is a suggestion for the teacher to
+    read, understand and rebuild in Blocks, not a finished drop-in.
+  - **`Claude/mods`**: music files (`.xm` tunes). The tunes are content, not code, so Claude can create them
+    directly; generator scripts for them go in `suggestions`.
+  Everywhere else is read-only for Claude. Git is the safety net.
 - **Go slowly.** One small step at a time, explained well enough to repeat to the coding club. No big code
   drops without a go-ahead.
 - All Python must be **block compatible**: paste into MakeCode, flip to Blocks, and it should render as real
@@ -37,10 +42,28 @@ Last updated: 1 November 2026.
 
 ### The tune and the boards
 - Tune: `Claude/mods/korobeiniki_techno_4ch_microbit.xm` (4 channels, 16 patterns, 64-slot order list, 10 instruments).
+
+### Song 2: Canon in D, bhangra techno
+- Tune: `Claude/mods/canon_bhangra_4ch_microbit.xm`; generator `Claude/suggestions/make_canon_xm_microbit.py`.
+- Why Pachelbel: the Knight Rider theme is under copyright (other people's versions don't change that), so the
+  second tune had to be public domain. Pachelbel's *Canon and Gigue in D* (about 1700) suits 4-bar techno: an
+  8-chord loop over an 8-note ground bass.
+- Same setup and the **same 10 instruments, byte for byte**, so the code, LEDs and converter work for both songs.
+- The 8 chords (D A Bm F#m G D G A) are stretched to 2 per bar: one pass of the ground bass = one pattern.
+  Bass lifted to D5-D4 so it keeps its shape above the speaker's floor.
+- Lead lines V1-V3 are Pachelbel's violin lines; V4 is new. In the canon patterns (V2-V4) track 3 plays the
+  line track 1 played one pattern earlier: a real canon across two micro:bits.
+- Bhangra: dhol groove on the toms (low tom = deep head, high tom = sharp head) with claps on beats 2 and 4,
+  over a four-on-the-floor kick. Hoover stabs: A-4, except E-4 over the A chord.
+- Patterns: INT1 INT2 V1 V2 V3 V4 D1 D2 D1x D2x BR1 BR2 BU1 BU2 RLD OUT (letters A-P in the same order).
 - Tracks follow the XM channels: **1 lead** (melody), **2 acid** (bass), **3 vox** (voice lane: tone phrases plus
   claps, crashes, toms, pews, Hoover stabs), **4 drums** (kick and hats). **0 = conductor** (metronome + radio).
-- Everything on the display is one character: tracks `0`-`4`, patterns `A`-`P`, songs `*` and `+`.
-- Songs: `*` = the real tune (64 patterns, about 6 min 50 s). `+` = test song, patterns A to P once each.
+- Everything on the display is one character: tracks `0`-`4`, patterns `A`-`P` (Korobeiniki) and `a`-`p`
+  (Canon), songs `*` (Korobeiniki) and `+` (Canon).
+- Two songs, one per tune, each 64 patterns (about 6 min 50 s). The earlier test song was dropped: single
+  patterns can be tested from the pattern screen.
+- In the code each track has 32 patterns: Korobeiniki's 16 (`lead_int1` ...) then the Canon's 16
+  (`canon_lead_int1` ...). The Canon's order list points at patterns 16-31. File: `Claude/suggestions/main_two_songs.py`.
 - Sounds: one function per sound (`play_kick` ...), recipes from `Claude/code/microbit_instruments.py`.
 - LEDs: one LED at a time. Waves on rows 1-2, related sounds share an LED; the low/open one is at
   `bright_dim` = 128 (half), the other at 255. Tones on rows 4, 3, 2 by note (not octave).
@@ -71,15 +94,24 @@ Last updated: 1 November 2026.
 
 ## To do
 
+- [ ] **Song 2 in MakeCode**: try `main_two_songs.py` (about 4,100 array entries, so Blocks may be slow; if it
+      struggles, share identical patterns). Check the lowercase `a`-`p` are easy to read on the display.
+
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
       in small steps.
-- [ ] **README**: the root README lists only song `*`; add the `+` test song (the draft wording is in
-      `Claude/suggestions/README.md`).
-- [ ] **Format doc**: the updated student version (channels, pattern letters, how the micro:bit plays a cell,
-      the LED grids, the test song) is no longer in `Claude/suggestions`; `Claude/microbit_tracker_format_students.md`
-      is the earlier version. Decide which to keep; Claude can regenerate the updated one. Its "how the micro:bit
-      plays a cell" section must now describe the substring version, not splitting at the space.
+- [ ] **README**: updated draft in `Claude/suggestions/README.md` (two tunes, 32 patterns, song names,
+      Pachelbel spelling, AI use). Still to decide: the VS Code section and the converter sentence (see below).
+- [ ] **Format doc**: updated student version in `Claude/suggestions/microbit_tracker_format_students.md`
+      (both tunes, pattern tables A-P and a-p, substring version, radio timing). Copy it over
+      `Claude/microbit_tracker_format_students.md`, which is still the first version.
+- [ ] **README, VS Code section**: `main.py` is MakeCode Python (`basic.`, `music.create_sound_expression`,
+      `radio.on_received_string`), not MicroPython, so adding `from microbit import *` and using "Put this
+      file" won't run it. Loading `microbit-Technobit.hex` onto the MICROBIT drive would.
+- [ ] **README, AI use**: "Claude Code has been used to create the .XM file conversion app" - the converter
+      hasn't been written yet.
+- [ ] **The .hex file** `microbit-Technobit.hex` was built before the Canon was added; download a fresh one
+      from MakeCode before checking in.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
@@ -93,9 +125,12 @@ Last updated: 1 November 2026.
 - Tracker format documented, with a student version and a short "what is a tracker" intro.
 - Existing code converted to the format: XM note names, name/Hz lookup tables, 12 agreed sounds, shared LEDs.
 - The tune hardcoded from the XM (64 pattern arrays checked cell by cell against the XM).
-- Single-character display, XM track order, test song `+`.
+- Single-character display, XM track order.
 - Radio sync without the wait (message always interrupts). Working on the real boards.
 - `play_note` uses substring blocks instead of Python's `split` (adopted in `main.py`, 1 Nov).
+- Song 2 XM (Canon in D, bhangra techno) generated, checked and listened to in OpenMPT.
+- Song 2 added to the code as song `+` (`main_two_songs.py`): all 64 Canon arrays match the XM; both songs
+  checked on the mock micro:bit.
 - Demo video shrunk from 87 MB to 9 MB (720p MP4) and shown in the README on GitHub; the 87 MB original removed.
 
 ---

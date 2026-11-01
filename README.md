@@ -13,27 +13,25 @@ To build manually in VSCode:
 - use normal commands from the palatte like "Put-this-file" to send to Micro:bit
 
 
-
 ## Techno:bit controls
 
 ### Playing Patterns
 On startup the Techno:bit shows the current 'track' or instrument it's going to play. 
 
 Press the A button to cycle between the tracks/instruments:
-- 1 = Drums 1
-- 2 = Drums 2
-- 3 = Bass
-- 4 = Melody
+- 1 = Lead
+- 2 = Acid
+- 3 = Vox
+- 4 = Drums
 
 Press the B button to select the track/instrument. Then the Techno:bit will show which pattern it's going to play.
 
 Now press the A button to cycle between the patterns:
-- A = normal pattern
-- B = alt pattern
+- A, B, C, etc
 
 Press the Micro:bit logo to switch to playing songs:
-- \* = first song
-- \+ = second song
+- \* = main song
+- \+ = test song
 
 Now press the B button to play that pattern/song using that track/instrument.
 
@@ -52,6 +50,6 @@ Gemini was used to investigate the timings for the sounds, radio, leds, etc, whi
 
 Claude was used to produce the XM music files, and some Python code for how that mod file can be used in Makecode (waveforms, note pitches, sequences, tracks, etc). Generated files are all under the Claude folder in this project.
 
-Claude Code has been used to crate the .XM file conversion app, and associated code generation to include that in the Makcode app. 
+Claude Code has been used to create the .XM file conversion app, and associated code generation to include that in the Makcode app. 
 
-The inetention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 
+The intention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 

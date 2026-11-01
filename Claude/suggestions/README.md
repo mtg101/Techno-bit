@@ -21,9 +21,10 @@ https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
 
 ## The tunes and the tracker format
 
-There are two tunes, both arranged for the same 4 channels and the same 10 instruments:
+There are three tunes, all arranged for the same 4 channels and the same 10 instruments:
 - a techno version of the traditional folk tune Korobeiniki (the one behind Tetris): `Claude/mods/korobeiniki_techno_4ch_microbit.xm`
 - a bhangra techno version of Pachelbel's Canon in D (from about 1700, so out of copyright): `Claude/mods/canon_bhangra_4ch_microbit.xm`
+- a drum-heavy synthwave version of Beethoven's Ode to Joy (1824, also out of copyright), with minor verses, major drops and a key change: `Claude/mods/ode_to_joy_synthwave_v3_4ch_microbit.xm`
 
 You can open the .xm files in a tracker such as [OpenMPT](https://openmpt.org/) and change them.
 
@@ -32,7 +33,7 @@ The music on the Micro:bits is stored in a very simple tracker format, with one 
 
 ## Techno:bit controls
 
-### Playing Patterns
+### Playing Songs
 On startup the Techno:bit shows the current 'track' it's going to play. 
 
 Press the A button to cycle between the tracks:
@@ -41,24 +42,23 @@ Press the A button to cycle between the tracks:
 - 3 = Voice lane (a few tone phrases, plus claps, crashes, toms, pews and Hoover stabs)
 - 4 = Drums (kick and hats, plus snare and toms in the fills)
 
-Press the B button to select the track. Then the Techno:bit will show which pattern it's going to play.
+Press the B button to select the track. Then the Techno:bit will show which song it's going to play.
 
-Now press the A button to cycle between the 32 patterns: A to P are Korobeiniki's, a to p are the Canon's (see the format document for what each one is).
-
-Press the Micro:bit logo to switch to playing a whole song, then press A to choose which:
+Now press the A button to cycle between the songs:
 - \* = Korobeiniki (Tetris theme)
 - \+ = Pachelbel's Canon in D
+- \# = Beethoven's Ode to Joy
 
-Now press the B button to play that pattern/song using that track.
+Now press the B button to play that song using that track.
 
 While playing press the B button to stop playing.
 
 ### Conducting via Radio
 When in track selection, press the Micro:bit logo to enter Conductor mode. The track number will now show 0.
 
-Now when you select a pattern/song the microbit will broadcast for other microbits to start playing their tracks, while this microbit plays a metronome beat.
+Now when you select a song (press B, then A to choose, then B to play) the microbit will broadcast each pattern number of the song for the other microbits to play on their tracks, while this microbit plays a metronome beat.
 
-So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the pattern/song!
+So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the song!
 
 Radio group 23 is used, so every Techno:bit needs to be on the same group.
 
@@ -75,4 +75,4 @@ Claude Code has been used to create the .XM file conversion app, and associated 
 
 The intention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 
 
-Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, wrote the 12 sound functions and the hardcoded versions of both tunes, created the Canon in D .xm file, fixed the radio timing between patterns, and shrank the demo video. Its drafts are in `Claude/suggestions` and its .xm files in `Claude/mods`.
+Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, wrote the 12 sound functions and the hardcoded versions of all three tunes, created the Canon in D and Ode to Joy .xm files, fixed the radio timing between patterns, and shrank the demo video. Its drafts are in `Claude/suggestions` and its .xm files in `Claude/mods`.

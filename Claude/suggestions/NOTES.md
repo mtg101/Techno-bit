@@ -27,6 +27,18 @@ Last updated: 1 November 2026.
 
 ---
 
+## Where things are (1 Nov)
+- `Claude/suggestions`: `main_three_songs.py` (next `main.py`), `make_canon_xm_microbit.py` and
+  `make_ode_to_joy_synthwave_v3_xm_microbit.py` (the generators for songs 2 and 3), `README.md` (draft),
+  `microbit_tracker_format_students.md` (draft), this file.
+- `Claude/mods`: the three tunes - `korobeiniki_techno_4ch_microbit.xm`, `canon_bhangra_4ch_microbit.xm`,
+  `ode_to_joy_synthwave_v3_4ch_microbit.xm`.
+- `old/` in both: stepping stones and tries, kept only to compare. Python: `main_agreed_format.py`,
+  `main_agreed_instruments.py`, `main_korobeiniki.py`, `main_interrupt.py`, `main_substring.py`,
+  `main_two_songs.py` (= current `main.py`). Tunes: early Korobeiniki versions, New World, Bella Ciao (techno,
+  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. File names mentioned below
+  for those are now in `old/`.
+
 ## Decisions
 
 ### The tracker format (see `Claude/microbit_tracker_format_students.md`)
@@ -56,14 +68,76 @@ Last updated: 1 November 2026.
 - Bhangra: dhol groove on the toms (low tom = deep head, high tom = sharp head) with claps on beats 2 and 4,
   over a four-on-the-floor kick. Hoover stabs: A-4, except E-4 over the A chord.
 - Patterns: INT1 INT2 V1 V2 V3 V4 D1 D2 D1x D2x BR1 BR2 BU1 BU2 RLD OUT (letters A-P in the same order).
+
+### Tried for song 3: Bella Ciao, chiptune techno
+- Tune: `Claude/mods/bella_ciao_techno_4ch_microbit.xm`; generator `Claude/suggestions/make_bella_ciao_xm_microbit.py`.
+- Traditional Italian folk song: only the traditional melody, no lyrics, no modern arrangement.
+- Melody checked against 8notes.com's violin MIDI (fetched once through the built-in browser): the 8-bar verse
+  matches note for note and every note is on the eighth-note grid, so nothing is rounded.
+- Moved to A minor so the Hoover's two pitches (A, E) are the key note and its fifth. Lead E5-F6 (loud on the
+  speaker). Chords per half bar: Am x7, A7 | A7, Dm, Dm, Am, Am, E7, E7, Am.
+- Same setup and the same 10 instruments, byte for byte. Pattern names and the 64-slot song order follow
+  Korobeiniki's; B1/B2 are the "bella ciao, bella ciao, bella ciao ciao ciao" hook chopped and looped.
+- **Synthwave version** (`Claude/mods/bella_ciao_synthwave_4ch_microbit.xm`, generator
+  `make_bella_ciao_synthwave_xm_microbit.py`): the techno version sounded too much like Korobeiniki, so this one
+  changes the groove, not just the tune. Felt at half speed (75 BPM, one row = a 16th): half-time drums with a
+  big snare on 2 and 4 and tom fills, a steady 16th-note bass, a two-octave arpeggio running on track 3 with
+  Hoover hits in the choruses, the melody stretched to half speed (an octave lower in the verses). No acid
+  octave pump, no pew-pews. Patterns: INT1 INT2 V1-V4 C1-C4 HK BR1 BR2 BU1 BU2 OUT.
+- Bella Ciao's melody felt too weak in synthwave, so we moved on to Ode to Joy (below).
+- Also tried: Dvorak's New World Symphony (XM in `mods`, not used: didn't work as techno). Ruled out as
+  copyrighted: Knight Rider, West Side Story (until 2060), Midnight Diner's "Omoide".
+
+### Song 3: Ode to Joy, drum-heavy synthwave (chosen 1 Nov)
+- Beethoven's Symphony No. 9 (1824), public domain. Song `#`. The one to use:
+  `Claude/mods/ode_to_joy_synthwave_v3_4ch_microbit.xm` (generator `make_ode_to_joy_synthwave_v3_xm_microbit.py`).
+- How we got there:
+  Three versions in `Claude/mods`: `ode_to_joy_trance_4ch_microbit.xm`,
+  `ode_to_joy_minor_4ch_microbit.xm`, `ode_to_joy_synthwave_4ch_microbit.xm` (one generator,
+  `make_ode_to_joy_xm_microbit.py trance|minor|synthwave`). Same tune, chords, patterns and order; only the
+  arrangement differs. Melody written from memory, not checked against a score.
+  Chosen style: **synthwave**, made drum heavy (1 Nov): in the drops track 3 is a second kit (claps on
+  the snares, tom grooves, crashes, a tom cascade at the end).
+  Then syncopated (it sounded too regular, "like a recorder recital"): the melody re-rhythmed with the
+  same notes in the same order (3+3+1+1 and 2+1+3+2 bars, phrase B anticipating the beat), the kick in a
+  3+3+2 pattern with the snare on the half-time backbeat, offbeat claps and toms on track 3, the bass
+  locked to the kick, and a gated verse arpeggio. Off-beat notes: melody 14% -> 38%, kick 12% -> 40%.
+  Then **v2, "everything at once"** (still sounded plain): `ode_to_joy_synthwave_v2_4ch_microbit.xm`,
+  generator `make_ode_to_joy_synthwave_v2_xm_microbit.py`. The v1 file is kept to compare.
+    1. Richer chords, two a bar: A F#m E A D A A E (phrase A), E E Bm F#m E A D E (phrase B).
+    2. Minor verses, major drops: intro, verses and breakdown in A minor (C# -> C; Am F E Dm G), drops in A major.
+    3. Key change: the last drops (KA KA2 KB) go up a step to B major, with Hoover brass hits on each bar.
+    4. Counter-melody: in the verses track 3 answers the lead at the end of each bar.
+    5. Edits: D1/KA stutter their last note, D2 cuts everything but the lead for the last half bar,
+       D4/KA2 end in a tom cascade, the build ends with a beat of silence.
+  Patterns: INT1 INT2 P1-P4 D1-D4 KA KA2 KB BR BU OUT (breakdown and build are one pattern each now).
+  Checked: no melody note on a chord change is outside the chord, track 3 never plays a semitone from the
+  lead, every cell converts to our format, same 10 instruments byte for byte.
+  Then **v3, more drums** (v2 was "weirdly minor then anthemy" - good - but wanted more drums):
+  `ode_to_joy_synthwave_v3_4ch_microbit.xm`, generator `make_ode_to_joy_synthwave_v3_xm_microbit.py`.
+  Still 4 tracks (the conductor stays the metronome: we're recreating 4-track trackers). A micro:bit plays
+  one sound at a time, so the extra drums go in the gaps; every tone is exactly as in v2:
+    A. the bass track plays a clap/hat in its rests (rows 2 and 5 of each bar, and row 7 in the verses);
+    B. in the drops track 3's second kit plays on nearly every row;
+    C. in the verses track 3 has a light hat/tom/clap groove in the first half of each bar, under the
+       counter-melody.
+  No track doubles the same drum another track plays on that row (except the tom cascade, on purpose).
+  About 44% more drum hits over the whole song.
+
+### The boards and the code
 - Tracks follow the XM channels: **1 lead** (melody), **2 acid** (bass), **3 vox** (voice lane: tone phrases plus
   claps, crashes, toms, pews, Hoover stabs), **4 drums** (kick and hats). **0 = conductor** (metronome + radio).
-- Everything on the display is one character: tracks `0`-`4`, patterns `A`-`P` (Korobeiniki) and `a`-`p`
-  (Canon), songs `*` (Korobeiniki) and `+` (Canon).
-- Two songs, one per tune, each 64 patterns (about 6 min 50 s). The earlier test song was dropped: single
-  patterns can be tested from the pattern screen.
-- In the code each track has 32 patterns: Korobeiniki's 16 (`lead_int1` ...) then the Canon's 16
-  (`canon_lead_int1` ...). The Canon's order list points at patterns 16-31. File: `Claude/suggestions/main_two_songs.py`.
+- Everything on the display is one character: tracks `0`-`4`, songs `*` (Korobeiniki), `+` (Canon),
+  `#` (Ode to Joy).
+- **Songs only** (1 Nov, `Claude/suggestions/main_three_songs.py`): the pattern screen is gone (a third set of
+  16 pattern letters would have been confusing). Controls: A = next track, logo = conductor (0), B = choose a
+  song; then A = next song, B = play; B again = stop. Receivers still play whatever pattern number arrives by
+  radio, so the radio sync is unchanged. Removed: `pattern_names`, `show_pattern_name`, `num_patterns`, the
+  logo's songs/patterns switch; `choosing_pattern` became `choosing_song`.
+- Three songs, one per tune, each 64 patterns (about 6 min 50 s).
+- In the code each track has 48 patterns: Korobeiniki's 16 (`lead_int1` ...), the Canon's 16
+  (`canon_lead_int1` ...) at 16-31, Ode to Joy's 16 (`ode_lead_int1` ...) at 32-47. Each song's order list
+  points at its own patterns. (`main_two_songs.py` is the two-song version with the pattern screen.)
 - Sounds: one function per sound (`play_kick` ...), recipes from `Claude/code/microbit_instruments.py`.
 - LEDs: one LED at a time. Waves on rows 1-2, related sounds share an LED; the low/open one is at
   `bright_dim` = 128 (half), the other at 255. Tones on rows 4, 3, 2 by note (not octave).
@@ -94,29 +168,30 @@ Last updated: 1 November 2026.
 
 ## To do
 
-- [ ] **Song 2 in MakeCode**: try `main_two_songs.py` (about 4,100 array entries, so Blocks may be slow; if it
-      struggles, share identical patterns). Check the lowercase `a`-`p` are easy to read on the display.
+- [ ] **Test `main_three_songs.py`** in MakeCode (Blocks conversion of the bigger file, ~150 KB) and on
+      the micro:bits (memory: 192 arrays now). Then adopt it as `main.py`, copy the README draft over
+      (below) and download a fresh `.hex`.
 
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
       in small steps.
-- [ ] **README**: updated draft in `Claude/suggestions/README.md` (two tunes, 32 patterns, song names,
-      Pachelbel spelling, AI use). Still to decide: the VS Code section and the converter sentence (see below).
+- [ ] **README**: updated draft in `Claude/suggestions/README.md` (three tunes, songs-only controls with
+      `*` `+` `#`, the conductor steps, Pachelbel spelling, AI use). Copy over the root README once
+      `main_three_songs.py` is adopted. Still to decide: the VS Code section and the converter sentence (see below).
 - [ ] **Format doc**: updated student version in `Claude/suggestions/microbit_tracker_format_students.md`
       (both tunes, pattern tables A-P and a-p, substring version, radio timing). Copy it over
-      `Claude/microbit_tracker_format_students.md`, which is still the first version.
+      `Claude/microbit_tracker_format_students.md`, which is still the first version. Needs updating first:
+      add Ode to Joy, and the A-P / a-p pattern letters are no longer on the display (songs only now).
 - [ ] **README, VS Code section**: `main.py` is MakeCode Python (`basic.`, `music.create_sound_expression`,
       `radio.on_received_string`), not MicroPython, so adding `from microbit import *` and using "Put this
       file" won't run it. Loading `microbit-Technobit.hex` onto the MICROBIT drive would.
 - [ ] **README, AI use**: "Claude Code has been used to create the .XM file conversion app" - the converter
       hasn't been written yet.
-- [ ] **The .hex file** `microbit-Technobit.hex` was built before the Canon was added; download a fresh one
+- [ ] **The .hex file** `microbit-Technobit.hex` was built before the Canon and Ode to Joy were added; download a fresh one
       from MakeCode before checking in.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
-- [ ] **Tidy `Claude/suggestions`**: `main_agreed_format.py`, `main_agreed_instruments.py`, `main_korobeiniki.py`
-      and `main_interrupt.py` are stepping stones; `main_substring.py` = current `main.py`.
 
 ---
 
@@ -129,8 +204,16 @@ Last updated: 1 November 2026.
 - Radio sync without the wait (message always interrupts). Working on the real boards.
 - `play_note` uses substring blocks instead of Python's `split` (adopted in `main.py`, 1 Nov).
 - Song 2 XM (Canon in D, bhangra techno) generated, checked and listened to in OpenMPT.
-- Song 2 added to the code as song `+` (`main_two_songs.py`): all 64 Canon arrays match the XM; both songs
+- Song 2 added to the code as song `+` (`main_two_songs.py`, adopted in `main.py`): all 64 Canon arrays match the XM; both songs
   checked on the mock micro:bit.
+- Song 3 chosen: Ode to Joy, drum-heavy synthwave (v3), after trying New World, Bella Ciao (techno and
+  synthwave) and three Ode to Joy styles; v1 -> syncopated -> v2 "everything at once" -> v3 more drums.
+- Songs-only controls and Ode to Joy as song `#` (`main_three_songs.py`): the pattern screen removed; all 64
+  Ode to Joy arrays match the XM; all three songs checked on the mock micro:bit (same sounds per track as
+  their XMs) and the buttons simulated (track, conductor, song choice, play, radio messages).
+- README draft updated for three tunes and the new controls.
+- Tidied (1 Nov): only the files in use are at the top of `Claude/suggestions` and `Claude/mods`; earlier
+  steps and tries moved to `old/` in each (see "Where things are").
 - Demo video shrunk from 87 MB to 9 MB (720p MP4) and shown in the README on GitHub; the 87 MB original removed.
 
 ---

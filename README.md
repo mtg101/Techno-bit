@@ -50,4 +50,8 @@ So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks 
 ## AI Use
 Gemini was used to investigate the timings for the sounds, radio, leds, etc, which included examples of Makecode Blocks I could use to implement the timings.
 
-Claude was used to produce the XM music files, and some Python code for how that mod file can be used in Makecode (waveforms, note pitches, sequences, tracks, etc). Generated files are all under the Claude folder in this project. 
+Claude was used to produce the XM music files, and some Python code for how that mod file can be used in Makecode (waveforms, note pitches, sequences, tracks, etc). Generated files are all under the Claude folder in this project.
+
+Claude Code has been used to crate the .XM file conversion app, and associated code generation to include that in the Makcode app. 
+
+The inetention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 

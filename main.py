@@ -88,9 +88,9 @@ def play_note(noteName: str):
         led.unplot(led_x, led_y)
     if "-" == noteName:
         led.unplot(led_x, led_y)
-    if "tone" == noteName.split(" ")[0]:
+    if "tone" == noteName.substr(0, 4):
         music.stop_all_sounds()
-        play_tone(noteName.split(" ")[1])
+        play_tone(noteName.substr(5, 3))
     if "wave kick" == noteName:
         play_kick()
     if "wave snare" == noteName:

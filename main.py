@@ -1,10 +1,11 @@
 def play_track(track: List[any]):
     global track_row, next_note_time
     track_row = 0
-    while track_row < 32 and is_playing:
+    while track_row < 32 and is_playing and not (new_pattern):
         next_note_time = input.running_time() + 200
         play_note(convert_to_text(track[track_row]))
-        basic.pause(max(0, next_note_time - input.running_time()))
+        while input.running_time() < next_note_time and not (new_pattern):
+            basic.pause(1)
         track_row += 1
     music.stop_all_sounds()
 def show_track_name():
@@ -2372,7 +2373,7 @@ def create_acid_patterns():
         "-"]
 
 def on_received_string(receivedString):
-    global receiving_song, is_playing, current_pattern, start_track
+    global receiving_song, is_playing, current_pattern, new_pattern, start_track
     if receivedString == "stop":
         receiving_song = False
         is_playing = False
@@ -2380,10 +2381,10 @@ def on_received_string(receivedString):
         receiving_song = True
     elif receivedString == "end song":
         receiving_song = False
-    elif not (is_playing):
-        if current_track != 0:
-            current_pattern = parse_float(receivedString)
-            start_track = True
+    elif current_track != 0:
+        current_pattern = parse_float(receivedString)
+        new_pattern = True
+        start_track = True
 radio.on_received_string(on_received_string)
 
 def play_hat():
@@ -2727,6 +2728,7 @@ is_playing = False
 track_row = 0
 receiving_song = False
 choosing_pattern = False
+new_pattern = False
 start_track = False
 bright_dim = 0
 bright_full = 0
@@ -2758,7 +2760,6 @@ def on_forever():
                     current_song_position = 0
                     if current_track == 0:
                         radio.send_string("start song")
-                        radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                 else:
                     playing_song = False
                     if current_track == 0:
@@ -2778,21 +2779,25 @@ def on_forever():
 basic.forever(on_forever)
 
 def on_forever2():
-    global current_pattern, current_song_position, start_track, choosing_pattern
+    global current_pattern, current_song_position, new_pattern, start_track, choosing_pattern
     if start_track:
         if playing_song:
+            new_pattern = False
             while current_song_position < len(song_list[current_song]) and playing_song:
                 if current_track == 0:
+                    radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                     if current_song_position == len(song_list[current_song]) - 1:
                         radio.send_string("end song")
-                    radio.send_string(convert_to_text(song_list[current_song][current_song_position]))
                 current_pattern = song_list[current_song][current_song_position]
                 play_current_pattern()
                 current_song_position += 1
-                if current_track == 0:
-                    control.wait_micros(50000)
         else:
-            play_current_pattern()
+            new_pattern = True
+            while new_pattern:
+                new_pattern = False
+                play_current_pattern()
+                while receiving_song and not (new_pattern):
+                    basic.pause(1)
         start_track = False
         choosing_pattern = False
         if not (receiving_song):

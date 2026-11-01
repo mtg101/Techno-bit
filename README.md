@@ -13,11 +13,7 @@ To build manually in VSCode:
 - use normal commands from the palette like "Put-this-file" to send to Micro:bit
 
 ### Demo
-
-
 https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
-
-
 
 ## The tune and the tracker format
 

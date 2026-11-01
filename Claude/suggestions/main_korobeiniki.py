@@ -2790,7 +2790,7 @@ def on_forever2():
                 play_current_pattern()
                 current_song_position += 1
                 if current_track == 0:
-                    control.wait_micros(10000)
+                    control.wait_micros(50000)
         else:
             play_current_pattern()
         start_track = False

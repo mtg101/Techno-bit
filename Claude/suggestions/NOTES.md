@@ -30,8 +30,6 @@ Last updated: 1 November 2026.
 ## Where things are (1 Nov, end of day)
 - `Claude/suggestions`:
   - `main_8_tracks_v3.py` - **the code to test next**: 3 songs, songs-only controls, tracks 0-8.
-  - Generators: `make_korobeiniki_8ch_v3_xm_microbit.py`, `make_canon_xm_microbit.py`,
-    `make_ode_to_joy_synthwave_v3_xm_microbit.py`.
   - Drafts: `README.md` (to copy over the root README), `microbit_tracker_format_students.md` (to copy over
     `Claude/microbit_tracker_format_students.md`). Both up to date with 3 songs and 8 tracks.
   - This file.
@@ -42,8 +40,10 @@ Last updated: 1 November 2026.
   `main_two_songs.py` (= current `main.py`), `main_three_songs.py` (3 songs, 4 tracks: the fallback),
   `main_8_tracks.py` (v1) and `main_8_tracks_v2.py`. Tunes: `korobeiniki_techno_4ch_microbit.xm` (= channels
   1-4 of the 8-track), the 8-track v1 and v2, early Korobeiniki versions, New World, Bella Ciao (techno,
-  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. File names mentioned below for
-  those are now in `old/`.
+  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. Also the generators of the three
+  tunes in use (`make_korobeiniki_8ch_v3_xm_microbit.py`, `make_canon_xm_microbit.py`,
+  `make_ode_to_joy_synthwave_v3_xm_microbit.py`): they made the `.xm` files, nothing runs them. File names
+  mentioned below for any of these are now in `old/`.
 
 ## Decisions
 

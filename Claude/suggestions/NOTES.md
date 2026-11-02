@@ -27,17 +27,23 @@ Last updated: 1 November 2026.
 
 ---
 
-## Where things are (1 Nov)
-- `Claude/suggestions`: `main_three_songs.py` (next `main.py`), `make_canon_xm_microbit.py` and
-  `make_ode_to_joy_synthwave_v3_xm_microbit.py` (the generators for songs 2 and 3), `README.md` (draft),
-  `microbit_tracker_format_students.md` (draft), this file.
-- `Claude/mods`: the three tunes - `korobeiniki_techno_4ch_microbit.xm`, `canon_bhangra_4ch_microbit.xm`,
-  `ode_to_joy_synthwave_v3_4ch_microbit.xm`.
-- `old/` in both: stepping stones and tries, kept only to compare. Python: `main_agreed_format.py`,
+## Where things are (1 Nov, end of day)
+- `Claude/suggestions`:
+  - `main_8_tracks_v3.py` - **the code to test next**: 3 songs, songs-only controls, tracks 0-8.
+  - Generators: `make_korobeiniki_8ch_v3_xm_microbit.py`, `make_canon_xm_microbit.py`,
+    `make_ode_to_joy_synthwave_v3_xm_microbit.py`.
+  - Drafts: `README.md` (to copy over the root README), `microbit_tracker_format_students.md` (to copy over
+    `Claude/microbit_tracker_format_students.md`). Both up to date with 3 songs and 8 tracks.
+  - This file.
+- `Claude/mods`: the three tunes - `korobeiniki_techno_8ch_v3_microbit.xm` (8 channels; 1-4 = the 4-track
+  tune), `canon_bhangra_4ch_microbit.xm`, `ode_to_joy_synthwave_v3_4ch_microbit.xm`.
+- `old/` in both: earlier steps and tries, kept only to compare. Python: `main_agreed_format.py`,
   `main_agreed_instruments.py`, `main_korobeiniki.py`, `main_interrupt.py`, `main_substring.py`,
-  `main_two_songs.py` (= current `main.py`). Tunes: early Korobeiniki versions, New World, Bella Ciao (techno,
-  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. File names mentioned below
-  for those are now in `old/`.
+  `main_two_songs.py` (= current `main.py`), `main_three_songs.py` (3 songs, 4 tracks: the fallback),
+  `main_8_tracks.py` (v1) and `main_8_tracks_v2.py`. Tunes: `korobeiniki_techno_4ch_microbit.xm` (= channels
+  1-4 of the 8-track), the 8-track v1 and v2, early Korobeiniki versions, New World, Bella Ciao (techno,
+  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. File names mentioned below for
+  those are now in `old/`.
 
 ## Decisions
 
@@ -126,21 +132,49 @@ Last updated: 1 November 2026.
 
 ### The boards and the code
 - Tracks follow the XM channels: **1 lead** (melody), **2 acid** (bass), **3 vox** (voice lane: tone phrases plus
-  claps, crashes, toms, pews, Hoover stabs), **4 drums** (kick and hats). **0 = conductor** (metronome + radio).
-- Everything on the display is one character: tracks `0`-`4`, songs `*` (Korobeiniki), `+` (Canon),
+  claps, crashes, toms, pews, Hoover stabs), **4 drums** (kick and hats). **5-8 = extras** (see "8 tracks").
+  **0 = conductor** (metronome + radio).
+- Everything on the display is one character: tracks `0`-`8`, songs `*` (Korobeiniki), `+` (Canon),
   `#` (Ode to Joy).
-- **Songs only** (1 Nov, `Claude/suggestions/main_three_songs.py`): the pattern screen is gone (a third set of
-  16 pattern letters would have been confusing). Controls: A = next track, logo = conductor (0), B = choose a
-  song; then A = next song, B = play; B again = stop. Receivers still play whatever pattern number arrives by
-  radio, so the radio sync is unchanged. Removed: `pattern_names`, `show_pattern_name`, `num_patterns`, the
-  logo's songs/patterns switch; `choosing_pattern` became `choosing_song`.
+- **Songs only** (1 Nov): the pattern screen is gone (a third set of 16 pattern letters would have been
+  confusing). Controls: A = next track, logo = conductor (0), B = choose a song; then A = next song, B = play;
+  B again = stop. Receivers still play whatever pattern number arrives by radio, so the radio sync is
+  unchanged. Removed: `pattern_names`, `show_pattern_name`, `num_patterns`, the logo's songs/patterns switch;
+  `choosing_pattern` became `choosing_song`. Patterns are now known by number (0-47) in the docs.
 - Three songs, one per tune, each 64 patterns (about 6 min 50 s).
-- In the code each track has 48 patterns: Korobeiniki's 16 (`lead_int1` ...), the Canon's 16
+- In the code each track has 48 patterns: Korobeiniki's 16 (`lead_int1` ...) at 0-15, the Canon's 16
   (`canon_lead_int1` ...) at 16-31, Ode to Joy's 16 (`ode_lead_int1` ...) at 32-47. Each song's order list
-  points at its own patterns. (`main_two_songs.py` is the two-song version with the pattern screen.)
+  (`song_1` ...) points at its own patterns.
 - Sounds: one function per sound (`play_kick` ...), recipes from `Claude/code/microbit_instruments.py`.
 - LEDs: one LED at a time. Waves on rows 1-2, related sounds share an LED; the low/open one is at
-  `bright_dim` = 128 (half), the other at 255. Tones on rows 4, 3, 2 by note (not octave).
+  `bright_dim` = 128 (half), the other at 255. Tones on rows 4, 3, 2 by note (not octave). Track on row 0
+  while playing (tracks 5-8: their partner's LED at half brightness).
+
+### 8 tracks (1 Nov, agreed: v3, to test): `main_8_tracks_v3.py` + `korobeiniki_techno_8ch_v3_microbit.xm`
+- Up to 8 boards plus the conductor. **The 4-track version must work on its own**: tracks 5-8 are extras that
+  only ADD, and they are **drums and bass, not melody or chords**. The conductor stays the metronome (we're
+  recreating 4-track trackers, and 8-track ones).
+- Only Korobeiniki has its own tracks 5-8 (memory). In a 4-track song nobody is silent: **track 5 plays
+  track 1, 6 plays 2, 7 plays 3, 8 plays 4** ("take away 4"). Done with the lists, not with logic:
+  `patterns_bass2` etc. point at the Canon's and Ode to Joy's track 1-4 arrays (nothing copied).
+- The 8-channel XM: channels 1-4 are byte for byte the 4-track tune (mute 5-8 in OpenMPT = the 4-track
+  version). Every extra board plays in every pattern; the parts start small and grow, so the drops are
+  still the biggest:
+  - 5 `bass2`: a second bass line, only the chord's root / fifth / octave (C-4 up), short punchy notes: half
+    notes in the intro, 3+3+2 in the verses, offbeats in the drops, a pump speeding up in the build.
+  - 6 `kit2`: hats and snare: light hats on the beat early on, a soft pulse in the breakdown, claps speeding
+    up with the build, a second kit in the drops, hats thinning out at the end.
+  - 7 `perc`: toms and claps: pick-ups in the intro, a tom groove, tom runs in the fills, a heartbeat in the
+    breakdown, toms speeding up in the build.
+  - 8 `hits`: crashes, extra syncopated kicks, open hats, pews.
+- Checked: no semitone clash between the extra bass and anything tonal; no drum doubled on two tracks on a row;
+  tones C-4..B-6; the pre-drop silences stay silent; every extra pattern has something in it; on the mock
+  micro:bit Korobeiniki's tracks 5-8 match the XM and the other songs' tracks 5-8 are tracks 1-4.
+- 64 new arrays (256 in all). Estimated flash: about 165 KB of program (out of about 190 KB) - to be measured
+  from a real hex.
+- How we got here: v1 had harmony / arpeggio / Hoover extras, mostly in the drops ("works well musically"),
+  but most extra boards had nothing to play early on - not great for students. v2 kept every board busy (with
+  pads and arpeggios). v3 made the extras drums and bass ("a nice mix").
 
 ### Radio sync: "a message always interrupts" (in `main.py` since 1 Nov)
 - The conductor broadcasts every pattern number; that is the point of the demo.
@@ -168,20 +202,19 @@ Last updated: 1 November 2026.
 
 ## To do
 
-- [ ] **Test `main_three_songs.py`** in MakeCode (Blocks conversion of the bigger file, ~150 KB) and on
-      the micro:bits (memory: 192 arrays now). Then adopt it as `main.py`, copy the README draft over
-      (below) and download a fresh `.hex`.
+- [ ] **Test `main_8_tracks_v3.py`** (agreed 1 Nov): in MakeCode (paste, flip to Blocks: watch the conversion
+      of the ~190 KB file) and on the boards - 4 boards should sound exactly like before, 8 boards + a
+      conductor if there are enough. Memory: 256 pattern arrays. Then adopt it as `main.py`, copy the README
+      and format doc drafts over, download a fresh `.hex` and measure it. If 8 tracks has to wait,
+      `old/main_three_songs.py` is the 4-track fallback.
 
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
       in small steps.
-- [ ] **README**: updated draft in `Claude/suggestions/README.md` (three tunes, songs-only controls with
-      `*` `+` `#`, the conductor steps, Pachelbel spelling, AI use). Copy over the root README once
-      `main_three_songs.py` is adopted. Still to decide: the VS Code section and the converter sentence (see below).
-- [ ] **Format doc**: updated student version in `Claude/suggestions/microbit_tracker_format_students.md`
-      (both tunes, pattern tables A-P and a-p, substring version, radio timing). Copy it over
-      `Claude/microbit_tracker_format_students.md`, which is still the first version. Needs updating first:
-      add Ode to Joy, and the A-P / a-p pattern letters are no longer on the display (songs only now).
+- [ ] **README and format doc drafts** are up to date (3 tunes, songs-only controls, tracks 1-8, the track
+      LED; format doc: 8 tracks, patterns by number with an Ode to Joy table). Copy them over once
+      `main_8_tracks_v3.py` is adopted. Still to decide in the README: the VS Code section and the converter
+      sentence (below).
 - [ ] **README, VS Code section**: `main.py` is MakeCode Python (`basic.`, `music.create_sound_expression`,
       `radio.on_received_string`), not MicroPython, so adding `from microbit import *` and using "Put this
       file" won't run it. Loading `microbit-Technobit.hex` onto the MICROBIT drive would.
@@ -211,7 +244,11 @@ Last updated: 1 November 2026.
 - Songs-only controls and Ode to Joy as song `#` (`main_three_songs.py`): the pattern screen removed; all 64
   Ode to Joy arrays match the XM; all three songs checked on the mock micro:bit (same sounds per track as
   their XMs) and the buttons simulated (track, conductor, song choice, play, radio messages).
-- README draft updated for three tunes and the new controls.
+- README draft updated for three tunes, the songs-only controls and tracks 1-8.
+- Format doc draft updated: three tunes, tracks 5-8 and the "take away 4" rule, patterns by number (0-47)
+  with an Ode to Joy table, the track LED.
+- 8 tracks: Korobeiniki 8-channel XM v3 (tracks 1-4 unchanged, extras = drums and bass) and
+  `main_8_tracks_v3.py`; checked on the mock micro:bit. Agreed 1 Nov ("a nice mix"); to test on the boards.
 - Tidied (1 Nov): only the files in use are at the top of `Claude/suggestions` and `Claude/mods`; earlier
   steps and tries moved to `old/` in each (see "Where things are").
 - Demo video shrunk from 87 MB to 9 MB (720p MP4) and shown in the README on GitHub; the 87 MB original removed.

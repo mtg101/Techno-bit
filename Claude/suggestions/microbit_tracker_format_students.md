@@ -24,6 +24,8 @@ A simple text format for one micro:bit's part of a tune. It is easy to read and 
 
 A tune is split into **channels**. Each micro:bit plays one channel, one sound at a time.
 
+A tune has 4 channels, and Korobeiniki has 4 extra ones for up to 8 micro:bits (see section 8).
+
 A channel is a list of **cells**. Each cell is one **row** of time and says what the micro:bit should do on that row.
 
 | Word | Meaning |
@@ -180,79 +182,114 @@ The only splitting left is turning one cell into its two words, for example `"to
 
 ### One array per pattern, plus an order list
 
-- **A pattern array** holds the 32 cells of one pattern. There are two tunes with 16 patterns each, so each
-  channel has 32 arrays, named after the channel and the pattern: Korobeiniki's are `lead_int1`, `drums_bu2` and
-  so on, and the Canon's start with `canon_`, such as `canon_lead_v3`.
+- **A pattern array** holds the 32 cells of one pattern. There are three tunes with 16 patterns each, so each
+  track has 48 patterns, named after the channel and the pattern: Korobeiniki's are `lead_int1`, `drums_bu2` and
+  so on, the Canon's start with `canon_` (such as `canon_lead_v3`) and Ode to Joy's with `ode_` (such as
+  `ode_vox_ka2`).
 - **An order list** is an array of numbers saying which pattern plays next. Each tune has one: `song_1`
-  (Korobeiniki) uses patterns 0 to 15, and `song_2` (the Canon) uses patterns 16 to 31. Each is 64 numbers long,
-  which is 6 minutes 50 seconds of music.
+  (Korobeiniki) uses patterns 0 to 15, `song_2` (the Canon) 16 to 31 and `song_3` (Ode to Joy) 32 to 47.
+  Each is 64 numbers long, which is 6 minutes 50 seconds of music.
 
 To play it: take the next number from the order list, find that pattern's array, then step through its 32 entries,
 one every 200 ms.
 
-### The channels
+### The tracks
 
-Both tunes have the same 4 channels. Each micro:bit plays one, chosen by its track number. Track 0 is the
-conductor, which keeps the beat and tells the others which pattern to play.
+Each micro:bit plays one track, chosen by its track number. Track 0 is the conductor, which keeps the beat and
+tells the others which pattern to play. Tracks 1 to 4 play the whole tune on their own. Tracks 5 to 8 are
+**extras** for up to 8 micro:bits: they only add drums and bass, so the tune still works with just 4.
 
 | Track | Channel | What it plays |
 |---|---|---|
 | 0 | conductor | A metronome, and the radio messages that start the others |
 | 1 | `lead` | The melody (tone notes) |
 | 2 | `acid` | The acid bass line (tone notes) |
-| 3 | `vox` | The voice lane: tone phrases, plus claps, crashes, toms, pews and Hoover stabs. In the Canon it also plays the dhol groove and the second canon voice |
+| 3 | `vox` | The voice lane: tone phrases, plus claps, crashes, toms, pews and Hoover stabs. In the Canon it also plays the dhol groove and the second canon voice; in Ode to Joy the counter-melody and a second drum kit |
 | 4 | `drums` | The kick and hats, plus snare and toms in the fills |
+| 5 | `bass2` | Extra: a second bass line, only the chord's root, fifth and octave, in short notes |
+| 6 | `kit2` | Extra: hats and snare |
+| 7 | `perc` | Extra: toms and claps |
+| 8 | `hits` | Extra: crashes, extra kicks, open hats and pews |
+
+Only Korobeiniki has its own tracks 5 to 8 (memory is tight). In the other two tunes nobody sits out: track 5
+plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The code does this with the lists, not
+with extra logic: in `patterns_bass2` the Canon's and Ode to Joy's entries are simply `canon_lead_...` and
+`ode_lead_...`.
 
 ### The patterns
 
-The display shows one letter per pattern: capitals for Korobeiniki, small letters for the Canon. The number in
-an order list is the pattern's position: A is 0, P is 15, a is 16 and p is 31.
+The display shows only tracks and songs, not patterns, so patterns are known by their number in the order list.
 
-**Korobeiniki (the Tetris tune), A to P**
+**Korobeiniki (the Tetris tune), patterns 0 to 15.** The extras (tracks 5-8) start small in the intro and grow,
+so the drops are the biggest moments.
 
-| Letter | Name in the code | What it is |
+| Number | Name in the code | What it is |
 |---|---|---|
-| A | `int1` | Intro 1: kick, hats, pings, a sparse bass |
-| B | `int2` | Intro 2: adds clap, arpeggio and Hoover stabs |
-| C | `va1` | Verse on tune A |
-| D | `va2` | Verse on tune A, with Hoover stabs |
-| E | `a1` | Drop, tune A |
-| F | `a2` | Drop, tune A, with a pew-pew fill at the end |
-| G | `a1x` | Drop, tune A, variant |
-| H | `a2x` | Drop, tune A, variant |
-| I | `b1` | Drop, tune B |
-| J | `b2` | Drop, tune B, with a fill at the end |
-| K | `br1` | Breakdown: no drums, tune B quiet |
-| L | `br2` | Breakdown, second half |
-| M | `bu1` | Build: rising stutter, pew-pew, snare roll |
-| N | `bu2` | Build, second half, ending in a beat of silence |
-| O | `rld` | Reload: a held Hoover and a teaser of tune A |
-| P | `out` | Outro: the kick fades out |
+| 0 | `int1` | Intro 1: kick, hats, pings, a sparse bass |
+| 1 | `int2` | Intro 2: adds clap, arpeggio and Hoover stabs |
+| 2 | `va1` | Verse on tune A |
+| 3 | `va2` | Verse on tune A, with Hoover stabs |
+| 4 | `a1` | Drop, tune A |
+| 5 | `a2` | Drop, tune A, with a pew-pew fill at the end |
+| 6 | `a1x` | Drop, tune A, variant |
+| 7 | `a2x` | Drop, tune A, variant |
+| 8 | `b1` | Drop, tune B |
+| 9 | `b2` | Drop, tune B, with a fill at the end |
+| 10 | `br1` | Breakdown: no drums, tune B quiet |
+| 11 | `br2` | Breakdown, second half |
+| 12 | `bu1` | Build: rising stutter, pew-pew, snare roll |
+| 13 | `bu2` | Build, second half, ending in a beat of silence |
+| 14 | `rld` | Reload: a held Hoover and a teaser of tune A |
+| 15 | `out` | Outro: the kick fades out |
 
-**Pachelbel's Canon in D (bhangra techno), a to p**
+**Pachelbel's Canon in D (bhangra techno), patterns 16 to 31**
 
 The Canon's chords and bass repeat every pattern: D, A, Bm, F#m, G, D, G, A. Lines 1 to 3 are Pachelbel's own
 violin lines; line 4 is new. In a canon, a second voice plays the same line later: here track 3 plays the line
 that track 1 played in the pattern before.
 
-| Letter | Name in the code | What it is |
+| Number | Name in the code | What it is |
 |---|---|---|
-| a | `int1` | Intro 1: the bass alone, kick, hats and pings |
-| b | `int2` | Intro 2: the bass on the beat, an arpeggio and Hoover stabs |
-| c | `v1` | Line 1 over the dhol groove |
-| d | `v2` | Line 2, with line 1 underneath on track 3: the canon starts |
-| e | `v3` | Line 3, with line 2 underneath |
-| f | `v4` | Line 4, with line 3 underneath |
-| g | `d1` | Drop: line 3, dhol, crash and Hoover stabs |
-| h | `d2` | Drop: line 4, with a fill at the end |
-| i | `d1x` | Drop variant: rolling bass, closed hats |
-| j | `d2x` | Drop variant, with a fill at the end |
-| k | `br1` | Breakdown: no drums, line 1 over a held bass and an arpeggio |
-| l | `br2` | Breakdown, line 2 |
-| m | `bu1` | Build: rising stutter, pew-pew, snare roll |
-| n | `bu2` | Build, second half, ending in a beat of silence |
-| o | `rld` | Reload: a held Hoover and the start of line 1, then a mini-build |
-| p | `out` | Outro: the kick fades out |
+| 16 | `int1` | Intro 1: the bass alone, kick, hats and pings |
+| 17 | `int2` | Intro 2: the bass on the beat, an arpeggio and Hoover stabs |
+| 18 | `v1` | Line 1 over the dhol groove |
+| 19 | `v2` | Line 2, with line 1 underneath on track 3: the canon starts |
+| 20 | `v3` | Line 3, with line 2 underneath |
+| 21 | `v4` | Line 4, with line 3 underneath |
+| 22 | `d1` | Drop: line 3, dhol, crash and Hoover stabs |
+| 23 | `d2` | Drop: line 4, with a fill at the end |
+| 24 | `d1x` | Drop variant: rolling bass, closed hats |
+| 25 | `d2x` | Drop variant, with a fill at the end |
+| 26 | `br1` | Breakdown: no drums, line 1 over a held bass and an arpeggio |
+| 27 | `br2` | Breakdown, line 2 |
+| 28 | `bu1` | Build: rising stutter, pew-pew, snare roll |
+| 29 | `bu2` | Build, second half, ending in a beat of silence |
+| 30 | `rld` | Reload: a held Hoover and the start of line 1, then a mini-build |
+| 31 | `out` | Outro: the kick fades out |
+
+**Beethoven's Ode to Joy (drum-heavy synthwave), patterns 32 to 47**
+
+Felt at half speed (one row is a sixteenth note at 75 BPM), with a syncopated melody and a 3+3+2 kick. The
+verses are in A minor, the drops burst into A major, and the last drops go up a step to B major (a key change).
+
+| Number | Name in the code | What it is |
+|---|---|---|
+| 32 | `int1` | Intro 1: a gated arpeggio, then the bass (A minor) |
+| 33 | `int2` | Intro 2: adds the verse drums and a fill |
+| 34 | `p1` | Verse, phrase A in A minor, with a counter-melody on track 3 |
+| 35 | `p2` | Verse, phrase A again (ending on the home note) |
+| 36 | `p3` | Verse, phrase B |
+| 37 | `p4` | Verse, phrase A, with a fill |
+| 38 | `d1` | Drop in A major, phrase A; the last note stutters |
+| 39 | `d2` | Drop, phrase A; everything but the melody stops for half a bar |
+| 40 | `d3` | Drop, phrase B |
+| 41 | `d4` | Drop, phrase A, ending in a tom cascade |
+| 42 | `ka` | Key change: drop up a step (B major), Hoover brass, stutter |
+| 43 | `ka2` | Key change drop, tom cascade |
+| 44 | `kb` | Key change drop, phrase B |
+| 45 | `br` | Breakdown: no drums, A minor, arpeggio and Hoover pad |
+| 46 | `bu` | Build: the roll speeds up, then a beat of silence |
+| 47 | `out` | Outro in B major: a held note, the beat falls away |
 
 ### Keeping the blocks manageable
 
@@ -287,6 +324,9 @@ if collapsing is not enough.
 ## 10. The LEDs
 
 The 5 x 5 LED display shows what is playing. Only one sound LED is lit at a time.
+
+**The track** is shown on row 0 while playing: tracks 0 to 4 light x0 to x4. The top row only has 5 LEDs, so
+tracks 5 to 8 light the same LED as their partner track (5 with 1, 6 with 2 and so on) at half brightness.
 
 **Wave sounds** use rows 1 and 2. Related sounds share an LED: the low or open sound is at half brightness
 and the other at full brightness.

@@ -321,6 +321,22 @@ if collapsing is not enough.
 
 ---
 
+### The radio: group and band
+
+The conductor sends each pattern number by radio. Two radio settings decide which boards hear it:
+
+- **The group** (`radio set group 23`) is like a name tag on every message. A board only listens to messages
+  for its own group, so two Techno:bit bands in the same room can play different songs. It does **not**
+  change the frequency: every group shares the same airwaves.
+- **The band** (`radio set frequency band 24`) is the actual frequency: 2400 + 24 = **2424 MHz**. This is
+  the same 2.4 GHz range used by Wi-Fi, Bluetooth, wireless game controllers and more, so a busy room can
+  drown the messages out. If a board misses a pattern number, it drops out until the next one arrives.
+
+We use group 23 and band 24. Band 24 sits in a gap: just above Wi-Fi channel 1 (about 2402-2422 MHz),
+below Wi-Fi channel 6 (about 2427-2447 MHz), and just clear of a frequency every Bluetooth device uses to
+announce itself (2426 MHz). The default band, 7, is right on top of Wi-Fi channel 1. **Every board,
+conductor included, must use the same group and the same band**, or they can't hear each other.
+
 ## 10. The LEDs
 
 The 5 x 5 LED display shows what is playing. Only one sound LED is lit at a time.

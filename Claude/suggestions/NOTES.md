@@ -32,8 +32,10 @@ Last updated: 1 November 2026.
   - `main_8_tracks_v3.py` - **the code to test next**: 3 songs, songs-only controls, tracks 0-8.
   - Drafts: `README.md` (matches the current `main.py`: 3 songs, 4 tracks, songs only - to copy over the
     root README now), `README_8_tracks.md` (for when `main_8_tracks_v3.py` becomes `main.py`),
-    `microbit_tracker_format_students.md` (8-track version; copy over `Claude/microbit_tracker_format_students.md`
-    with the 8-track code).
+    `microbit_tracker_format.md` (the student format doc, newest version: 3 songs, 8 tracks, patterns by
+    number, radio group/band). Note (4 Nov): the root `microbit_tracker_format.md` added in "tracker format
+    promoted" is a copy of the OLD first version (`Claude/microbit_tracker_format_students.md`, 225 lines),
+    not of this draft.
   - This file.
 - **`main.py` (in GitHub since 1 Nov 22:58) = `old/main_three_songs.py`**: 3 songs, 4 tracks, songs only.
   Copied over by Russell, not yet tested on the boards.
@@ -191,6 +193,23 @@ Last updated: 1 November 2026.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
 
+### Radio band (4 Nov, being tried): group 23, **band 24**
+- Testing at home was unreliable: boards seemed dead, then played after being moved. The room is full of
+  2.4 GHz wireless (Wi-Fi, Bluetooth, 2.4 GHz joypads ...) and "away from other wireless" isn't an option.
+- `radio.set_group(23)` only filters messages; it doesn't change the frequency. `radio.set_frequency_band(n)`
+  does: 2400 + n MHz, n = 0-83, default 7 (right on Wi-Fi channel 1).
+- Picking a band: Wi-Fi channels 1 / 6 / 11 / 13 cover about 2402-2422 / 2427-2447 / 2452-2472 / 2462-2482 MHz.
+  Gaps: bands 23-25 (between 1 and 6), 49-50 (between 6 and 11), 75-79 (above 11, only if nobody uses 13).
+  Bluetooth hops over the whole band (brief collisions, can't be avoided) but advertises on fixed 2402, 2426,
+  2480 MHz, so avoid bands 2, 26, 80. **24** is the middle of the first gap (23 is nearer Wi-Fi 1, 25 is
+  nearer Bluetooth's 2426). Group 23 + band 23 was tempting (fnord), 24 is the safer bet.
+- Russell is trying band 24 (added to on start next to `radio set group 23`, on every board). Not yet in the
+  suggested code files. Fair test: conductor + one board, same spot, a whole song per band, listen for dropouts.
+- `radio.set_transmit_power(7)` (the maximum) is the other idea, not tried yet.
+- `radio.set_transmit_serial_number` (asked 4 Nov): adds the sender's serial number to every packet so a
+  receiver can tell boards apart. Not needed - only the conductor sends.
+- The README drafts and the format doc draft already say group 23 + band 24.
+
 ---
 
 ## Known limits
@@ -231,6 +250,9 @@ Last updated: 1 November 2026.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
+- [ ] **Radio band 24**: test it (see "Radio band" above). If it helps, put `radio.set_frequency_band(24)`
+      in `main_8_tracks_v3.py` too (and maybe `radio.set_transmit_power(7)`). Also check what a missed
+      "start song" does (a missed pattern number only drops one pattern).
 
 ---
 

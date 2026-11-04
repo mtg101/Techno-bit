@@ -27,41 +27,19 @@ Last updated: 1 November 2026.
 
 ---
 
-## Where things are (1 Nov, end of day)
-- `Claude/suggestions`:
-  - `main_no_start_song.py` - **the code to test next**: the current `main.py` with no "start song", the B fix
-    and the dim waiting row (see "Radio: no start song").
-  - `main_8_tracks_v3.py` - 3 songs, songs-only controls, tracks 0-8, band 24 (= the current `main.py`).
-  - Drafts: `README_8_tracks.md` (the next root README: 3 songs, 8 tracks, band 24, and - with
-    `main_no_start_song.py` - how boards join a song, B to come back, the dim waiting row), `README.md` (the 4-track version, = the root README now),
-    `microbit_tracker_format.md` (the student format doc; ahead of the root copy since 4 Nov 13:50: adds "The
-    radio messages" and the waiting row, which go with `main_no_start_song.py` - promote them together).
-  - This file.
-- **`main.py` (4 Nov 13:02, "3 songs work with 4 tracks, better radio settings") = `main_8_tracks_v3.py`**
-  (exported back from MakeCode, so the functions are in MakeCode's order) **plus** `radio.set_transmit_power(7)`
-  and `radio.set_frequency_band(24)` after `radio.set_group(23)`. Checked 4 Nov: every function, array, song
-  and track list is the same as `main_8_tracks_v3.py` (which has had the two radio lines too since 4 Nov, so
-  the two now differ only in MakeCode's ordering). 3 songs tested on 4 boards; 8 tracks not yet.
-- **Root docs** (4 Nov): `microbit_tracker_format.md` (project root) = the student format doc, the only copy
-  outside `suggestions`; the old `Claude/microbit_tracker_format_students.md` was deleted (4 Nov). The root
-  README still links to that deleted file. The root `README.md` = the 4-track
-  draft, but `main.py` now has 8 tracks, so `README_8_tracks.md` is the one that matches. Both drafts now link
-  to the root `microbit_tracker_format.md`.
-- **Measured from the hex** (`microbit-Technobit.hex`, built 4 Nov 12:49, 8-track version): the V2 program
-  area ends at 0x6B8D0, 92 KB more than the Korobeiniki-only hex; about 46 KB is left below the bootloader
-  (0x77000), maybe a little less if MakeCode keeps some flash for storage. Our estimate (165 KB) was too high:
-  the real program is about 142 KB. Room for roughly one more 4-track song.
+## Where things are (4 Nov 14:20, after promoting)
+- **Live** (project root): `main.py` = `old/main_no_start_song.py` (3 songs, 8 tracks, band 24 + power 7, no
+  "start song", the B fix, the dim waiting row; tested on the boards 4 Nov: "more resilient"),
+  `README.md` = `old/README_8_tracks.md`, `microbit-Technobit.hex` (fresh, 4 Nov 14:11).
+  **Not yet promoted:** `old/microbit_tracker_format.md` (adds "The radio messages" and the waiting row) -
+  copy it over the root `microbit_tracker_format.md`.
+- `Claude/suggestions`: only this file. Everything else is in `old/`.
 - `Claude/mods`: the three tunes - `korobeiniki_techno_8ch_v3_microbit.xm` (8 channels; 1-4 = the 4-track
   tune), `canon_bhangra_4ch_microbit.xm`, `ode_to_joy_synthwave_v3_4ch_microbit.xm`.
-- `old/` in both: earlier steps and tries, kept only to compare. Python: `main_agreed_format.py`,
-  `main_agreed_instruments.py`, `main_korobeiniki.py`, `main_interrupt.py`, `main_substring.py`,
-  `main_two_songs.py` (2 songs with the pattern screen: the version before), `main_three_songs.py` (= `main.py`),
-  `main_8_tracks.py` (v1) and `main_8_tracks_v2.py`. Tunes: `korobeiniki_techno_4ch_microbit.xm` (= channels
-  1-4 of the 8-track), the 8-track v1 and v2, early Korobeiniki versions, New World, Bella Ciao (techno,
-  synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. Also the generators of the three
-  tunes in use (`make_korobeiniki_8ch_v3_xm_microbit.py`, `make_canon_xm_microbit.py`,
-  `make_ode_to_joy_synthwave_v3_xm_microbit.py`): they made the `.xm` files, nothing runs them. File names
-  mentioned below for any of these are now in `old/`.
+- `old/` in both: earlier steps, tries and promoted drafts, kept only to compare (and the generators that
+  made the three `.xm` files). File names mentioned below are mostly in `old/` now.
+- Flash (measured from the 14:11 hex): the V2 program area ends at 0x6B9A0, **about 45 KB free** below the
+  bootloader (maybe a little less if MakeCode keeps some flash for storage).
 
 ## Decisions
 
@@ -205,7 +183,7 @@ Last updated: 1 November 2026.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
 
-### Radio: no "start song", B fix, dim waiting row (4 Nov, to test): `main_no_start_song.py`
+### Radio: no "start song", B fix, dim waiting row (4 Nov, tested and live in `main.py`): `main_no_start_song.py`
 - Based on the current `main.py` (8 tracks, band 24, power 7). After "8-track Tetris works!" the radio was
   still the weak spot, so: simpler messages, and a way to SEE when a board is waiting.
 - Messages now: **a number** = play this pattern and stay in the song; **`end song`** = after this pattern go
@@ -272,35 +250,27 @@ Last updated: 1 November 2026.
 ## To do
 
 - [x] **3 songs on 4 boards** work with `main.py` (4 Nov).
-- [ ] **Copy `Claude/suggestions/README_8_tracks.md` over the root README** (main.py has 8 tracks now). It also
-      fixes the root README's link to the format doc, which still points at the deleted
-      `Claude/microbit_tracker_format_students.md`.
+- [x] **README promoted** (4 Nov 14:15): the root README is the 8-track version, links the root format doc.
 - [x] Old `Claude/microbit_tracker_format_students.md` deleted (4 Nov); the root `microbit_tracker_format.md`
       is the format doc.
-- [ ] **Test 8 tracks** (`main.py` = `main_8_tracks_v3.py` since 4 Nov): 8 boards + a conductor, once all 9 are
-      here. 4 boards already play the 3 songs. If 8 tracks has to wait, `old/main_three_songs.py` is the
-      4-track version.
+- [x] **8 tracks tested**: 8-track Tetris works on 8 boards + a conductor (4 Nov).
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
       in small steps.
-- [ ] **README and format doc drafts** are up to date (3 tunes, songs-only controls, tracks 1-8, the track
-      LED; format doc: 8 tracks, patterns by number with an Ode to Joy table). Copy them over once
-      `main_8_tracks_v3.py` is adopted. Still to decide in the README: the VS Code section and the converter
-      sentence (below).
+- [ ] **README, still to decide**: the VS Code section and the converter sentence (below).
 - [ ] **README, VS Code section**: `main.py` is MakeCode Python (`basic.`, `music.create_sound_expression`,
       `radio.on_received_string`), not MicroPython, so adding `from microbit import *` and using "Put this
       file" won't run it. Loading `microbit-Technobit.hex` onto the MICROBIT drive would.
 - [ ] **README, AI use**: "Claude Code has been used to create the .XM file conversion app" - the converter
       hasn't been written yet.
-- [ ] **The .hex file** `microbit-Technobit.hex` was built before the Canon and Ode to Joy were added; download a fresh one
-      from MakeCode before checking in.
+- [x] **Fresh hex** (4 Nov 14:11), measured: about 45 KB free.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
-- [ ] **Test `main_no_start_song.py`** on the boards: songs play as before; the dim waiting row shows when a
-      board drops out (and is visibly dimmer than tracks 5-8's track LED - tune `bright_wait`); B always gets a
-      board back to its track screen. Then promote it to `main.py`, together with `README_8_tracks.md` (as the root README)
-      and `microbit_tracker_format.md` (over the root copy).
+- [x] **`main_no_start_song.py`** tested on the boards ("more resilient") and promoted to `main.py` with the
+      README (4 Nov 14:15). Fresh hex downloaded.
+- [ ] **Promote the format doc**: copy `Claude/suggestions/old/microbit_tracker_format.md` over the root
+      `microbit_tracker_format.md` (it was missed: the root copy lacks "The radio messages" and the waiting row).
 - [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) See also `main_no_start_song.py` (below).
 
 ---

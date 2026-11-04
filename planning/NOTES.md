@@ -1,107 +1,125 @@
 # Techno:bit notes
 
 A running record of what we have decided and what is left to do. Claude keeps this file at
-`planning/claude/NOTES.md`.
+`planning/NOTES.md`.
 
 Last updated: 4 November 2026, 18:10.
 
 ---
 
-## Summary: where we are (4 Nov 18:10)
+## Summary: where we are (4 Nov 22:25)
 
-**Live** (committed): `techno-bit/main.py` - 3 songs with a song screen, 8 tracks, band 24 + power 7, no "start
-song", the B fix, the dim waiting row; works on 4 boards and on 8 + a conductor. `techno-bit/hex/techno-bit.hex`
-is the same program. Tunes in `techno-bit/mods/`, the format doc in `techno-bit/docs/`, the video in
-`techno-bit/media/`. Front page `README.md` (overview, how it works, AI use) and `techno-bit/README.md` (students).
+**Everything promoted** (agreed 22:19: "promote everything and get everything in step"). `planning/` holds only
+these notes; nothing is pending.
 
-**Pending - to test, then promote:** one program per song, in `planning/claude/suggestions/`:
-`techno-bit/korobeiniki.py` (92 KB), `canon.py` (56 KB), `ode_to_joy.py` (55 KB): same tracker code, generic
-names (`track1_p00` ...), no song screen; plus the front page, the student README and the format doc to match.
-Checked on the mock boards (same arrays, sounds and radio behaviour as the live program).
-- Test 1: MakeCode speed on a student laptop (Korobeiniki is the biggest, about 4,000 blocks).
-- Test 2: the boards - 4 boards, 8 + a conductor, B on a single track.
-- Then: promote; three MakeCode projects; hexes as `techno-bit/hex/<song>.hex`; remove `main.py` and
-  `hex/techno-bit.hex`.
+**Live** (top level since 23:15): **one program per song, all 8 tracks**: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`
+(same tracker code, generic names `track1_p00` ..., no song screen: A = track, logo = conductor, B = play/stop).
+The 8-channel `mods/*.xm`. `docs/guide.md` (for students), `docs/tracker_format.md`. Front page `README.md` with
+"How to play". The old 3-song `main.py` and `hex/techno-bit.hex` were removed (in git history, the commit before).
 
-**Next after that:** making tunes from `.xm` files - the converter script, its rules doc, and a template `.xm`
-(first draft in git at `f50c8f5`, to update to the new names); later a web page version so nobody needs Python.
+**MakeCode projects** (made by Russell, 4 Nov 22:36; in the front page and the guide):
+Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
+Canon https://makecode.microbit.org/S16435-66036-39782-77562 ,
+Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 .
+(The original all-in-one project https://makecode.microbit.org/S26000-11508-29408-02742 is mentioned as history.)
+
+**Not yet tested on the real boards** (checked only on the mock micro:bit):
+1. Listen to the 8-track Canon and Ode to Joy in OpenMPT.
+2. MakeCode on a student laptop: the three projects exist now (links above) - is Blocks fast enough? (About 4,000 blocks each now: all three have 8 tracks.)
+3. The boards: 4 boards, 8 + a conductor, B on a single track.
+4. ~~Download the three hexes~~ Done 4 Nov 22:49: `techno-bit/hex/korobeiniki.hex`, `canon.hex`, `ode_to_joy.hex`
+   (downloaded from the three MakeCode projects; renamed from MakeCode's `microbit-TB-...` names). Measured:
+   **about 111 KB free** in each (the 3-song hex had 46 KB). If something's wrong, the tested 3-song `main.py`
+   and its hex are in git history.
+
+**Next after that:** making tunes from `.xm` files - the converter and its rules doc (draft in git at
+`f50c8f5`, needs the new names; no template needed: any song's program and `.xm` serve as one). Later a web page.
 
 **Parked:** sending radio numbers twice / counting misses / logging; compiling on the PC with MakeCode's own
-command-line compiler; sound balance on the real speakers; more tempos and instruments.
+command-line compiler; sound balance; more tempos and instruments.
 
-**How we work:** see the ground rules below. In short: Claude changes anything in `planning/claude/` and can
-tidy the project; promoting drafts into `techno-bit/` or the root README happens when we agree on it in the
-conversation; Russell commits and pushes (Stage All first); no `old` folders - git keeps the history.
+**How we work:** see "How we work" below.
 
 ---
 
-## Ground rules (4 Nov: new structure)
+## How we work (agreed 4 Nov)
 
-**The project:**
+**The layout** (4 Nov 23:15: students' material at the top, planning in one folder off to the side):
 ```
-README.md            the official GitHub front page: what someone reads first
-techno-bit/          the Techno:bit itself: what students use, with the right documentation
-planning/claude/     where Russell and Claude work together: NOTES.md (this file), suggestions/
+README.md          the GitHub front page = the guide: what it is, demo, the tunes, getting them on, how to play
+korobeiniki.py  canon.py  ode_to_joy.py      one program per tune
+hex/  mods/  docs/  media/                   ready-to-flash files, .xm tunes, tracker_format.md, the video
+planning/          for us: NOTES.md (this file) + drafts of changes ("Not needed to play")
 ```
-**Suggestions mirror the project exactly:** a draft has the same path under `planning/claude/suggestions/` as
-the real file has in the project (`suggestions/README.md` -> `README.md`, `suggestions/techno-bit/main.py` ->
-`techno-bit/main.py`). `suggestions` only holds files being proposed; once promoted and matching, they can go.
 
-**Who may change what (agreed 4 Nov):**
-- Claude can change anything in the project: write drafts, tidy, move and rename files.
-- **Promoting** a draft from `suggestions` into the real project (`techno-bit/`, the root `README.md`) happens
-  when **we agree on it in the conversation** - no separate permission questions. Then the files are copied,
-  Claude checks they match, Russell tests code on the boards and commits.
-- **No `old` folders** (4 Nov): git keeps the history, so old drafts are deleted, not kept. Claude never
-  commits or pushes.
-- **MakeCode is the source of truth for the block layout**: when `techno-bit/main.py` comes back from MakeCode,
-  Claude compares it by what it does (functions, arrays), not by text.
+**`planning/` mirrors the project exactly** (except itself): a draft has the real file's path with `planning/` in
+front - `planning/README.md` is a draft of `README.md`, `planning/canon.py` a draft of `canon.py`,
+`planning/mods/x.xm` a draft of `mods/x.xm`. The one extra file is **`NOTES.md`**, which is never promoted.
+
+**The steps, every time:**
+1. **Draft:** Claude writes or changes files in `planning/`, at their real paths (only the files being changed).
+2. **Check:** Claude checks the drafts before showing them: on the mock micro:bit for code, links for docs.
+3. **Talk it through:** Claude explains what changed and why; Russell reads and asks.
+4. **Agree:** promoting happens when we agree on it in the conversation - no separate permission questions.
+5. **Promote:** Claude copies `planning/<path>` to `<path>`, checks each one matches byte for byte (and the
+   links work), then **deletes the draft**.
+6. **Remove what's replaced:** files the promotion makes obsolete (an old program, an old hex) are deleted,
+   not kept.
+7. **Test and commit:** Russell tests code on the real boards, then commits in VS Code (**Stage All** first, so
+   moves are recorded as renames) and pushes. Claude never commits or pushes.
+
+So **`planning/` holds only NOTES.md and what's pending**: when it's just NOTES.md, everything is in step.
+**No `old` folders, no "_old" files:** git keeps the history, so anything replaced is deleted, and NOTES.md
+says where to find it (the commit) if it might be wanted again.
+
+**Who may change what:** Claude can change anything in `planning/` and can tidy the project (move, rename,
+fix links); anything else in the project changes only by promoting (steps 4-5).
+
+**Code rules:**
 - **Go slowly.** One small step at a time, explained well enough to repeat to the coding club. No big code
   drops without a go-ahead.
 - All Python must be **block compatible**: paste into MakeCode, flip to Blocks, and it should render as real
   blocks, with no grey `<python code>` blocks hiding logic. Avoid Python string methods such as `.split()`,
   `.find()`, `.strip()`: MakeCode turns them into hidden helpers with no block. Use the text blocks instead:
   `substr`, `index_of`, `char_at`, `includes`.
-- The **MakeCode project is the source of truth for the block layout**. `main.py` in GitHub is a copy for
-  version control; when MakeCode exports Python it writes functions in its own (layout) order.
+- **MakeCode is the source of truth for the block layout.** The `.py` files in GitHub are copies for version
+  control; MakeCode writes functions in its own order when it exports Python, so when a program comes back from
+  MakeCode, Claude compares it by what it does (functions, arrays), not by its text.
 
 ---
 
-## Where things are (4 Nov 17:10)
+## Where things are (4 Nov 23:15)
 
 ```
-README.md                         the GitHub front page
-  (and techno-bit/README.md       for students)
-techno-bit/                       what students use
-  main.py                         the 3-song program (tested 4 Nov: songs only, 8 tracks, no "start song")
-  hex/techno-bit.hex              the same program, ready to flash (downloaded 4 Nov 14:11)
-  mods/                           korobeiniki.xm (8 channels), canon.xm, ode_to_joy.xm
-  docs/tracker_format.md          the format doc (newest, promoted 4 Nov)
-  media/technobit-demo.mp4
-planning/claude/
-  NOTES.md                        these notes
-  suggestions/                    drafts, mirroring the project paths (empty: nothing pending)
+README.md                         the front page and guide (merged 4 Nov 23:15; docs/guide.md folded into it)
+korobeiniki.py canon.py ode_to_joy.py         one program per song, 8 tracks each
+mods/   korobeiniki.xm canon.xm ode_to_joy.xm   (all 8 channels)
+hex/    korobeiniki.hex canon.hex ode_to_joy.hex   (about 111 KB free each) + microbit-Technobit.hex (old 3-song: keep?)
+docs/   tracker_format.md
+media/  technobit-demo.mp4
+planning/NOTES.md                 these notes (nothing else pending)
 ```
+(Until 4 Nov 23:10 the students' files were in a `techno-bit/` folder; NOTES entries before then use those paths.)
 
 **Promoted 4 Nov 17:10** (agreed: "just docs and we agreed it's good"): `README.md` (the front page),
-`techno-bit/README.md` (for students), `techno-bit/docs/tracker_format.md` (the newest format doc). All links
-checked (one fixed: the video is at `techno-bit/media/`). Nothing pending in `suggestions` now.
+`techno-bit/docs/guide.md` (for students), `techno-bit/docs/tracker_format.md` (the newest format doc). All links
+checked (one fixed: the video is at `techno-bit/media/`). Nothing pending in `planning/` now.
 **Promoted 4 Nov 17:20:** a fuller front page `README.md` (title, "What it is", "How it works (the techie bit)",
 "Try it", and a rewritten "AI use" saying honestly who does what). (A VS Code README in `techno-bit/tools/local_build/`
 was promoted too, then deleted with that folder the same day.) Every line of the old front page is now in one of the
-READMEs. Nothing pending in `suggestions`.
+READMEs. Nothing pending in `planning/`.
 
-**Pending (in `suggestions`, to TEST before promoting):** one program per song (agreed 4 Nov 17:34):
+**Pending (in `planning/`, to TEST before promoting):** one program per song (agreed 4 Nov 17:34):
 - `techno-bit/korobeiniki.py` (8 tracks, 92 KB), `techno-bit/canon.py` (56 KB), `techno-bit/ode_to_joy.py`
   (55 KB) - replace `techno-bit/main.py` (195 KB, all three).
-- `techno-bit/README.md`, `techno-bit/docs/tracker_format.md`, `README.md` (front page) updated to match.
+- `techno-bit/docs/guide.md`, `techno-bit/docs/tracker_format.md`, `README.md` (front page) updated to match.
 - Then: one MakeCode project per tune, hexes saved as `techno-bit/hex/<tune>.hex`; `main.py` and
   `hex/techno-bit.hex` go.
 
-**The first one-song attempt + the XM converter** were deleted from `planning/claude/single_song_paused/`
+**The first one-song attempt + the XM converter** were deleted from `planning/single_song_paused/`
 (4 Nov 17:42); they're in git at commit `f50c8f5` ("more refactors..."), path
-`planning/claude/single_song_paused/techno-bit/`. For the XM step, get back `tools/xm_to_makecode.py` and
-`docs/making_tunes.md` from there (`git show f50c8f5:planning/claude/single_song_paused/techno-bit/tools/xm_to_makecode.py`);
+`planning/single_song_paused/techno-bit/`. For the XM step, get back `tools/xm_to_makecode.py` and
+`docs/making_tunes.md` from there (`git show f50c8f5:planning/single_song_paused/techno-bit/tools/xm_to_makecode.py`);
 they use the older `lead_00` names and need updating to `track1_p00`.
 
 ## Decisions
@@ -121,7 +139,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - Tune: `mods/korobeiniki_techno_4ch_microbit.xm` (4 channels, 16 patterns, 64-slot order list, 10 instruments).
 
 ### Song 2: Canon in D, bhangra techno
-- Tune: `mods/canon_bhangra_4ch_microbit.xm`; generator `planning/claude/suggestions/make_canon_xm_microbit.py`.
+- Tune: `mods/canon_bhangra_4ch_microbit.xm`; generator `planning/make_canon_xm_microbit.py`.
 - Why Pachelbel: the Knight Rider theme is under copyright (other people's versions don't change that), so the
   second tune had to be public domain. Pachelbel's *Canon and Gigue in D* (about 1700) suits 4-bar techno: an
   8-chord loop over an 8-note ground bass.
@@ -135,7 +153,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - Patterns: INT1 INT2 V1 V2 V3 V4 D1 D2 D1x D2x BR1 BR2 BU1 BU2 RLD OUT (letters A-P in the same order).
 
 ### Tried for song 3: Bella Ciao, chiptune techno
-- Tune: `mods/bella_ciao_techno_4ch_microbit.xm`; generator `planning/claude/suggestions/make_bella_ciao_xm_microbit.py`.
+- Tune: `mods/bella_ciao_techno_4ch_microbit.xm`; generator `planning/make_bella_ciao_xm_microbit.py`.
 - Traditional Italian folk song: only the traditional melody, no lyrics, no modern arrangement.
 - Melody checked against 8notes.com's violin MIDI (fetched once through the built-in browser): the 8-bar verse
   matches note for note and every note is on the eighth-note grid, so nothing is rounded.
@@ -246,7 +264,30 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
 
-### One program per song (4 Nov 17:40, in `suggestions`, to test)
+### No template (4 Nov 22:00)
+- No separate template program or template `.xm`: the song programs share identical tracker code, so **any song
+  program is the template** (swap in different patterns = a new tune), and **any song's `.xm` is the template
+  `.xm`** (copy it: it already has the 10 instruments, speed 12 / tempo 150, 32-row patterns, 8 channels).
+- So the XM converter can take any song program as its base.
+
+### 8-track Canon and Ode to Joy (4 Nov 21:55, in `planning/`, to test)
+- Same idea as the 8-track Korobeiniki: **tracks 1-4 byte for byte as before** (4 boards sound exactly the
+  same), tracks 5-8 only add **drums and bass**: 5 a second bass line (root / fifth / octave, short notes),
+  6 hats and snare, 7 toms and claps, 8 crashes, extra kicks, open hats, pews. Every extra board plays in every
+  pattern, starting small and growing towards the drops.
+- In each song's style: the Canon's drops get the straight drive (offbeat octave bass, snare on 2 and 4);
+  Ode to Joy's drops follow its half-time 3+3+2 (bass an octave above the kick, snare on the backbeat, a kick
+  pick-up into each bar). Fills on the Canon's D2/D2x and Ode's tom-cascade drops (D4, KA2).
+- The extras stay silent where the tune goes quiet: the beat before the Canon's drops (BU2, RLD), Ode's
+  half-bar stop in D2 (only the melody carries on) and the silent beat after its build.
+- Made by `add_8ch_extras.py` (scratch, not in the project): reads the 4-channel .xm, copies channels 1-4 and the
+  instruments, adds 5-8 from a short description of each song (sections, chords per half bar, quiet rows).
+- Checked: tracks 1-4 and the instruments identical to the 4-channel files; no semitone clashes; no drum doubled
+  on a row; tones C-4..B-6; no extras in the quiet rows; every extra pattern has sound; the programs' tracks
+  0-4 = the 4-track programs, tracks 5-8 = the new .xm, the same sounds per track as the .xm.
+- **To test:** listen in OpenMPT (and with 5-8 muted = as before), then on 8 boards + a conductor.
+
+### One program per song (4 Nov 17:40, in `planning/`, to test)
 - Why: MakeCode was too slow on student laptops with all three songs (256 arrays, about 8,000 blocks).
 - **Three programs, named after the song:** `techno-bit/korobeiniki.py`, `canon.py`, `ode_to_joy.py`, with
   `mods/<song>.xm` and `hex/<song>.hex`. No `main.py` (MakeCode still calls its file main.py inside a project).
@@ -268,7 +309,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - MakeCode got very slow with 3 songs (256 arrays, ~8,000 blocks). Arrays stay (students see them in Blocks),
   so: **one MakeCode project per song**, flashing the boards to change song. **Shared tracker code**: every
   song project is the same base program with different arrays.
-- **Base** = `planning/claude/suggestions/main.py` (to become the root `main.py`): the live code with only Tetris
+- **Base** = `planning/main.py` (to become the root `main.py`): the live code with only Tetris
   (Korobeiniki, 8 tracks). The song screen is gone: A = next track, logo = conductor, **B = play the song**
   (B again = stop; on a board following the conductor, B = back to the track screen). Everything else
   (radio, no "start song", waiting row, band 24, LEDs, sounds) is unchanged. No song symbols (one song a hex).
@@ -276,7 +317,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   hits`; `song` is the order list; `song_tracks[track][pattern]`. 98 KB instead of 195 KB.
 - The song lives only in `create_<track>_patterns()`, `create_patterns()`, `create_song()` and their
   declarations; the converter replaces exactly those (found by name, so MakeCode's re-ordering doesn't matter).
-- **Converter** = `planning/claude/suggestions/tools/xm_to_makecode.py` (Python script, decided 4 Nov: simple, and students can
+- **Converter** = `planning/tools/xm_to_makecode.py` (Python script, decided 4 Nov: simple, and students can
   read it): `python xm_to_makecode.py tune.xm --base main.py --out tune_main.py`. Checks the tune follows the
   rules (4 or 8 channels, 32 rows, instruments 1-10, C-4..B-6, tom/pew/hoover pitches, no volume/effects,
   speed 12 / tempo 150, size) and reports problems by pattern / row / channel. 4 channels: tracks 5-8 play
@@ -285,10 +326,10 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   Joy XMs reproduces the live arrays and orders exactly; Tetris -> Canon -> Tetris gives the identical file;
   all three play the same sounds per track as their XMs; no variable problems; radio scenarios (lost numbers,
   lost "end song", B mid-song) behave as in the live code.
-- **Documentation first** (asked 4 Nov): `planning/claude/suggestions/xm_converter.md` - the rules for a tune, how the
+- **Documentation first** (asked 4 Nov): `planning/xm_converter.md` - the rules for a tune, how the
   converter is run and used, what it writes, the changes it asks of the draft converter, open questions.
   The code above is a draft until that document is agreed. Decided: song programs live in **`mods/` in the
-  project root** (mirrored in `planning/claude/suggestions/mods`): each `.xm` with its converted `<name>_main.py` next to it; the root
+  project root** (mirrored in `planning/mods`): each `.xm` with its converted `<name>_main.py` next to it; the root
   `main.py` is the base (Tetris); the converter and `template.xm` in **`tools/`** (decided 4 Nov): `python tools/xm_to_makecode.py mods/my_tune.xm`.
   Anyone can run anything (it's all GitHub), but **nobody should be blocked by Python**: two ways to make a
   tune - edit the arrays in Blocks (no tools), or OpenMPT + converter; a **converter web page** (drop in an
@@ -369,9 +410,10 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - [x] Old `Claude/microbit_tracker_format_students.md` deleted (4 Nov); the root `microbit_tracker_format.md`
       is the format doc.
 - [x] **8 tracks tested**: 8-track Tetris works on 8 boards + a conductor (4 Nov).
-- [ ] **Test the one-program-per-song split** (in `suggestions`): MakeCode speed on a student laptop, then the
+- [ ] **Listen to the 8-track Canon and Ode to Joy** (`planning/techno-bit/mods/*.xm`) in OpenMPT.
+- [ ] **Test the one-program-per-song split** (in `planning/`, all three now 8 tracks): MakeCode speed on a student laptop, then the
       boards (4, 8 + a conductor, B on one track). Then promote, make the three MakeCode projects and hexes.
-- [ ] **XM converter, rules doc, template `.xm`** - after the split (draft in git at `f50c8f5`, needs the new
+- [ ] **XM converter and rules doc** (no template needed: any song is one) - after the split (draft in git at `f50c8f5`, needs the new
       names). Later: a web page converter.
 - [ ] **Later: compile on the PC** (4 Nov). MakeCode is the focus of this project, so this waits. The old
       `microbit/` folder turned out to be "microbitstubs" (MicroPython auto-complete placeholders for VS Code,
@@ -412,7 +454,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   with an Ode to Joy table, the track LED.
 - 8 tracks: Korobeiniki 8-channel XM v3 (tracks 1-4 unchanged, extras = drums and bass) and
   `main_8_tracks_v3.py`; checked on the mock micro:bit. Agreed 1 Nov ("a nice mix"); to test on the boards.
-- Tidied (1 Nov): only the files in use are at the top of `planning/claude/suggestions` and what was `Claude/mods`; earlier
+- Tidied (1 Nov): only the files in use are at the top of `planning/` and what was `Claude/mods`; earlier
   steps and tries moved to `old/` (the `old` folders were deleted on 4 Nov: they are in git history).
 - Demo video shrunk from 87 MB to 9 MB (720p MP4) and shown in the README on GitHub; the 87 MB original removed.
 

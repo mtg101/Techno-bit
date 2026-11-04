@@ -24,7 +24,7 @@ A simple text format for one micro:bit's part of a tune. It is easy to read and 
 
 A tune is split into **channels**. Each micro:bit plays one channel, one sound at a time.
 
-A tune has 4 channels, and Korobeiniki has 4 extra ones for up to 8 micro:bits (see section 8).
+A tune has 4 channels that make the whole tune, and 4 extra ones (drums and bass) for up to 8 micro:bits (see section 8).
 
 A channel is a list of **cells**. Each cell is one **row** of time and says what the micro:bit should do on that row.
 
@@ -214,10 +214,10 @@ tells the others which pattern to play. Tracks 1 to 4 play the whole tune on the
 | 7 | `track7` | Extra: toms and claps |
 | 8 | `track8` | Extra: crashes, extra kicks, open hats and pews |
 
-A tune can have 4 tracks or 8. Korobeiniki has its own tracks 5 to 8. In a 4-track tune (the Canon, Ode to
-Joy) nobody sits out: track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The
-code does this with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds
-`track1_p00`, `track1_p01` and so on.
+All three of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
+because track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The code does this
+with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds `track1_p00`,
+`track1_p01` and so on.
 
 ### The patterns
 

@@ -3,7 +3,35 @@
 A running record of what we have decided and what is left to do. Claude keeps this file at
 `planning/claude/NOTES.md`.
 
-Last updated: 4 November 2026.
+Last updated: 4 November 2026, 18:10.
+
+---
+
+## Summary: where we are (4 Nov 18:10)
+
+**Live** (committed): `techno-bit/main.py` - 3 songs with a song screen, 8 tracks, band 24 + power 7, no "start
+song", the B fix, the dim waiting row; works on 4 boards and on 8 + a conductor. `techno-bit/hex/techno-bit.hex`
+is the same program. Tunes in `techno-bit/mods/`, the format doc in `techno-bit/docs/`, the video in
+`techno-bit/media/`. Front page `README.md` (overview, how it works, AI use) and `techno-bit/README.md` (students).
+
+**Pending - to test, then promote:** one program per song, in `planning/claude/suggestions/`:
+`techno-bit/korobeiniki.py` (92 KB), `canon.py` (56 KB), `ode_to_joy.py` (55 KB): same tracker code, generic
+names (`track1_p00` ...), no song screen; plus the front page, the student README and the format doc to match.
+Checked on the mock boards (same arrays, sounds and radio behaviour as the live program).
+- Test 1: MakeCode speed on a student laptop (Korobeiniki is the biggest, about 4,000 blocks).
+- Test 2: the boards - 4 boards, 8 + a conductor, B on a single track.
+- Then: promote; three MakeCode projects; hexes as `techno-bit/hex/<song>.hex`; remove `main.py` and
+  `hex/techno-bit.hex`.
+
+**Next after that:** making tunes from `.xm` files - the converter script, its rules doc, and a template `.xm`
+(first draft in git at `f50c8f5`, to update to the new names); later a web page version so nobody needs Python.
+
+**Parked:** sending radio numbers twice / counting misses / logging; compiling on the PC with MakeCode's own
+command-line compiler; sound balance on the real speakers; more tempos and instruments.
+
+**How we work:** see the ground rules below. In short: Claude changes anything in `planning/claude/` and can
+tidy the project; promoting drafts into `techno-bit/` or the root README happens when we agree on it in the
+conversation; Russell commits and pushes (Stage All first); no `old` folders - git keeps the history.
 
 ---
 
@@ -341,27 +369,23 @@ they use the older `lead_00` names and need updating to `track1_p00`.
 - [x] Old `Claude/microbit_tracker_format_students.md` deleted (4 Nov); the root `microbit_tracker_format.md`
       is the format doc.
 - [x] **8 tracks tested**: 8-track Tetris works on 8 boards + a conductor (4 Nov).
+- [ ] **Test the one-program-per-song split** (in `suggestions`): MakeCode speed on a student laptop, then the
+      boards (4, 8 + a conductor, B on one track). Then promote, make the three MakeCode projects and hexes.
+- [ ] **XM converter, rules doc, template `.xm`** - after the split (draft in git at `f50c8f5`, needs the new
+      names). Later: a web page converter.
 - [ ] **Later: compile on the PC** (4 Nov). MakeCode is the focus of this project, so this waits. The old
       `microbit/` folder turned out to be "microbitstubs" (MicroPython auto-complete placeholders for VS Code,
       2019): they can't build MakeCode Python, so they were deleted (in git history, with Russell's original VS
       Code instructions). A real local build would use MakeCode's own command-line compiler (`pxt`, via Node.js).
-- [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
-      volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
-      in small steps.
-- [ ] **README, still to decide**: the VS Code section and the converter sentence (below).
-- [ ] **README, VS Code section**: `main.py` is MakeCode Python (`basic.`, `music.create_sound_expression`,
-      `radio.on_received_string`), not MicroPython, so adding `from microbit import *` and using "Put this
-      file" won't run it. Loading `microbit-Technobit.hex` onto the MICROBIT drive would.
-- [ ] **README, AI use**: "Claude Code has been used to create the .XM file conversion app" - the converter
-      hasn't been written yet.
+- [x] **README decisions** (4 Nov): the VS Code section was moved, then deleted with the stubs; the wrong
+      converter sentence went in the AI-use rewrite.
 - [x] **Fresh hex** (4 Nov 14:11), measured: about 45 KB free.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
 - [x] **`main_no_start_song.py`** tested on the boards ("more resilient") and promoted to `main.py` with the
       README (4 Nov 14:15). Fresh hex downloaded.
-- [ ] **Promote the format doc**: `suggestions/techno-bit/docs/tracker_format.md` -> `techno-bit/docs/tracker_format.md`
-      (adds "The radio messages", and describes one song per program - so promote it with the new `main.py`).
+- [x] **Format doc promoted** (4 Nov 17:10, the newest version with "The radio messages").
 - [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) See also `main_no_start_song.py` (below).
 
 ---

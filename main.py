@@ -522,6 +522,10 @@ def create_canon_vox_patterns():
         "-",
         "-",
         "-"]
+def show_waiting():
+    for wait_x in range(5):
+        if not (led.point(wait_x, 0)):
+            led.plot_brightness(wait_x, 0, bright_wait)
 def show_track_name():
     basic.clear_screen()
     basic.show_string("" + (track_names[current_track]))
@@ -7640,11 +7644,10 @@ def on_received_string(receivedString):
     if receivedString == "stop":
         receiving_song = False
         is_playing = False
-    elif receivedString == "start song":
-        receiving_song = True
     elif receivedString == "end song":
         receiving_song = False
     elif current_track != 0:
+        receiving_song = True
         current_pattern = parse_float(receivedString)
         new_pattern = True
         start_track = True
@@ -9558,6 +9561,7 @@ receiving_song = False
 choosing_song = False
 start_track = False
 bright_dim = 0
+bright_wait = 0
 bright_full = 0
 led_y = 0
 led_x = 0
@@ -9571,6 +9575,7 @@ led_x = -1
 led_y = -1
 bright_full = 255
 bright_dim = 128
+bright_wait = 30
 start_track = False
 choosing_song = False
 receiving_song = False
@@ -9580,14 +9585,16 @@ create_tones()
 create_songs()
 
 def on_forever():
-    global playing_song, current_song_position, start_track, choosing_song, is_playing
+    global receiving_song, playing_song, current_song_position, start_track, choosing_song, is_playing
     if input.button_is_pressed(Button.B):
-        if not (is_playing):
+        if receiving_song:
+            receiving_song = False
+            is_playing = False
+            choosing_song = False
+        elif not (is_playing):
             if choosing_song:
                 playing_song = True
                 current_song_position = 0
-                if current_track == 0:
-                    radio.send_string("start song")
                 start_track = True
             else:
                 choosing_song = True
@@ -9620,6 +9627,8 @@ def on_forever2():
             while new_pattern:
                 new_pattern = False
                 play_current_pattern()
+                if receiving_song and not (new_pattern):
+                    show_waiting()
                 while receiving_song and not (new_pattern):
                     basic.pause(1)
         start_track = False

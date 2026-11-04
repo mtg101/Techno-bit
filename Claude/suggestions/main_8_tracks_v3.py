@@ -9562,6 +9562,8 @@ bright_full = 0
 led_y = 0
 led_x = 0
 radio.set_group(23)
+radio.set_transmit_power(7)
+radio.set_frequency_band(24)
 music.stop_all_sounds()
 music.set_built_in_speaker_enabled(True)
 music.set_volume(255)

@@ -38,7 +38,8 @@ Last updated: 1 November 2026.
 - **`main.py` (4 Nov 13:02, "3 songs work with 4 tracks, better radio settings") = `main_8_tracks_v3.py`**
   (exported back from MakeCode, so the functions are in MakeCode's order) **plus** `radio.set_transmit_power(7)`
   and `radio.set_frequency_band(24)` after `radio.set_group(23)`. Checked 4 Nov: every function, array, song
-  and track list is the same as `main_8_tracks_v3.py`. 3 songs tested on 4 boards; 8 tracks not yet.
+  and track list is the same as `main_8_tracks_v3.py` (which has had the two radio lines too since 4 Nov, so
+  the two now differ only in MakeCode's ordering). 3 songs tested on 4 boards; 8 tracks not yet.
 - **Root docs** (4 Nov): `microbit_tracker_format.md` (project root) = the student format doc, the only copy
   outside `suggestions`; the old `Claude/microbit_tracker_format_students.md` was deleted (4 Nov). The root
   README still links to that deleted file. The root `README.md` = the 4-track
@@ -212,8 +213,8 @@ Last updated: 1 November 2026.
   Bluetooth hops over the whole band (brief collisions, can't be avoided) but advertises on fixed 2402, 2426,
   2480 MHz, so avoid bands 2, 26, 80. **24** is the middle of the first gap (23 is nearer Wi-Fi 1, 25 is
   nearer Bluetooth's 2426). Group 23 + band 23 was tempting (fnord), 24 is the safer bet.
-- Russell is trying band 24 (added to on start next to `radio set group 23`, on every board). Not yet in the
-  suggested code files. Fair test: conductor + one board, same spot, a whole song per band, listen for dropouts.
+- Band 24 and transmit power 7 are in `main.py` (4 Nov) and in `main_8_tracks_v3.py` (added 4 Nov, same place:
+  straight after `radio.set_group(23)`). Fair test: conductor + one board, same spot, a whole song per band, listen for dropouts.
 - `radio.set_transmit_power(7)` (the maximum) is the other idea, not tried yet.
 - `radio.set_transmit_serial_number` (asked 4 Nov): adds the sender's serial number to every packet so a
   receiver can tell boards apart. Not needed - only the conductor sends.
@@ -260,8 +261,7 @@ Last updated: 1 November 2026.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
-- [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). If it helps, put `radio.set_frequency_band(24)`
-      in `main_8_tracks_v3.py` too (and maybe `radio.set_transmit_power(7)`). Also check what a missed
+- [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) Also check what a missed
       "start song" does (a missed pattern number only drops one pattern).
 
 ---

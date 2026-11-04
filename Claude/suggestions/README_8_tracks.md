@@ -28,7 +28,7 @@ There are three tunes, all arranged for the same 4 channels and the same 10 inst
 
 You can open the .xm files in a tracker such as [OpenMPT](https://openmpt.org/) and change them.
 
-The music on the Micro:bits is stored in a very simple tracker format, with one row every 200ms (an eighth note at 150 BPM) and 32 rows to a pattern. It is described for students in [Claude/microbit_tracker_format_students.md](Claude/microbit_tracker_format_students.md): how notes (`tone D-6`), sounds (`wave kick`), silence (`x`) and rests (`-`) are written, and how the Micro:bit plays them.
+The music on the Micro:bits is stored in a very simple tracker format, with one row every 200ms (an eighth note at 150 BPM) and 32 rows to a pattern. It is described for students in [microbit_tracker_format.md](microbit_tracker_format.md): how notes (`tone D-6`), sounds (`wave kick`), silence (`x`) and rests (`-`) are written, and how the Micro:bit plays them.
 
 
 ## Techno:bit controls

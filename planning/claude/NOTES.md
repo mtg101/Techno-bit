@@ -53,7 +53,6 @@ techno-bit/                       what students use
 planning/claude/
   NOTES.md                        these notes
   suggestions/                    drafts, mirroring the project paths (empty: nothing pending)
-  single_song_paused/             the paused "one song per program" work (see below)
 ```
 
 **Promoted 4 Nov 17:10** (agreed: "just docs and we agreed it's good"): `README.md` (the front page),
@@ -64,12 +63,18 @@ checked (one fixed: the video is at `techno-bit/media/`). Nothing pending in `su
 was promoted too, then deleted with that folder the same day.) Every line of the old front page is now in one of the
 READMEs. Nothing pending in `suggestions`.
 
-**Paused: one song per program** (4 Nov, "drop the single-song changes for now, come back to it"). Not in git
-yet, so kept in `planning/claude/single_song_paused/techno-bit/` (same paths as the project): the one-song base
-`main.py` (Tetris, no song screen, numbered arrays), `mods/canon_main.py` and `mods/ode_to_joy_main.py` (from the
-converter), `tools/xm_to_makecode.py` (the converter), `docs/making_tunes.md` (its documentation), and the
-README / format doc drafts written for it. Commit it, then it can be deleted (git keeps it). See "One song per
-project + XM converter" below for the design and the checks done.
+**Pending (in `suggestions`, to TEST before promoting):** one program per song (agreed 4 Nov 17:34):
+- `techno-bit/korobeiniki.py` (8 tracks, 92 KB), `techno-bit/canon.py` (56 KB), `techno-bit/ode_to_joy.py`
+  (55 KB) - replace `techno-bit/main.py` (195 KB, all three).
+- `techno-bit/README.md`, `techno-bit/docs/tracker_format.md`, `README.md` (front page) updated to match.
+- Then: one MakeCode project per tune, hexes saved as `techno-bit/hex/<tune>.hex`; `main.py` and
+  `hex/techno-bit.hex` go.
+
+**The first one-song attempt + the XM converter** were deleted from `planning/claude/single_song_paused/`
+(4 Nov 17:42); they're in git at commit `f50c8f5` ("more refactors..."), path
+`planning/claude/single_song_paused/techno-bit/`. For the XM step, get back `tools/xm_to_makecode.py` and
+`docs/making_tunes.md` from there (`git show f50c8f5:planning/claude/single_song_paused/techno-bit/tools/xm_to_makecode.py`);
+they use the older `lead_00` names and need updating to `track1_p00`.
 
 ## Decisions
 
@@ -213,7 +218,25 @@ project + XM converter" below for the design and the checks done.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
 
-### One song per project + XM converter (4 Nov: PAUSED - files in `planning/claude/single_song_paused/`)
+### One program per song (4 Nov 17:40, in `suggestions`, to test)
+- Why: MakeCode was too slow on student laptops with all three songs (256 arrays, about 8,000 blocks).
+- **Three programs, named after the song:** `techno-bit/korobeiniki.py`, `canon.py`, `ode_to_joy.py`, with
+  `mods/<song>.xm` and `hex/<song>.hex`. No `main.py` (MakeCode still calls its file main.py inside a project).
+- **Generic names:** `track1_p00` ... `track8_p15` (one pattern of one track), `track1_patterns` ... (a track's
+  list; `track0_patterns` = the metronome), `song_tracks[track][pattern]`, `song` (the order list), functions
+  `create_track1_patterns()` ..., `create_patterns()`, `create_song()`. Each song's patterns are numbered 0-15.
+- **No song screen:** A = next track (1-8), logo = conductor (0), B = play the song (conductor: broadcasts;
+  other tracks: plays that track alone), B again = stop; boards following the conductor join by themselves.
+- **Tracker code identical in all three**, made by a script from the tested `techno-bit/main.py` (its arrays
+  taken from running it), so nothing can drift. The only code changes: `show_song_name` gone, and the song
+  choice taken out of the A button, the logo, `on_forever` (B) and `on_forever2`.
+- Checked on the mock micro:bit: each program's arrays and song order = the live program's exactly; the same
+  sounds on every track 0-8; tracks 5-8 of the 4-track songs share tracks 1-4's arrays; no variable problems;
+  the radio scenarios (lost numbers, lost "end song", B mid-song) behave as before.
+- **To test:** each in MakeCode on a student laptop (Blocks speed: Korobeiniki is the biggest, about 4,000
+  blocks), then on the boards: 4 boards and 8 boards + a conductor, B on a track plays that track alone.
+
+### One song per project + XM converter (4 Nov: first attempt; the converter part is for later - files in git at `f50c8f5`)
 - MakeCode got very slow with 3 songs (256 arrays, ~8,000 blocks). Arrays stay (students see them in Blocks),
   so: **one MakeCode project per song**, flashing the boards to change song. **Shared tracker code**: every
   song project is the same base program with different arrays.

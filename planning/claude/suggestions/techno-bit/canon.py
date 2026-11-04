@@ -370,9 +370,9 @@ def play_clap():
             InterpolationCurve.LINEAR),
         music.PlaybackMode.IN_BACKGROUND)
     show_sound(0, 1, bright_full)
-def create_lead_patterns():
-    global lead_00, lead_01, lead_02, lead_03, lead_04, lead_05, lead_06, lead_07, lead_08, lead_09, lead_10, lead_11, lead_12, lead_13, lead_14, lead_15
-    lead_00 = ["x",
+def create_track1_patterns():
+    global track1_p00, track1_p01, track1_p02, track1_p03, track1_p04, track1_p05, track1_p06, track1_p07, track1_p08, track1_p09, track1_p10, track1_p11, track1_p12, track1_p13, track1_p14, track1_p15
+    track1_p00 = ["x",
         "-",
         "-",
         "-",
@@ -404,7 +404,7 @@ def create_lead_patterns():
         "-",
         "-",
         "-"]
-    lead_01 = ["x",
+    track1_p01 = ["x",
         "-",
         "-",
         "-",
@@ -436,7 +436,7 @@ def create_lead_patterns():
         "-",
         "-",
         "-"]
-    lead_02 = ["tone F#5",
+    track1_p02 = ["tone F#5",
         "-",
         "-",
         "x",
@@ -468,263 +468,7 @@ def create_lead_patterns():
         "-",
         "-",
         "x"]
-    lead_03 = ["tone D-5",
-        "-",
-        "-",
-        "x",
-        "tone C#5",
-        "-",
-        "-",
-        "x",
-        "tone B-4",
-        "-",
-        "-",
-        "x",
-        "tone A-4",
-        "-",
-        "-",
-        "x",
-        "tone G-4",
-        "-",
-        "-",
-        "x",
-        "tone F#4",
-        "-",
-        "-",
-        "x",
-        "tone G-4",
-        "-",
-        "-",
-        "x",
-        "tone E-4",
-        "-",
-        "-",
-        "x"]
-    lead_04 = ["tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone E-5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone B-4",
-        "-",
-        "tone D-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone B-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-"]
-    lead_05 = ["tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone D-6",
-        "tone C#6",
-        "tone A-5",
-        "tone E-5",
-        "tone A-5",
-        "tone B-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone F#5",
-        "tone C#5",
-        "tone F#5",
-        "tone G-5",
-        "tone B-5",
-        "tone D-6",
-        "tone B-5",
-        "tone A-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone G-5",
-        "tone D-5",
-        "tone B-4",
-        "tone D-5",
-        "tone E-5",
-        "tone A-5",
-        "tone C#6",
-        "tone E-6"]
-    lead_06 = ["tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone E-5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone B-4",
-        "-",
-        "tone D-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone B-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-"]
-    lead_07 = ["tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone D-6",
-        "tone C#6",
-        "tone A-5",
-        "tone E-5",
-        "tone A-5",
-        "tone B-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone F#5",
-        "tone C#5",
-        "tone F#5",
-        "tone G-5",
-        "tone B-5",
-        "tone D-6",
-        "tone B-5",
-        "tone A-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone G-5",
-        "tone D-5",
-        "tone B-4",
-        "tone D-5",
-        "tone E-5",
-        "tone A-5",
-        "tone C#6",
-        "tone E-6"]
-    lead_08 = ["tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone F#5",
-        "-",
-        "tone E-5",
-        "-",
-        "tone D-5",
-        "-",
-        "tone B-4",
-        "-",
-        "tone D-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-",
-        "tone B-5",
-        "-",
-        "tone A-5",
-        "-",
-        "tone G-5",
-        "-"]
-    lead_09 = ["tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone D-6",
-        "tone C#6",
-        "tone A-5",
-        "tone E-5",
-        "tone A-5",
-        "tone B-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone A-5",
-        "tone F#5",
-        "tone C#5",
-        "tone F#5",
-        "tone G-5",
-        "tone B-5",
-        "tone D-6",
-        "tone B-5",
-        "tone A-5",
-        "tone F#5",
-        "tone D-5",
-        "tone F#5",
-        "tone G-5",
-        "tone D-5",
-        "tone B-4",
-        "tone D-5",
-        "tone E-5",
-        "tone A-5",
-        "tone C#6",
-        "tone E-6"]
-    lead_10 = ["tone F#5",
-        "-",
-        "-",
-        "x",
-        "tone E-5",
-        "-",
-        "-",
-        "x",
-        "tone D-5",
-        "-",
-        "-",
-        "x",
-        "tone C#5",
-        "-",
-        "-",
-        "x",
-        "tone B-4",
-        "-",
-        "-",
-        "x",
-        "tone A-4",
-        "-",
-        "-",
-        "x",
-        "tone B-4",
-        "-",
-        "-",
-        "x",
-        "tone C#5",
-        "-",
-        "-",
-        "x"]
-    lead_11 = ["tone D-5",
+    track1_p03 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -756,7 +500,263 @@ def create_lead_patterns():
         "-",
         "-",
         "x"]
-    lead_12 = ["tone D-5",
+    track1_p04 = ["tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone E-5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone B-4",
+        "-",
+        "tone D-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone B-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-"]
+    track1_p05 = ["tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone D-6",
+        "tone C#6",
+        "tone A-5",
+        "tone E-5",
+        "tone A-5",
+        "tone B-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone F#5",
+        "tone C#5",
+        "tone F#5",
+        "tone G-5",
+        "tone B-5",
+        "tone D-6",
+        "tone B-5",
+        "tone A-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone G-5",
+        "tone D-5",
+        "tone B-4",
+        "tone D-5",
+        "tone E-5",
+        "tone A-5",
+        "tone C#6",
+        "tone E-6"]
+    track1_p06 = ["tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone E-5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone B-4",
+        "-",
+        "tone D-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone B-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-"]
+    track1_p07 = ["tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone D-6",
+        "tone C#6",
+        "tone A-5",
+        "tone E-5",
+        "tone A-5",
+        "tone B-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone F#5",
+        "tone C#5",
+        "tone F#5",
+        "tone G-5",
+        "tone B-5",
+        "tone D-6",
+        "tone B-5",
+        "tone A-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone G-5",
+        "tone D-5",
+        "tone B-4",
+        "tone D-5",
+        "tone E-5",
+        "tone A-5",
+        "tone C#6",
+        "tone E-6"]
+    track1_p08 = ["tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone F#5",
+        "-",
+        "tone E-5",
+        "-",
+        "tone D-5",
+        "-",
+        "tone B-4",
+        "-",
+        "tone D-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-",
+        "tone B-5",
+        "-",
+        "tone A-5",
+        "-",
+        "tone G-5",
+        "-"]
+    track1_p09 = ["tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone D-6",
+        "tone C#6",
+        "tone A-5",
+        "tone E-5",
+        "tone A-5",
+        "tone B-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone A-5",
+        "tone F#5",
+        "tone C#5",
+        "tone F#5",
+        "tone G-5",
+        "tone B-5",
+        "tone D-6",
+        "tone B-5",
+        "tone A-5",
+        "tone F#5",
+        "tone D-5",
+        "tone F#5",
+        "tone G-5",
+        "tone D-5",
+        "tone B-4",
+        "tone D-5",
+        "tone E-5",
+        "tone A-5",
+        "tone C#6",
+        "tone E-6"]
+    track1_p10 = ["tone F#5",
+        "-",
+        "-",
+        "x",
+        "tone E-5",
+        "-",
+        "-",
+        "x",
+        "tone D-5",
+        "-",
+        "-",
+        "x",
+        "tone C#5",
+        "-",
+        "-",
+        "x",
+        "tone B-4",
+        "-",
+        "-",
+        "x",
+        "tone A-4",
+        "-",
+        "-",
+        "x",
+        "tone B-4",
+        "-",
+        "-",
+        "x",
+        "tone C#5",
+        "-",
+        "-",
+        "x"]
+    track1_p11 = ["tone D-5",
+        "-",
+        "-",
+        "x",
+        "tone C#5",
+        "-",
+        "-",
+        "x",
+        "tone B-4",
+        "-",
+        "-",
+        "x",
+        "tone A-4",
+        "-",
+        "-",
+        "x",
+        "tone G-4",
+        "-",
+        "-",
+        "x",
+        "tone F#4",
+        "-",
+        "-",
+        "x",
+        "tone G-4",
+        "-",
+        "-",
+        "x",
+        "tone E-4",
+        "-",
+        "-",
+        "x"]
+    track1_p12 = ["tone D-5",
         "-",
         "tone D-5",
         "-",
@@ -788,7 +788,7 @@ def create_lead_patterns():
         "tone F#5",
         "tone F#5",
         "tone F#5"]
-    lead_13 = ["tone A-5",
+    track1_p13 = ["tone A-5",
         "tone A-5",
         "tone A-5",
         "tone A-5",
@@ -820,7 +820,7 @@ def create_lead_patterns():
         "tone D-6",
         "x",
         "-"]
-    lead_14 = ["tone F#5",
+    track1_p14 = ["tone F#5",
         "-",
         "-",
         "x",
@@ -852,7 +852,7 @@ def create_lead_patterns():
         "tone A-5",
         "x",
         "-"]
-    lead_15 = ["x",
+    track1_p15 = ["x",
         "-",
         "-",
         "-",
@@ -884,9 +884,9 @@ def create_lead_patterns():
         "-",
         "-",
         "-"]
-def create_acid_patterns():
-    global acid_00, acid_01, acid_02, acid_03, acid_04, acid_05, acid_06, acid_07, acid_08, acid_09, acid_10, acid_11, acid_12, acid_13, acid_14, acid_15
-    acid_00 = ["tone D-5",
+def create_track2_patterns():
+    global track2_p00, track2_p01, track2_p02, track2_p03, track2_p04, track2_p05, track2_p06, track2_p07, track2_p08, track2_p09, track2_p10, track2_p11, track2_p12, track2_p13, track2_p14, track2_p15
+    track2_p00 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -918,7 +918,7 @@ def create_acid_patterns():
         "-",
         "-",
         "x"]
-    acid_01 = ["tone D-5",
+    track2_p01 = ["tone D-5",
         "x",
         "tone D-5",
         "x",
@@ -950,7 +950,7 @@ def create_acid_patterns():
         "x",
         "tone A-4",
         "x"]
-    acid_02 = ["tone D-5",
+    track2_p02 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -982,7 +982,7 @@ def create_acid_patterns():
         "-",
         "-",
         "x"]
-    acid_03 = ["tone D-5",
+    track2_p03 = ["tone D-5",
         "x",
         "tone D-5",
         "x",
@@ -1014,7 +1014,7 @@ def create_acid_patterns():
         "x",
         "tone A-4",
         "x"]
-    acid_04 = ["tone D-5",
+    track2_p04 = ["tone D-5",
         "tone D-5",
         "tone D-6",
         "tone D-5",
@@ -1046,7 +1046,7 @@ def create_acid_patterns():
         "tone A-4",
         "tone A-5",
         "tone A-4"]
-    acid_05 = ["tone D-5",
+    track2_p05 = ["tone D-5",
         "tone D-5",
         "tone D-6",
         "tone D-5",
@@ -1078,7 +1078,7 @@ def create_acid_patterns():
         "tone A-4",
         "tone A-5",
         "tone A-4"]
-    acid_06 = ["tone D-5",
+    track2_p06 = ["tone D-5",
         "tone D-5",
         "tone D-6",
         "tone D-5",
@@ -1110,7 +1110,7 @@ def create_acid_patterns():
         "tone A-4",
         "tone A-5",
         "tone A-4"]
-    acid_07 = ["tone D-5",
+    track2_p07 = ["tone D-5",
         "tone D-5",
         "tone D-6",
         "tone D-5",
@@ -1142,7 +1142,7 @@ def create_acid_patterns():
         "tone A-4",
         "x",
         "-"]
-    acid_08 = ["tone D-5",
+    track2_p08 = ["tone D-5",
         "tone D-6",
         "tone A-5",
         "tone D-6",
@@ -1174,7 +1174,7 @@ def create_acid_patterns():
         "tone A-5",
         "tone E-5",
         "tone A-5"]
-    acid_09 = ["tone D-5",
+    track2_p09 = ["tone D-5",
         "tone D-6",
         "tone A-5",
         "tone D-6",
@@ -1206,7 +1206,7 @@ def create_acid_patterns():
         "tone A-5",
         "x",
         "-"]
-    acid_10 = ["tone D-5",
+    track2_p10 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -1238,7 +1238,7 @@ def create_acid_patterns():
         "-",
         "-",
         "x"]
-    acid_11 = ["tone D-5",
+    track2_p11 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -1270,7 +1270,7 @@ def create_acid_patterns():
         "-",
         "-",
         "x"]
-    acid_12 = ["tone D-5",
+    track2_p12 = ["tone D-5",
         "x",
         "tone D-5",
         "x",
@@ -1302,7 +1302,7 @@ def create_acid_patterns():
         "x",
         "tone A-4",
         "x"]
-    acid_13 = ["tone D-5",
+    track2_p13 = ["tone D-5",
         "tone D-6",
         "tone D-5",
         "tone D-6",
@@ -1334,7 +1334,7 @@ def create_acid_patterns():
         "tone A-5",
         "x",
         "-"]
-    acid_14 = ["tone D-5",
+    track2_p14 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -1366,7 +1366,7 @@ def create_acid_patterns():
         "tone A-5",
         "x",
         "-"]
-    acid_15 = ["tone D-5",
+    track2_p15 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -1398,9 +1398,9 @@ def create_acid_patterns():
         "-",
         "-",
         "-"]
-def create_vox_patterns():
-    global vox_00, vox_01, vox_02, vox_03, vox_04, vox_05, vox_06, vox_07, vox_08, vox_09, vox_10, vox_11, vox_12, vox_13, vox_14, vox_15
-    vox_00 = ["x",
+def create_track3_patterns():
+    global track3_p00, track3_p01, track3_p02, track3_p03, track3_p04, track3_p05, track3_p06, track3_p07, track3_p08, track3_p09, track3_p10, track3_p11, track3_p12, track3_p13, track3_p14, track3_p15
+    track3_p00 = ["x",
         "tone D-5",
         "x",
         "tone A-5",
@@ -1432,7 +1432,7 @@ def create_vox_patterns():
         "tone A-5",
         "x",
         "tone E-6"]
-    vox_01 = ["tone D-5",
+    track3_p01 = ["tone D-5",
         "tone F#5",
         "tone A-5",
         "wave hoover_a",
@@ -1464,7 +1464,7 @@ def create_vox_patterns():
         "tone C#5",
         "tone E-5",
         "wave hoover_e"]
-    vox_02 = ["wave crash",
+    track3_p02 = ["wave crash",
         "wave tom_hi",
         "wave clap",
         "wave tom_lo",
@@ -1496,7 +1496,7 @@ def create_vox_patterns():
         "wave tom_lo",
         "wave clap",
         "wave tom_hi"]
-    vox_03 = ["tone F#5",
+    track3_p03 = ["tone F#5",
         "-",
         "-",
         "x",
@@ -1528,7 +1528,7 @@ def create_vox_patterns():
         "-",
         "-",
         "x"]
-    vox_04 = ["tone D-5",
+    track3_p04 = ["tone D-5",
         "-",
         "-",
         "x",
@@ -1560,7 +1560,7 @@ def create_vox_patterns():
         "-",
         "-",
         "x"]
-    vox_05 = ["tone D-5",
+    track3_p05 = ["tone D-5",
         "-",
         "tone F#5",
         "-",
@@ -1592,7 +1592,7 @@ def create_vox_patterns():
         "-",
         "tone G-5",
         "-"]
-    vox_06 = ["wave crash",
+    track3_p06 = ["wave crash",
         "wave tom_hi",
         "wave clap",
         "wave tom_lo",
@@ -1624,7 +1624,7 @@ def create_vox_patterns():
         "wave tom_lo",
         "wave clap",
         "wave hoover_e"]
-    vox_07 = ["wave crash",
+    track3_p07 = ["wave crash",
         "wave tom_hi",
         "wave clap",
         "wave tom_lo",
@@ -1656,7 +1656,7 @@ def create_vox_patterns():
         "wave pew_lo",
         "wave pew_hi",
         "wave pew_hi"]
-    vox_08 = ["wave crash",
+    track3_p08 = ["wave crash",
         "wave tom_hi",
         "wave clap",
         "wave tom_lo",
@@ -1688,7 +1688,7 @@ def create_vox_patterns():
         "wave tom_lo",
         "wave clap",
         "wave hoover_e"]
-    vox_09 = ["wave crash",
+    track3_p09 = ["wave crash",
         "wave tom_hi",
         "wave clap",
         "wave tom_lo",
@@ -1720,7 +1720,7 @@ def create_vox_patterns():
         "wave pew_lo",
         "wave pew_hi",
         "wave pew_hi"]
-    vox_10 = ["tone D-5",
+    track3_p10 = ["tone D-5",
         "tone F#5",
         "tone A-5",
         "tone F#5",
@@ -1752,7 +1752,7 @@ def create_vox_patterns():
         "tone C#6",
         "tone E-6",
         "tone C#6"]
-    vox_11 = ["tone D-5",
+    track3_p11 = ["tone D-5",
         "tone F#5",
         "tone A-5",
         "tone F#5",
@@ -1784,7 +1784,7 @@ def create_vox_patterns():
         "tone C#6",
         "tone E-6",
         "tone C#6"]
-    vox_12 = ["x",
+    track3_p12 = ["x",
         "wave pew_lo",
         "-",
         "-",
@@ -1816,7 +1816,7 @@ def create_vox_patterns():
         "wave pew_lo",
         "-",
         "wave pew_lo"]
-    vox_13 = ["wave pew_lo",
+    track3_p13 = ["wave pew_lo",
         "wave pew_lo",
         "wave pew_lo",
         "wave pew_lo",
@@ -1848,7 +1848,7 @@ def create_vox_patterns():
         "wave pew_hi",
         "x",
         "-"]
-    vox_14 = ["wave hoover_a",
+    track3_p14 = ["wave hoover_a",
         "-",
         "-",
         "-",
@@ -1880,7 +1880,7 @@ def create_vox_patterns():
         "wave pew_hi",
         "x",
         "-"]
-    vox_15 = ["x",
+    track3_p15 = ["x",
         "tone D-5",
         "x",
         "tone A-5",
@@ -1912,9 +1912,9 @@ def create_vox_patterns():
         "-",
         "-",
         "-"]
-def create_drums_patterns():
-    global drums_00, drums_01, drums_02, drums_03, drums_04, drums_05, drums_06, drums_07, drums_08, drums_09, drums_10, drums_11, drums_12, drums_13, drums_14, drums_15
-    drums_00 = ["wave kick",
+def create_track4_patterns():
+    global track4_p00, track4_p01, track4_p02, track4_p03, track4_p04, track4_p05, track4_p06, track4_p07, track4_p08, track4_p09, track4_p10, track4_p11, track4_p12, track4_p13, track4_p14, track4_p15
+    track4_p00 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -1946,7 +1946,7 @@ def create_drums_patterns():
         "wave hat",
         "wave kick",
         "wave hat"]
-    drums_01 = ["wave kick",
+    track4_p01 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -1978,7 +1978,7 @@ def create_drums_patterns():
         "wave hat",
         "wave kick",
         "wave hat"]
-    drums_02 = ["wave kick",
+    track4_p02 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -2010,7 +2010,7 @@ def create_drums_patterns():
         "wave hat",
         "wave kick",
         "wave hat"]
-    drums_03 = ["wave kick",
+    track4_p03 = ["wave kick",
         "wave tom_hi",
         "wave kick",
         "wave tom_lo",
@@ -2042,7 +2042,7 @@ def create_drums_patterns():
         "wave tom_hi",
         "wave kick",
         "wave tom_lo"]
-    drums_04 = ["wave kick",
+    track4_p04 = ["wave kick",
         "wave tom_hi",
         "wave kick",
         "wave tom_lo",
@@ -2074,7 +2074,7 @@ def create_drums_patterns():
         "wave tom_hi",
         "wave kick",
         "wave tom_lo"]
-    drums_05 = ["wave kick",
+    track4_p05 = ["wave kick",
         "wave tom_hi",
         "wave kick",
         "wave tom_lo",
@@ -2106,7 +2106,7 @@ def create_drums_patterns():
         "wave tom_hi",
         "wave kick",
         "wave tom_lo"]
-    drums_06 = ["wave kick",
+    track4_p06 = ["wave kick",
         "wave openhat",
         "wave kick",
         "wave openhat",
@@ -2138,7 +2138,7 @@ def create_drums_patterns():
         "wave openhat",
         "wave kick",
         "wave openhat"]
-    drums_07 = ["wave kick",
+    track4_p07 = ["wave kick",
         "wave openhat",
         "wave kick",
         "wave openhat",
@@ -2170,7 +2170,7 @@ def create_drums_patterns():
         "wave snare",
         "wave tom_hi",
         "wave tom_lo"]
-    drums_08 = ["wave kick",
+    track4_p08 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -2202,7 +2202,7 @@ def create_drums_patterns():
         "wave hat",
         "wave kick",
         "wave hat"]
-    drums_09 = ["wave kick",
+    track4_p09 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -2234,7 +2234,7 @@ def create_drums_patterns():
         "wave snare",
         "wave tom_hi",
         "wave tom_lo"]
-    drums_10 = ["-",
+    track4_p10 = ["-",
         "-",
         "-",
         "-",
@@ -2266,7 +2266,7 @@ def create_drums_patterns():
         "-",
         "-",
         "-"]
-    drums_11 = ["-",
+    track4_p11 = ["-",
         "-",
         "-",
         "-",
@@ -2298,7 +2298,7 @@ def create_drums_patterns():
         "-",
         "-",
         "-"]
-    drums_12 = ["wave kick",
+    track4_p12 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -2330,7 +2330,7 @@ def create_drums_patterns():
         "-",
         "wave kick",
         "wave snare"]
-    drums_13 = ["wave kick",
+    track4_p13 = ["wave kick",
         "wave snare",
         "wave kick",
         "wave snare",
@@ -2362,7 +2362,7 @@ def create_drums_patterns():
         "wave snare",
         "x",
         "-"]
-    drums_14 = ["-",
+    track4_p14 = ["-",
         "-",
         "-",
         "-",
@@ -2394,7 +2394,7 @@ def create_drums_patterns():
         "wave snare",
         "x",
         "-"]
-    drums_15 = ["wave kick",
+    track4_p15 = ["wave kick",
         "wave hat",
         "wave kick",
         "wave hat",
@@ -2427,13 +2427,13 @@ def create_drums_patterns():
         "-",
         "-"]
 def create_patterns():
-    global patterns_metronome, patterns_lead, patterns_acid, patterns_vox, patterns_drums, patterns_bass2, patterns_kit2, patterns_perc, patterns_hits, song_tracks
+    global track0_patterns, track1_patterns, track2_patterns, track3_patterns, track4_patterns, track5_patterns, track6_patterns, track7_patterns, track8_patterns, song_tracks
     create_track_metronome()
-    create_lead_patterns()
-    create_acid_patterns()
-    create_vox_patterns()
-    create_drums_patterns()
-    patterns_metronome = [track_metronome,
+    create_track1_patterns()
+    create_track2_patterns()
+    create_track3_patterns()
+    create_track4_patterns()
+    track0_patterns = [track_metronome,
         track_metronome,
         track_metronome,
         track_metronome,
@@ -2449,143 +2449,143 @@ def create_patterns():
         track_metronome,
         track_metronome,
         track_metronome]
-    patterns_lead = [lead_00,
-        lead_01,
-        lead_02,
-        lead_03,
-        lead_04,
-        lead_05,
-        lead_06,
-        lead_07,
-        lead_08,
-        lead_09,
-        lead_10,
-        lead_11,
-        lead_12,
-        lead_13,
-        lead_14,
-        lead_15]
-    patterns_acid = [acid_00,
-        acid_01,
-        acid_02,
-        acid_03,
-        acid_04,
-        acid_05,
-        acid_06,
-        acid_07,
-        acid_08,
-        acid_09,
-        acid_10,
-        acid_11,
-        acid_12,
-        acid_13,
-        acid_14,
-        acid_15]
-    patterns_vox = [vox_00,
-        vox_01,
-        vox_02,
-        vox_03,
-        vox_04,
-        vox_05,
-        vox_06,
-        vox_07,
-        vox_08,
-        vox_09,
-        vox_10,
-        vox_11,
-        vox_12,
-        vox_13,
-        vox_14,
-        vox_15]
-    patterns_drums = [drums_00,
-        drums_01,
-        drums_02,
-        drums_03,
-        drums_04,
-        drums_05,
-        drums_06,
-        drums_07,
-        drums_08,
-        drums_09,
-        drums_10,
-        drums_11,
-        drums_12,
-        drums_13,
-        drums_14,
-        drums_15]
-    patterns_bass2 = [lead_00,
-        lead_01,
-        lead_02,
-        lead_03,
-        lead_04,
-        lead_05,
-        lead_06,
-        lead_07,
-        lead_08,
-        lead_09,
-        lead_10,
-        lead_11,
-        lead_12,
-        lead_13,
-        lead_14,
-        lead_15]
-    patterns_kit2 = [acid_00,
-        acid_01,
-        acid_02,
-        acid_03,
-        acid_04,
-        acid_05,
-        acid_06,
-        acid_07,
-        acid_08,
-        acid_09,
-        acid_10,
-        acid_11,
-        acid_12,
-        acid_13,
-        acid_14,
-        acid_15]
-    patterns_perc = [vox_00,
-        vox_01,
-        vox_02,
-        vox_03,
-        vox_04,
-        vox_05,
-        vox_06,
-        vox_07,
-        vox_08,
-        vox_09,
-        vox_10,
-        vox_11,
-        vox_12,
-        vox_13,
-        vox_14,
-        vox_15]
-    patterns_hits = [drums_00,
-        drums_01,
-        drums_02,
-        drums_03,
-        drums_04,
-        drums_05,
-        drums_06,
-        drums_07,
-        drums_08,
-        drums_09,
-        drums_10,
-        drums_11,
-        drums_12,
-        drums_13,
-        drums_14,
-        drums_15]
-    song_tracks = [patterns_metronome,
-        patterns_lead,
-        patterns_acid,
-        patterns_vox,
-        patterns_drums,
-        patterns_bass2,
-        patterns_kit2,
-        patterns_perc,
-        patterns_hits]
+    track1_patterns = [track1_p00,
+        track1_p01,
+        track1_p02,
+        track1_p03,
+        track1_p04,
+        track1_p05,
+        track1_p06,
+        track1_p07,
+        track1_p08,
+        track1_p09,
+        track1_p10,
+        track1_p11,
+        track1_p12,
+        track1_p13,
+        track1_p14,
+        track1_p15]
+    track2_patterns = [track2_p00,
+        track2_p01,
+        track2_p02,
+        track2_p03,
+        track2_p04,
+        track2_p05,
+        track2_p06,
+        track2_p07,
+        track2_p08,
+        track2_p09,
+        track2_p10,
+        track2_p11,
+        track2_p12,
+        track2_p13,
+        track2_p14,
+        track2_p15]
+    track3_patterns = [track3_p00,
+        track3_p01,
+        track3_p02,
+        track3_p03,
+        track3_p04,
+        track3_p05,
+        track3_p06,
+        track3_p07,
+        track3_p08,
+        track3_p09,
+        track3_p10,
+        track3_p11,
+        track3_p12,
+        track3_p13,
+        track3_p14,
+        track3_p15]
+    track4_patterns = [track4_p00,
+        track4_p01,
+        track4_p02,
+        track4_p03,
+        track4_p04,
+        track4_p05,
+        track4_p06,
+        track4_p07,
+        track4_p08,
+        track4_p09,
+        track4_p10,
+        track4_p11,
+        track4_p12,
+        track4_p13,
+        track4_p14,
+        track4_p15]
+    track5_patterns = [track1_p00,
+        track1_p01,
+        track1_p02,
+        track1_p03,
+        track1_p04,
+        track1_p05,
+        track1_p06,
+        track1_p07,
+        track1_p08,
+        track1_p09,
+        track1_p10,
+        track1_p11,
+        track1_p12,
+        track1_p13,
+        track1_p14,
+        track1_p15]
+    track6_patterns = [track2_p00,
+        track2_p01,
+        track2_p02,
+        track2_p03,
+        track2_p04,
+        track2_p05,
+        track2_p06,
+        track2_p07,
+        track2_p08,
+        track2_p09,
+        track2_p10,
+        track2_p11,
+        track2_p12,
+        track2_p13,
+        track2_p14,
+        track2_p15]
+    track7_patterns = [track3_p00,
+        track3_p01,
+        track3_p02,
+        track3_p03,
+        track3_p04,
+        track3_p05,
+        track3_p06,
+        track3_p07,
+        track3_p08,
+        track3_p09,
+        track3_p10,
+        track3_p11,
+        track3_p12,
+        track3_p13,
+        track3_p14,
+        track3_p15]
+    track8_patterns = [track4_p00,
+        track4_p01,
+        track4_p02,
+        track4_p03,
+        track4_p04,
+        track4_p05,
+        track4_p06,
+        track4_p07,
+        track4_p08,
+        track4_p09,
+        track4_p10,
+        track4_p11,
+        track4_p12,
+        track4_p13,
+        track4_p14,
+        track4_p15]
+    song_tracks = [track0_patterns,
+        track1_patterns,
+        track2_patterns,
+        track3_patterns,
+        track4_patterns,
+        track5_patterns,
+        track6_patterns,
+        track7_patterns,
+        track8_patterns]
 def create_song():
     global song
     song = [0,
@@ -2652,79 +2652,79 @@ def create_song():
         0,
         0,
         15]
-lead_00: List[str] = []
-lead_01: List[str] = []
-lead_02: List[str] = []
-lead_03: List[str] = []
-lead_04: List[str] = []
-lead_05: List[str] = []
-lead_06: List[str] = []
-lead_07: List[str] = []
-lead_08: List[str] = []
-lead_09: List[str] = []
-lead_10: List[str] = []
-lead_11: List[str] = []
-lead_12: List[str] = []
-lead_13: List[str] = []
-lead_14: List[str] = []
-lead_15: List[str] = []
-acid_00: List[str] = []
-acid_01: List[str] = []
-acid_02: List[str] = []
-acid_03: List[str] = []
-acid_04: List[str] = []
-acid_05: List[str] = []
-acid_06: List[str] = []
-acid_07: List[str] = []
-acid_08: List[str] = []
-acid_09: List[str] = []
-acid_10: List[str] = []
-acid_11: List[str] = []
-acid_12: List[str] = []
-acid_13: List[str] = []
-acid_14: List[str] = []
-acid_15: List[str] = []
-vox_00: List[str] = []
-vox_01: List[str] = []
-vox_02: List[str] = []
-vox_03: List[str] = []
-vox_04: List[str] = []
-vox_05: List[str] = []
-vox_06: List[str] = []
-vox_07: List[str] = []
-vox_08: List[str] = []
-vox_09: List[str] = []
-vox_10: List[str] = []
-vox_11: List[str] = []
-vox_12: List[str] = []
-vox_13: List[str] = []
-vox_14: List[str] = []
-vox_15: List[str] = []
-drums_00: List[str] = []
-drums_01: List[str] = []
-drums_02: List[str] = []
-drums_03: List[str] = []
-drums_04: List[str] = []
-drums_05: List[str] = []
-drums_06: List[str] = []
-drums_07: List[str] = []
-drums_08: List[str] = []
-drums_09: List[str] = []
-drums_10: List[str] = []
-drums_11: List[str] = []
-drums_12: List[str] = []
-drums_13: List[str] = []
-drums_14: List[str] = []
-drums_15: List[str] = []
-patterns_metronome: List[List[str]] = []
-patterns_lead: List[List[str]] = []
-patterns_acid: List[List[str]] = []
-patterns_vox: List[List[str]] = []
-patterns_drums: List[List[str]] = []
-patterns_bass2: List[List[str]] = []
-patterns_kit2: List[List[str]] = []
-patterns_perc: List[List[str]] = []
-patterns_hits: List[List[str]] = []
+track1_p00: List[str] = []
+track1_p01: List[str] = []
+track1_p02: List[str] = []
+track1_p03: List[str] = []
+track1_p04: List[str] = []
+track1_p05: List[str] = []
+track1_p06: List[str] = []
+track1_p07: List[str] = []
+track1_p08: List[str] = []
+track1_p09: List[str] = []
+track1_p10: List[str] = []
+track1_p11: List[str] = []
+track1_p12: List[str] = []
+track1_p13: List[str] = []
+track1_p14: List[str] = []
+track1_p15: List[str] = []
+track2_p00: List[str] = []
+track2_p01: List[str] = []
+track2_p02: List[str] = []
+track2_p03: List[str] = []
+track2_p04: List[str] = []
+track2_p05: List[str] = []
+track2_p06: List[str] = []
+track2_p07: List[str] = []
+track2_p08: List[str] = []
+track2_p09: List[str] = []
+track2_p10: List[str] = []
+track2_p11: List[str] = []
+track2_p12: List[str] = []
+track2_p13: List[str] = []
+track2_p14: List[str] = []
+track2_p15: List[str] = []
+track3_p00: List[str] = []
+track3_p01: List[str] = []
+track3_p02: List[str] = []
+track3_p03: List[str] = []
+track3_p04: List[str] = []
+track3_p05: List[str] = []
+track3_p06: List[str] = []
+track3_p07: List[str] = []
+track3_p08: List[str] = []
+track3_p09: List[str] = []
+track3_p10: List[str] = []
+track3_p11: List[str] = []
+track3_p12: List[str] = []
+track3_p13: List[str] = []
+track3_p14: List[str] = []
+track3_p15: List[str] = []
+track4_p00: List[str] = []
+track4_p01: List[str] = []
+track4_p02: List[str] = []
+track4_p03: List[str] = []
+track4_p04: List[str] = []
+track4_p05: List[str] = []
+track4_p06: List[str] = []
+track4_p07: List[str] = []
+track4_p08: List[str] = []
+track4_p09: List[str] = []
+track4_p10: List[str] = []
+track4_p11: List[str] = []
+track4_p12: List[str] = []
+track4_p13: List[str] = []
+track4_p14: List[str] = []
+track4_p15: List[str] = []
+track0_patterns: List[List[str]] = []
+track1_patterns: List[List[str]] = []
+track2_patterns: List[List[str]] = []
+track3_patterns: List[List[str]] = []
+track4_patterns: List[List[str]] = []
+track5_patterns: List[List[str]] = []
+track6_patterns: List[List[str]] = []
+track7_patterns: List[List[str]] = []
+track8_patterns: List[List[str]] = []
 song_tracks: List[List[List[str]]] = []
 song: List[number] = []
 current_song_position = 0

@@ -182,14 +182,16 @@ The only splitting left is turning one cell into its two words, for example `"to
 
 ### One array per pattern, plus an order list
 
-Each song is its own program (one MakeCode project per song): the tracker code is the same in every song,
-only the arrays change.
+Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`): the tracker code is the same in
+all three, only the arrays change.
 
-- **A pattern array** holds the 32 cells of one pattern, named after the track and the pattern number:
-  `lead_00`, `lead_01` ... for track 1, `acid_00` ... for track 2, and so on up to `hits_15` for track 8.
-- **An order list**, `song`, is an array of numbers saying which pattern plays next. Our songs are 64
+- **A pattern array** holds the 32 cells of one pattern, named after its track and its pattern number:
+  `track1_p00`, `track1_p01` ... `track1_p15` for track 1, `track2_p00` ... for track 2, and so on.
+- **A track's list** puts that track's patterns in order: `track1_patterns` holds `track1_p00` to `track1_p15`.
+  `track0_patterns` is the conductor's metronome.
+- **`song_tracks`** holds all the lists, so `song_tracks[track][pattern]` is one pattern's array for one track.
+- **The order list**, `song`, is an array of numbers saying which pattern plays next. Our tunes are 64
   numbers long, which is 6 minutes 50 seconds of music.
-- **`song_tracks`** puts it together: `song_tracks[track][pattern]` is one pattern's array for one track.
 
 To play it: take the next number from the order list, find that pattern's array, then step through its 32 entries,
 one every 200 ms.
@@ -200,28 +202,28 @@ Each micro:bit plays one track, chosen by its track number. Track 0 is the condu
 tells the others which pattern to play. Tracks 1 to 4 play the whole tune on their own. Tracks 5 to 8 are
 **extras** for up to 8 micro:bits: they only add drums and bass, so the tune still works with just 4.
 
-| Track | Channel | What it plays |
+| Track | In the code | What it plays (in Korobeiniki; other tunes use their tracks in their own way) |
 |---|---|---|
-| 0 | conductor | A metronome, and the radio messages that start the others |
-| 1 | `lead` | The melody (tone notes) |
-| 2 | `acid` | The acid bass line (tone notes) |
-| 3 | `vox` | The voice lane: tone phrases, plus claps, crashes, toms, pews and Hoover stabs. In the Canon it also plays the dhol groove and the second canon voice; in Ode to Joy the counter-melody and a second drum kit |
-| 4 | `drums` | The kick and hats, plus snare and toms in the fills |
-| 5 | `bass2` | Extra: a second bass line, only the chord's root, fifth and octave, in short notes |
-| 6 | `kit2` | Extra: hats and snare |
-| 7 | `perc` | Extra: toms and claps |
-| 8 | `hits` | Extra: crashes, extra kicks, open hats and pews |
+| 0 | `track0` (conductor) | A metronome, and the radio messages that start the others |
+| 1 | `track1` | The melody (tone notes) |
+| 2 | `track2` | The acid bass line (tone notes) |
+| 3 | `track3` | The voice lane: tone phrases, plus claps, crashes, toms, pews and Hoover stabs. In the Canon it also plays the dhol groove and the second canon voice; in Ode to Joy the counter-melody and a second drum kit |
+| 4 | `track4` | The kick and hats, plus snare and toms in the fills |
+| 5 | `track5` | Extra: a second bass line, only the chord's root, fifth and octave, in short notes |
+| 6 | `track6` | Extra: hats and snare |
+| 7 | `track7` | Extra: toms and claps |
+| 8 | `track8` | Extra: crashes, extra kicks, open hats and pews |
 
-A song can have 4 tracks or 8. Korobeiniki has its own tracks 5 to 8. In a 4-track song (the Canon, Ode to
+A tune can have 4 tracks or 8. Korobeiniki has its own tracks 5 to 8. In a 4-track tune (the Canon, Ode to
 Joy) nobody sits out: track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The
-code does this with the lists, not with extra logic: in a 4-track song, `patterns_bass2` simply holds
-`lead_00`, `lead_01` and so on.
+code does this with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds
+`track1_p00`, `track1_p01` and so on.
 
 ### The patterns
 
-The display shows only the track, so patterns are known by their number in the order list. In the code a
-pattern's number is in its array names (pattern 3 = `lead_03`, `acid_03` ...). The part names below come
-from how each tune was written; they are not in the code.
+The display shows only the track, so patterns are known by their number in the order list. A pattern's
+number is in its array names (pattern 3 = `track1_p03`, `track2_p03` ...). The part names below come from how
+each tune was written; they are not in the code.
 
 **Korobeiniki (the Tetris tune), patterns 0 to 15.** The extras (tracks 5-8) start small in the intro and grow,
 so the drops are the biggest moments.

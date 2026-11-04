@@ -30,14 +30,18 @@ Last updated: 1 November 2026.
 ## Where things are (1 Nov, end of day)
 - `Claude/suggestions`:
   - `main_8_tracks_v3.py` - **the code to test next**: 3 songs, songs-only controls, tracks 0-8.
-  - Drafts: `README.md` (to copy over the root README), `microbit_tracker_format_students.md` (to copy over
-    `Claude/microbit_tracker_format_students.md`). Both up to date with 3 songs and 8 tracks.
+  - Drafts: `README.md` (matches the current `main.py`: 3 songs, 4 tracks, songs only - to copy over the
+    root README now), `README_8_tracks.md` (for when `main_8_tracks_v3.py` becomes `main.py`),
+    `microbit_tracker_format_students.md` (8-track version; copy over `Claude/microbit_tracker_format_students.md`
+    with the 8-track code).
   - This file.
+- **`main.py` (in GitHub since 1 Nov 22:58) = `old/main_three_songs.py`**: 3 songs, 4 tracks, songs only.
+  Copied over by Russell, not yet tested on the boards.
 - `Claude/mods`: the three tunes - `korobeiniki_techno_8ch_v3_microbit.xm` (8 channels; 1-4 = the 4-track
   tune), `canon_bhangra_4ch_microbit.xm`, `ode_to_joy_synthwave_v3_4ch_microbit.xm`.
 - `old/` in both: earlier steps and tries, kept only to compare. Python: `main_agreed_format.py`,
   `main_agreed_instruments.py`, `main_korobeiniki.py`, `main_interrupt.py`, `main_substring.py`,
-  `main_two_songs.py` (= current `main.py`), `main_three_songs.py` (3 songs, 4 tracks: the fallback),
+  `main_two_songs.py` (2 songs with the pattern screen: the version before), `main_three_songs.py` (= `main.py`),
   `main_8_tracks.py` (v1) and `main_8_tracks_v2.py`. Tunes: `korobeiniki_techno_4ch_microbit.xm` (= channels
   1-4 of the 8-track), the 8-track v1 and v2, early Korobeiniki versions, New World, Bella Ciao (techno,
   synthwave), Ode to Joy trance/minor/synthwave v1/v2, with their generators. Also the generators of the three
@@ -202,11 +206,13 @@ Last updated: 1 November 2026.
 
 ## To do
 
+- [ ] **Test the current `main.py`** (3 songs, 4 tracks, songs only) on the boards, and copy
+      `Claude/suggestions/README.md` over the root README (it matches this `main.py`).
 - [ ] **Test `main_8_tracks_v3.py`** (agreed 1 Nov): in MakeCode (paste, flip to Blocks: watch the conversion
       of the ~190 KB file) and on the boards - 4 boards should sound exactly like before, 8 boards + a
       conductor if there are enough. Memory: 256 pattern arrays. Then adopt it as `main.py`, copy the README
       and format doc drafts over, download a fresh `.hex` and measure it. If 8 tracks has to wait,
-      `old/main_three_songs.py` is the 4-track fallback.
+      the current `main.py` (3 songs, 4 tracks) is the fallback.
 
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
@@ -241,7 +247,8 @@ Last updated: 1 November 2026.
   checked on the mock micro:bit.
 - Song 3 chosen: Ode to Joy, drum-heavy synthwave (v3), after trying New World, Bella Ciao (techno and
   synthwave) and three Ode to Joy styles; v1 -> syncopated -> v2 "everything at once" -> v3 more drums.
-- Songs-only controls and Ode to Joy as song `#` (`main_three_songs.py`): the pattern screen removed; all 64
+- Songs-only controls and Ode to Joy as song `#` (`main_three_songs.py`, copied to `main.py` 1 Nov, untested on
+  the boards): the pattern screen removed; all 64
   Ode to Joy arrays match the XM; all three songs checked on the mock micro:bit (same sounds per track as
   their XMs) and the buttons simulated (track, conductor, song choice, play, radio messages).
 - README draft updated for three tunes, the songs-only controls and tracks 1-8.

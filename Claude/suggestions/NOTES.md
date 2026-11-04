@@ -229,6 +229,8 @@ Last updated: 1 November 2026.
   nearer Bluetooth's 2426). Group 23 + band 23 was tempting (fnord), 24 is the safer bet.
 - Band 24 and transmit power 7 are in `main.py` (4 Nov) and in `main_8_tracks_v3.py` (added 4 Nov, same place:
   straight after `radio.set_group(23)`). Fair test: conductor + one board, same spot, a whole song per band, listen for dropouts.
+- Testing rig (4 Nov): the boards are now mounted on a board, close together and in fixed places (safe from
+  cats jumping on the table), so radio tests are repeatable from one run to the next.
 - `radio.set_transmit_power(7)` (the maximum) is the other idea, not tried yet.
 - `radio.set_transmit_serial_number` (asked 4 Nov): adds the sender's serial number to every packet so a
   receiver can tell boards apart. Not needed - only the conductor sends.

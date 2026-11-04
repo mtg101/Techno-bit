@@ -29,11 +29,13 @@ Last updated: 1 November 2026.
 
 ## Where things are (1 Nov, end of day)
 - `Claude/suggestions`:
-  - `main_8_tracks_v3.py` - **the code to test next**: 3 songs, songs-only controls, tracks 0-8.
-  - Drafts: `README_8_tracks.md` (**matches the current `main.py`**: 3 songs, 8 tracks, band 24 - to copy over
-    the root README), `README.md` (the 4-track version, = the root README now),
-    `microbit_tracker_format.md` (the student format doc; same as the root `microbit_tracker_format.md` since
-    4 Nov - edit the draft here, then copy it over).
+  - `main_no_start_song.py` - **the code to test next**: the current `main.py` with no "start song", the B fix
+    and the dim waiting row (see "Radio: no start song").
+  - `main_8_tracks_v3.py` - 3 songs, songs-only controls, tracks 0-8, band 24 (= the current `main.py`).
+  - Drafts: `README_8_tracks.md` (the next root README: 3 songs, 8 tracks, band 24, and - with
+    `main_no_start_song.py` - how boards join a song, B to come back, the dim waiting row), `README.md` (the 4-track version, = the root README now),
+    `microbit_tracker_format.md` (the student format doc; ahead of the root copy since 4 Nov 13:50: adds "The
+    radio messages" and the waiting row, which go with `main_no_start_song.py` - promote them together).
   - This file.
 - **`main.py` (4 Nov 13:02, "3 songs work with 4 tracks, better radio settings") = `main_8_tracks_v3.py`**
   (exported back from MakeCode, so the functions are in MakeCode's order) **plus** `radio.set_transmit_power(7)`
@@ -203,6 +205,40 @@ Last updated: 1 November 2026.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
 
+### Radio: no "start song", B fix, dim waiting row (4 Nov, to test): `main_no_start_song.py`
+- Based on the current `main.py` (8 tracks, band 24, power 7). After "8-track Tetris works!" the radio was
+  still the weak spot, so: simpler messages, and a way to SEE when a board is waiting.
+- Messages now: **a number** = play this pattern and stay in the song; **`end song`** = after this pattern go
+  back to the track screen; **`stop`** = stop now and go back. "start song" is gone: any number puts a board
+  in the song (`receiving_song = True`), so a board can't miss the start of a song.
+- **B fix**: B on a board that's following the conductor (`receiving_song`) now leaves the song and goes
+  back to the track screen. Before, B mid-pattern did nothing visible (the board waited for the next number),
+  and after a lost "end song" B opened the song screen while the board was still stuck in the song.
+  Known and accepted: if the conductor is still playing, that board rejoins at the next pattern. To take boards
+  out of a song that's still playing, stop the conductor.
+- **Dim waiting row** (`show_waiting`): when a pattern ends and the next number hasn't arrived, the other
+  LEDs on the top row light at `bright_wait` = 30 (around the track LED; only plots, no pause). The next
+  pattern's `clear_screen` turns them off. Normally a board waits 1-5 ms (invisible), so the row only shows a
+  lost number (for one pattern) or a lost "end song" (until B). Tune `bright_wait` on the boards: it has to
+  look dimmer than tracks 5-8's half-bright track LED.
+- Simulated (conductor + 2 boards, the same message lost in both versions):
+
+  | Lost | Old code | New code |
+  |---|---|---|
+  | nothing | plays everything | plays everything |
+  | "start song" | plays everything | (no such message) |
+  | pattern 0's number | joins at the 2nd pattern | joins at the 2nd pattern, dim row while waiting |
+  | a number mid-song | drops that pattern silently | drops that pattern, dim row while waiting |
+  | "end song", then B | B opens the song screen, board still stuck in the song | dim row until B, then the track screen |
+  | B mid-song | nothing visible | track screen, rejoins at the next pattern |
+
+  So the new version never plays worse, shows when a board is waiting, and B always works. Correction: in the OLD code a lost "start song" did NOT spoil the song in the
+  simulation (the next number arrives just before a board finishes, because boards run behind the
+  conductor), so removing it is a simplification, not a big fix. The B fix and the waiting row are the gains.
+- Later, if numbers are still often lost: send each one twice, with the song position so a repeat isn't
+  replayed (patterns can legitimately repeat, e.g. INT1 INT1). Counting misses and logging (V2 data logger)
+  also parked.
+
 ### Radio band (4 Nov, being tried): group 23, **band 24**
 - Testing at home was unreliable: boards seemed dead, then played after being moved. The room is full of
   2.4 GHz wireless (Wi-Fi, Bluetooth, 2.4 GHz joypads ...) and "away from other wireless" isn't an option.
@@ -261,8 +297,11 @@ Last updated: 1 November 2026.
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
 - [ ] **First-beat lateness**: only if it can be heard.
-- [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) Also check what a missed
-      "start song" does (a missed pattern number only drops one pattern).
+- [ ] **Test `main_no_start_song.py`** on the boards: songs play as before; the dim waiting row shows when a
+      board drops out (and is visibly dimmer than tracks 5-8's track LED - tune `bright_wait`); B always gets a
+      board back to its track screen. Then promote it to `main.py`, together with `README_8_tracks.md` (as the root README)
+      and `microbit_tracker_format.md` (over the root copy).
+- [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) See also `main_no_start_song.py` (below).
 
 ---
 

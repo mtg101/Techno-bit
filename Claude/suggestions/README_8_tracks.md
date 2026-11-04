@@ -63,10 +63,12 @@ Now when you select a song (press B, then A to choose, then B to play) the micro
 
 So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the song! And with 9, one conductor makes the other 8 play all 8 tracks.
 
+The other Techno:bits only need to be on their track screen: as soon as one hears a pattern number it joins the song, and it goes back to its track screen when the song ends. If a Techno:bit misses a message it drops out for one pattern and then carries on. If one is ever left waiting (its top row glows dimly), press its B button to bring it back to the track screen.
+
 Radio group 23 and frequency band 24 (2424 MHz) are used, so every Techno:bit needs to be on the same group and band. The band was picked to sit between the busy Wi-Fi channels: if your room has lots of 2.4 GHz wireless (Wi-Fi, Bluetooth, game controllers) and boards drop out, try moving them, or try another band on every board.
 
 ### What the lights show
-The LEDs show what each Techno:bit is playing: one LED for each note (but not its octave) or sound, with related sounds sharing an LED. The top row shows the track while playing: tracks 0 to 4 light one LED each, and tracks 5 to 8 light their partner track's LED at half brightness. The tables are in the format document.
+The LEDs show what each Techno:bit is playing: one LED for each note (but not its octave) or sound, with related sounds sharing an LED. The top row shows the track while playing: tracks 0 to 4 light one LED each, and tracks 5 to 8 light their partner track's LED at half brightness. If the rest of the top row glows dimly, that Techno:bit is waiting for the conductor's next pattern number: it has missed one (it will carry on with the next), or the song has ended and it missed the message (press B). The tables are in the format document.
 
 
 ## AI Use

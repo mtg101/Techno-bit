@@ -321,6 +321,19 @@ if collapsing is not enough.
 
 ---
 
+### The radio messages
+
+The conductor only ever sends three kinds of message:
+
+| Message | What a board does |
+|---|---|
+| a pattern number, such as `12` | Play that pattern now, and stay in the song: when it ends, wait for the next number |
+| `end song` | Finish the pattern you're playing, then go back to the track screen |
+| `stop` | Stop now and go back to the track screen |
+
+A board joins a song as soon as it hears a number, so there is no "start" message to miss. Pressing B on a
+board that is following the conductor also takes it back to its track screen.
+
 ### The radio: group and band
 
 The conductor sends each pattern number by radio. Two radio settings decide which boards hear it:
@@ -343,6 +356,12 @@ The 5 x 5 LED display shows what is playing. Only one sound LED is lit at a time
 
 **The track** is shown on row 0 while playing: tracks 0 to 4 light x0 to x4. The top row only has 5 LEDs, so
 tracks 5 to 8 light the same LED as their partner track (5 with 1, 6 with 2 and so on) at half brightness.
+
+**Waiting:** if a pattern ends and the next pattern number hasn't arrived, the board lights the rest of the
+top row very dimly (`bright_wait`). Normally the next number arrives within a few milliseconds, too fast to
+see, so a dim top row means the board has missed a message. It carries on when the next number arrives, or
+goes back to its track screen when you press B. Lighting LEDs with `plot` takes no time, unlike `show string`,
+so this never makes the music late.
 
 **Wave sounds** use rows 1 and 2. Related sounds share an LED: the low or open sound is at half brightness
 and the other at full brightness.

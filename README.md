@@ -4,71 +4,22 @@ Plus I think it makes a cool demo to show the students at our local coding club 
 
 The python saved here is taken from the Makecode project https://makecode.microbit.org/S26000-11508-29408-02742 which I'm making in blocks so anyone can understand it. I'm just putting it here in GitHub for version control. OK it turns out that the Makecode site does that... kinda - I trust this more. Plus I can document and have multiple block projects collected here if I want. 
 
-To use in MakeCode:
-- copy/pasta the Python into the MakeCode project
-- flip back to blocks and it should all render properly
-
-To build manually in VSCode:
-- check "from microbit import *" is at the  start of main.py (I copy & paste over from MakeCode a lot and I won't be adding this all the time...)
-- use normal commands from the palette like "Put-this-file" to send to Micro:bit
-
 ### Demo
 
 
 https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
 
+(The video file itself is in [techno-bit/media/technobit-demo.mp4](techno-bit/media/technobit-demo.mp4).)
 
 
-## The tunes and the tracker format
+## How this project is organised
 
-There are three tunes, all arranged for the same 4 channels and the same 10 instruments (Korobeiniki also has 4 extra drum and bass channels for up to 8 Techno:bits):
-- a techno version of the traditional folk tune Korobeiniki (the one behind Tetris): `Claude/mods/korobeiniki_techno_8ch_v3_microbit.xm` (8 tracks: the first 4 are the whole tune, the other 4 add drums and bass)
-- a bhangra techno version of Pachelbel's Canon in D (from about 1700, so out of copyright): `Claude/mods/canon_bhangra_4ch_microbit.xm`
-- a drum-heavy synthwave version of Beethoven's Ode to Joy (1824, also out of copyright), with minor verses, major drops and a key change: `Claude/mods/ode_to_joy_synthwave_v3_4ch_microbit.xm`
+| Folder | What it is |
+|---|---|
+| **[techno-bit/](techno-bit/)** | **The Techno:bit itself: start here.** The program, the tunes, ready-to-flash files, and the documentation for using it and making your own tunes: see [techno-bit/README.md](techno-bit/README.md). |
+| [planning/](planning/) | Where the project is planned. `planning/claude/` is where I work with Claude (an AI assistant): notes, and suggested changes that haven't made it into `techno-bit/` yet. |
 
-You can open the .xm files in a tracker such as [OpenMPT](https://openmpt.org/) and change them.
-
-The music on the Micro:bits is stored in a very simple tracker format, with one row every 200ms (an eighth note at 150 BPM) and 32 rows to a pattern. It is described for students in [microbit_tracker_format.md](microbit_tracker_format.md): how notes (`tone D-6`), sounds (`wave kick`), silence (`x`) and rests (`-`) are written, and how the Micro:bit plays them.
-
-
-## Techno:bit controls
-
-### Playing Songs
-On startup the Techno:bit shows the current 'track' it's going to play. 
-
-Press the A button to cycle between the tracks:
-- 1 = Lead (the melody)
-- 2 = Acid bass
-- 3 = Voice lane (a few tone phrases, plus claps, crashes, toms, pews and Hoover stabs)
-- 4 = Drums (kick and hats, plus snare and toms in the fills)
-- 5 to 8 = Extras, for up to 8 Techno:bits. In Korobeiniki they add a second bass line (5), hats and snare (6), toms and claps (7), and crashes, extra kicks and pews (8). In the other songs they double tracks 1 to 4 (5 plays 1, 6 plays 2, 7 plays 3, 8 plays 4), so nobody sits out.
-
-Tracks 1 to 4 play the whole tune on their own; tracks 5 to 8 only add to it.
-
-Press the B button to select the track. Then the Techno:bit will show which song it's going to play.
-
-Now press the A button to cycle between the songs:
-- \* = Korobeiniki (Tetris theme)
-- \+ = Pachelbel's Canon in D
-- \# = Beethoven's Ode to Joy
-
-Now press the B button to play that song using that track.
-
-While playing press the B button to stop playing.
-
-### Conducting via Radio
-When in track selection, press the Micro:bit logo to enter Conductor mode. The track number will now show 0.
-
-Now when you select a song (press B, then A to choose, then B to play) the microbit will broadcast each pattern number of the song for the other microbits to play on their tracks, while this microbit plays a metronome beat.
-
-So with 5 Techno:bits... one conductor makes the other 4 play the full 4 tracks of the song! And with 9, one conductor makes the other 8 play all 8 tracks.
-
-The other Techno:bits only need to be on their track screen: as soon as one hears a pattern number it joins the song, and it goes back to its track screen when the song ends. If a Techno:bit misses a message it drops out for one pattern and then carries on. If one is ever left waiting (its top row glows dimly), press its B button to bring it back to the track screen.
-
-Radio group 23 and frequency band 24 (2424 MHz) are used, so every Techno:bit needs to be on the same group and band. The band was picked to sit between the busy Wi-Fi channels: if your room has lots of 2.4 GHz wireless (Wi-Fi, Bluetooth, game controllers) and boards drop out, try moving them, or try another band on every board.
-
-### What the lights show
-The LEDs show what each Techno:bit is playing: one LED for each note (but not its octave) or sound, with related sounds sharing an LED. The top row shows the track while playing: tracks 0 to 4 light one LED each, and tracks 5 to 8 light their partner track's LED at half brightness. If the rest of the top row glows dimly, that Techno:bit is waiting for the conductor's next pattern number: it has missed one (it will carry on with the next), or the song has ended and it missed the message (press B). The tables are in the format document.
+The MakeCode project for the base program is https://makecode.microbit.org/S26000-11508-29408-02742.
 
 
 ## AI Use
@@ -80,4 +31,4 @@ Claude Code has been used to create the .XM file conversion app, and associated 
 
 The intention of using AI in this way is to allow me to quickly use the app I've coded to have a cool tune, and then allow students to explore changing both the code and the music. 
 
-Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, wrote the 12 sound functions and the hardcoded versions of all three tunes, created the Canon in D and Ode to Joy .xm files and the 8-track Korobeiniki, fixed the radio timing between patterns, and shrank the demo video. Its drafts are in `Claude/suggestions` and its .xm files in `Claude/mods`.
+Claude (in the Claude desktop app, with access to this project) also helped to document the tracker format, converted the code to that format, wrote the 12 sound functions and the hardcoded versions of all three tunes, created the Canon in D and Ode to Joy .xm files and the 8-track Korobeiniki, fixed the radio timing between patterns, and shrank the demo video. Its notes and drafts are in `planning/claude`.

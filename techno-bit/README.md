@@ -11,7 +11,6 @@ Several micro:bits play a tune together, like a tracker from the old Amiga days:
 | `mods/` | The tunes as `.xm` files you can open in a tracker |
 | `docs/` | [The tracker format](docs/tracker_format.md): how the music is stored and played |
 | `media/` | The demo video |
-| `tools/` | Parked: files for building from VS Code (not used yet) |
 
 ## Getting it onto the micro:bits
 

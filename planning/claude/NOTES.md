@@ -50,7 +50,6 @@ techno-bit/                       what students use
   mods/                           korobeiniki.xm (8 channels), canon.xm, ode_to_joy.xm
   docs/tracker_format.md          the format doc (newest, promoted 4 Nov)
   media/technobit-demo.mp4
-  tools/local_build/microbit/     parked (VS Code build files)
 planning/claude/
   NOTES.md                        these notes
   suggestions/                    drafts, mirroring the project paths (empty: nothing pending)
@@ -60,6 +59,10 @@ planning/claude/
 **Promoted 4 Nov 17:10** (agreed: "just docs and we agreed it's good"): `README.md` (the front page),
 `techno-bit/README.md` (for students), `techno-bit/docs/tracker_format.md` (the newest format doc). All links
 checked (one fixed: the video is at `techno-bit/media/`). Nothing pending in `suggestions` now.
+**Promoted 4 Nov 17:20:** a fuller front page `README.md` (title, "What it is", "How it works (the techie bit)",
+"Try it", and a rewritten "AI use" saying honestly who does what). (A VS Code README in `techno-bit/tools/local_build/`
+was promoted too, then deleted with that folder the same day.) Every line of the old front page is now in one of the
+READMEs. Nothing pending in `suggestions`.
 
 **Paused: one song per program** (4 Nov, "drop the single-song changes for now, come back to it"). Not in git
 yet, so kept in `planning/claude/single_song_paused/techno-bit/` (same paths as the project): the one-song base
@@ -315,10 +318,10 @@ project + XM converter" below for the design and the checks done.
 - [x] Old `Claude/microbit_tracker_format_students.md` deleted (4 Nov); the root `microbit_tracker_format.md`
       is the format doc.
 - [x] **8 tracks tested**: 8-track Tetris works on 8 boards + a conductor (4 Nov).
-- [ ] **Parked: building locally from VS Code** (4 Nov). The root `microbit/` folder holds files Russell copied
-      from a tutorial for building / flashing Python on the micro:bit from VS Code (MicroPython helper files).
-      To move to `tools/local_build/microbit/` in the new layout and come back to later. Note: `main.py` is
-      MakeCode Python, so a local VS Code route would need checking against MakeCode's own compiler.
+- [ ] **Later: compile on the PC** (4 Nov). MakeCode is the focus of this project, so this waits. The old
+      `microbit/` folder turned out to be "microbitstubs" (MicroPython auto-complete placeholders for VS Code,
+      2019): they can't build MakeCode Python, so they were deleted (in git history, with Russell's original VS
+      Code instructions). A real local build would use MakeCode's own command-line compiler (`pxt`, via Node.js).
 - [ ] **XM converter** and a **template XM** (4 channels, 32 rows, 10 instruments, speed 12 / tempo 150, no
       volume or effects) so a new tune goes from OpenMPT to MakeCode without hand copying. Design first,
       in small steps.

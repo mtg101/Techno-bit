@@ -55,6 +55,9 @@ MakeCode project from `planning/midnight_diner.py` and downloads `hex/microbit-T
 Renamed 5 Nov 00:06 ("rename all the 'diner' to 'midnight diner'"): the tune is **Midnight Diner**, the files
 `midnight_diner.py`, `mods/midnight_diner.xm`, `hex/microbit-TB-midnight-diner.hex` (the XM's title too; older notes updated).
 
+**Song 5: Bella Ciao, Latin techno - dropped** (5 Nov 00:45, "that doesn't work as techno - reverse ferret and
+abandon all that"). The draft `.xm` is deleted (never committed); what was tried is under "Song 5" below.
+
 **Next after that:** making tunes from `.xm` files - the converter and its rules doc (draft in git at
 `f50c8f5`, needs the new names; no template needed: any song's program and `.xm` serve as one). Later a web page.
 
@@ -363,6 +366,38 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   = a louder bass). The bass notes' fifth on beat 3 now goes below the root when it fits, so both basses stay in
   the bottom octave (nothing above B-4). Melody, drums and the build-up unchanged. Checked: no rubs, no doubled
   drums, cells ok.
+
+### Song 5: Bella Ciao, Latin techno (5 Nov 00:40) - dropped 5 Nov 00:45
+- Russell: "Bella Ciao techno - but all Latin and not with the same techniques as the previous songs - still
+  techno but needs to not just sound the same with a different melody". (Tried for song 3 as chiptune techno -
+  too like Korobeiniki - and synthwave - the melody felt weak; see above.)
+- Melody: the verse as checked for song 3 (8notes.com's violin MIDI, A minor, git `bb97906`); traditional, no lyrics.
+- **Left out on purpose:** four-on-the-floor outside the drops, offbeat hats, the acid octave pump, the Hoover,
+  pews, arpeggios, the snare-roll-and-silence build.
+- **Latin instead:** the 3-2 son **clave** on claps (track 3; track 8 while track 3 plays horns); a **tumbao**
+  bass (nothing on beat 1, the fifth on the "and" of 2, the next chord's root on beat 4 held over the bar line;
+  track 2, track 5 doubles the hits); **congas** on toms (track 4) and **bongos** (track 7); the **cascara**
+  (timbale-shell rhythm) on hats (track 6); **horns** - the hook a third below the tune (track 3); **coro**:
+  call and response, the hook jumps from track 1 to track 3; a **descarga** percussion break with the horns'
+  mambo stabs, ending in a timbale roll (abanico) into the drop; timbale "cha" and tom runs on track 8.
+- Sections: INT1-2 percussion builds up (clave, congas, cascara, bass, bongos) | VA1-2 verse, no kick |
+  VB1-2 verse, kick on 1 and 3, horns on the hook | D1-2 the drop: the verse, four on the floor | HK1 the hook,
+  call and response | BR1-2 descarga | OUT1 the hook and a last hit.
+  Order: INT VA VB D D HK HK VA BR D D HK HK OUT = 23 patterns, 2.5 minutes; 12 patterns in the file.
+- Checked: no rubs, no doubled drums, tones in range, cells ok.
+- **Second try, the tune from the start** (5 Nov 00:40): "when it gets going it's cool, but to start with I
+  didn't recognise the theme - make the intro very clearly the Bella Ciao melody". INT1-2 now play the verse's
+  first 4 bars ("una mattina... o bella ciao, bella ciao, bella ciao ciao ciao") twice: first over only the
+  clave, then with congas, cascara, the tumbao bass and bongos coming in under it. Rest unchanged. Checked again.
+- **Third try, half speed first** (5 Nov 00:45): "start at half speed for a few patterns, then double speed once we
+  get going". The intro (now INT1-4) is the same music stretched to half speed (every row becomes two: tune,
+  clave, congas, bass), ending in a full-speed snare roll into double time; it then goes straight to VB (the
+  verse with a kick). Order: INT1-4 VB D D HK HK VA BR D D HK HK OUT = 23 patterns, 2.5 minutes; 14 patterns in
+  the file. Checked again.
+- **Dropped** (5 Nov 00:45): "that doesn't work as techno - reverse ferret and abandon all that"; Russell chose to
+  drop Bella Ciao entirely, not just the half-speed intro. (Liked on the way: the Latin drops "when it gets going
+  it's cool".) The draft was never committed; Claude's generator was in the session scratchpad only. Bella Ciao has
+  now been tried three ways (chiptune techno, synthwave, Latin techno).
 
 ### No template (4 Nov 22:00)
 - No separate template program or template `.xm`: the song programs share identical tracker code, so **any song

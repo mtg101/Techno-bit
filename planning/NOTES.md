@@ -3,11 +3,11 @@
 A running record of what we have decided and what is left to do. Claude keeps this file at
 `planning/NOTES.md`.
 
-Last updated: 5 November 2026, 01:35.
+Last updated: 5 November 2026, 02:05.
 
 ---
 
-## Summary: where we are (5 Nov 01:35)
+## Summary: where we are (5 Nov 02:05)
 
 **Live: five tunes**, one program each, all 8 tracks: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
 `midnight_diner.py`, `manic_miner.py` (the same tracker code; `manic_miner.py` adds three noise sounds for its tape
@@ -19,10 +19,10 @@ B = play/stop.
 `README.md` (five tunes, its row with hex and MakeCode link), `docs/tracker_format.md` (extra sounds a tune can
 bring, the noise waves, LEDs, XM instrument 11, its pattern table). Each matched its draft; all links work.
 
-**Pending in `planning/`:**
-- (The four docs-check fixes were promoted 5 Nov 01:36: "promote".)
-- `mods/mountain_king.xm` (stomping build) and `mods/drunken_sailor.xm` (robot electro, double time halfway):
-  song candidates, not chosen yet (see "Song 5 candidates").
+**Nothing pending** (5 Nov 02:05): `planning/` holds only these notes, so everything is in step. Russell: "we are
+good with our 5 tunes as they are". The song 5 candidates (Mountain King, Drunken Sailor) were dropped - their XMs
+deleted from `planning/mods/` (they are in git at `b337ad6`) - and the more Spectrum-like Manic Miner loading was
+abandoned (see below).
 
 **MakeCode projects** (made by Russell; all in the README):
 Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
@@ -113,7 +113,7 @@ hex/    microbit-TB-Korobeiniki-Tetris.hex microbit-TB-canon.hex microbit-TB-ode
         microbit-TB-midnight-diner.hex microbit-TB-Manic-Miner.hex
 docs/   tracker_format.md
 media/  technobit-demo.mp4
-planning/NOTES.md                 these notes, plus pending drafts (see the summary)
+planning/NOTES.md                 these notes (nothing pending)
 ```
 (Until 4 Nov 23:10 the students' files were in a `techno-bit/` folder; NOTES entries before then use those paths.)
 
@@ -389,7 +389,7 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   it's cool".) The draft was never committed; Claude's generator was in the session scratchpad only. Bella Ciao has
   now been tried three ways (chiptune techno, synthwave, Latin techno).
 
-### Song 5 candidates (5 Nov 01:10, drafts in `planning/mods/`, to listen to)
+### Song 5 candidates (5 Nov 01:10) - Manic Miner chosen; the others dropped 5 Nov 02:05 (XMs in git at `b337ad6`)
 - Russell: "everything I think of is copyrighted - from Red Dwarf to anything by the Chemical Brothers". Claude
   suggested out-of-copyright tunes (composer dead 70+ years, the UK rule; only the melody, never a later
   recording or arrangement): Mountain King, Bach's Toccata, Holst's Mars, Ravel's Bolero, Drunken Sailor, or an
@@ -478,6 +478,46 @@ they use the older `lead_00` names and need updating to `track1_p00`.
     moments, and never starts the same pitch as another board on the same row. The pilot tone stays on one
     board (track 1). Checked again.
 
+### Manic Miner: a real Spectrum loading (5 Nov 01:50) - abandoned 5 Nov 02:00
+- Russell: "it's a good start, but I want it to sound like the real Speccy loading - compare the basic micro:bit
+  sounds with an XM", then "it still sounds noisy - needs some beepy bits - compare to real Speccy loading".
+- **The real thing** (TZX tape format spec, the ROM loader): pilot pulses of 2168 T-states (807 Hz) for 5 s
+  before a header, 2 s before data; two sync clicks; a 0 bit = two 855 T-state pulses (2,047 Hz), a 1 bit =
+  two 1710 (1,023 Hz); 1 s pause after a block. A header is only 19 bytes (about 0.1 s). The data is NOT
+  noise: a square wave flipping between the two pitches; a loading screen's blank areas (all 0s) give a clean
+  2,047 Hz beep, solid areas (all 1s) a 1,023 Hz beep, detail a screech, and the colours (one byte repeated) a
+  buzz - the "pitch all over the place".
+- **What the micro:bit can do:** the Spectrum's beeper and the micro:bit's `ring_tone` / square-wave sound
+  expressions are the same kind of wave; any exact frequency and any duration in ms are possible in a sound
+  function. It can't flip pitch 1,000 times a second from code, but MakeCode's **warble** effect sets the pitch
+  from sin(step) on whole steps (CODAL `SoundSynthesizerEffects.cpp`), which jumps erratically - probably the
+  closest to the screech (to test on a board). The **noise** wave we used is hiss: the least Spectrum-like.
+- **The draft:** XM instruments 11-15, each a square wave from the real timings - `wave pilot` (807 Hz),
+  `wave data_0` (2,047 Hz), `wave data_1` (1,023 Hz), `wave data_mix` (real random bits: the screech),
+  `wave data_buzz` (the byte 0x47 repeated: a buzz). LOAD1-4 on ONE board (track 1, like the Spectrum's one
+  beeper - the 4-board noise was a big part of "noisy"): pilot 5 s, a one-row header, a 1 s pause, pilot 2 s,
+  then the data in runs of 1-4 rows (beeps, screech; mostly buzz at the end), a pause, the game. The rest of the
+  tune is unchanged. 29 patterns, 3.1 minutes. Checked: no rubs, no doubled drums, in range, cells ok.
+- **Second draft, a real screen loaded for real** (5 Nov 01:55): "it just doesn't sound like a Spectrum loading".
+  Why: runs of 200-800 ms of one beep are far too slow and tidy - a real loading changes every byte (about 6 ms),
+  with the rhythm of the screen's "venetian blind" memory order. So the draft now builds a real 256 x 192 loading
+  screen (a brick border, MANIC MINER in big letters, stars, a dotted floor, a solid air bar), lays its bytes out
+  in the Spectrum's screen-memory order (thirds; pixel line 0 of every character row, then line 1 ...; then the
+  768 colour bytes) and turns them into real tape pulses (sync pulses, 855/1710 T-states per half-bit), at
+  33,452 Hz so a 0 bit's pulse is 8 samples (checked: 2,044 / 1,022 / 807 Hz). Instruments 11-15: `wave pilot`,
+  `wave header` (the real 19-byte header, 0.10 s), `wave load_a`, `load_b`, `load_c` (one long stream cut in
+  three, one per pattern, since each pattern starts its sound afresh): 47% of the picture loads (67% of it blank
+  bytes: the whine), then 4 s of the colours (the buzz). On one board (track 1). The XM is now the TARGET sound:
+  the micro:bit can't play a bit stream, so its recipe comes after (warble squares, to test).
+- **Abandoned** (5 Nov 02:00): "OK nope - we tried but let's abandon this plan". Neither draft sounded like a
+  Spectrum loading to Russell. The draft XM is deleted (never committed); Claude's generators stay in the session
+  scratchpad only. **The live Manic Miner is unchanged:** its loading uses the three noise sounds
+  (`wave noise_lo/mid/hi`, staggered on four boards), as promoted 5 Nov 01:32, and still needs its real-board test.
+- **What we learned, if we ever come back to it:** a real loading changes every byte (about 6 ms) - far faster
+  than our 200 ms rows - so a tracker grid can only fake it; the micro:bit can't play a bit stream, and the
+  closest it could get is probably square-wave sound expressions with the warble effect (untested). A recording
+  of a real loading to compare against would be the first thing to get.
+
 ### Earlier summary notes (moved here from the summary 5 Nov 01:35)
 **Everything promoted** (agreed 5 Nov 00:17: "good let's promote everything"; before that 4 Nov 22:19).
 `planning/` holds only these notes; nothing is pending.
@@ -540,8 +580,8 @@ a Manic Miner pattern table). **Decided by Claude:** only `manic_miner.py` gets 
 programs stay as they are, so their MakeCode projects don't need remaking. **Next:** Russell makes the MakeCode
 project from `planning/manic_miner.py`, downloads the hex, tests on the boards; then we promote. (MakeCode project
 and hex done 01:28; the README draft has both.)
-The other two candidates stay in `planning/mods/` for now: `mountain_king.xm` (stomping build) and
-`drunken_sailor.xm` (robot electro).
+The other two candidates were dropped 5 Nov 02:05 (no programs were ever made for them; their XMs are in git at
+`b337ad6`): `mountain_king.xm` (stomping build) and `drunken_sailor.xm` (robot electro).
 
 ### No template (4 Nov 22:00)
 - No separate template program or template `.xm`: the song programs share identical tracker code, so **any song
@@ -682,32 +722,21 @@ The other two candidates stay in `planning/mods/` for now: `mountain_king.xm` (s
 
 ---
 
-## To do
+## To do (5 Nov 02:05)
 
-- [x] **3 songs on 4 boards** work with `main.py` (4 Nov).
-- [x] **README promoted** (4 Nov 14:15): the root README is the 8-track version, links the root format doc.
-- [x] Old `Claude/microbit_tracker_format_students.md` deleted (4 Nov); the root `microbit_tracker_format.md`
-      is the format doc.
-- [x] **8 tracks tested**: 8-track Tetris works on 8 boards + a conductor (4 Nov).
-- [ ] **Listen to the 8-track Canon and Ode to Joy** (`planning/techno-bit/mods/*.xm`) in OpenMPT.
-- [ ] **Test the one-program-per-song split** (in `planning/`, all three now 8 tracks): MakeCode speed on a student laptop, then the
-      boards (4, 8 + a conductor, B on one track). Then promote, make the three MakeCode projects and hexes.
-- [ ] **XM converter and rules doc** (no template needed: any song is one) - after the split (draft in git at `f50c8f5`, needs the new
-      names). Later: a web page converter.
-- [ ] **Later: compile on the PC** (4 Nov). MakeCode is the focus of this project, so this waits. The old
-      `microbit/` folder turned out to be "microbitstubs" (MicroPython auto-complete placeholders for VS Code,
-      2019): they can't build MakeCode Python, so they were deleted (in git history, with Russell's original VS
-      Code instructions). A real local build would use MakeCode's own command-line compiler (`pxt`, via Node.js).
-- [x] **README decisions** (4 Nov): the VS Code section was moved, then deleted with the stubs; the wrong
-      converter sentence went in the AI-use rewrite.
-- [x] **Fresh hex** (4 Nov 14:11), measured: about 45 KB free.
+- [ ] **Test on the real boards** (all checked only on the mock micro:bit): the 8-track Canon and Ode to Joy;
+      Midnight Diner (is the second bass loud enough?); Manic Miner (the noise loading - the noise wave with a
+      warble - on the real speaker). Each with 4 boards, 8 + a conductor, and B on one track.
+- [ ] **MakeCode on a student laptop:** is Blocks fast enough for the five projects (about 4,000 blocks each)?
 - [ ] **Sounds and balance** on the real speakers: note any sound that is too quiet, too loud or wrong.
       The acid bass (around 440 Hz) is likely to be the quietest part.
-- [ ] **First-beat lateness**: only if it can be heard.
-- [x] **`main_no_start_song.py`** tested on the boards ("more resilient") and promoted to `main.py` with the
-      README (4 Nov 14:15). Fresh hex downloaded.
-- [x] **Format doc promoted** (4 Nov 17:10, the newest version with "The radio messages").
-- [ ] **Radio band 24** (in `main.py` since 4 Nov, with transmit power 7: "not any worse"): keep testing it (see "Radio band" above). (Already in `main.py` and `main_8_tracks_v3.py`.) See also `main_no_start_song.py` (below).
+- [ ] **Radio band 24** (with transmit power 7: "not any worse"): keep testing it (see "Radio band").
+- [ ] **XM converter and rules doc** (no template needed: any song is one; draft in git at `f50c8f5`, needs the
+      new names and the per-tune extra sounds). Later: a web page converter.
+- [ ] **First-beat lateness:** only if it can be heard.
+- [ ] **Later: compile on the PC** with MakeCode's own command-line compiler (`pxt`, via Node.js). MakeCode is
+      the focus of this project, so this waits.
+(Finished items from the older list: see "Done" and the Decisions above.)
 
 ---
 

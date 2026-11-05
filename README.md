@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
 - **Several BBC micro:bit V2s play one tune together.** Each micro:bit plays one track (the melody, the bass, a voice lane, the drums ...) through its built-in speaker, and lights up an LED for every note or drum it plays.
 - **A conductor micro:bit keeps them together.** It broadcasts which pattern to play by radio, and plays a metronome.
 - **Up to 9 micro:bits:** a conductor plus 4 tracks for the whole tune, plus 4 more tracks of extra drums and bass. Every tune works with 4 players or 8.
-- **Four tunes so far:** Korobeiniki (the Tetris tune), Pachelbel's Canon in D, Beethoven's Ode to Joy and Midnight Diner (the Irish folk tune behind the *Midnight Diner* theme), all with 8 tracks. All out of copyright. Each tune is its own program (`korobeiniki.py` and so on), with the same tracker code: flash all the micro:bits with the tune you want.
+- **Five tunes so far:** Korobeiniki (the Tetris tune), Pachelbel's Canon in D, Beethoven's Ode to Joy, Midnight Diner (the Irish folk tune behind the *Midnight Diner* theme) and Manic Miner (Grieg's *In the Hall of the Mountain King*, the tune in the ZX Spectrum game), all with 8 tracks. All out of copyright. Each tune is its own program (`korobeiniki.py` and so on), with the same tracker code: flash all the micro:bits with the tune you want.
 - **It's written in MakeCode Blocks**, so students can see and change everything, including the music: every pattern of every track is an array you can edit.
 
 ## The tunes
@@ -26,8 +26,9 @@ https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
 | Pachelbel's Canon in D (about 1700), bhangra techno | [hex/microbit-TB-canon.hex](hex/microbit-TB-canon.hex) | https://makecode.microbit.org/S16435-66036-39782-77562 | [mods/canon.xm](mods/canon.xm) |
 | Beethoven's Ode to Joy (1824), drum-heavy synthwave with a key change | [hex/microbit-TB-ode_to_joy.hex](hex/microbit-TB-ode_to_joy.hex) | https://makecode.microbit.org/S92579-43021-82836-81182 | [mods/ode_to_joy.xm](mods/ode_to_joy.xm) |
 | Midnight Diner: "Pretty Maid Milking Her Cow" (Irish, 18th century, the folk tune behind the TV show's theme), waltz techno in 3/4 | [hex/microbit-TB-midnight-diner.hex](hex/microbit-TB-midnight-diner.hex) | https://makecode.microbit.org/S89025-71001-08778-34052 | [mods/midnight_diner.xm](mods/midnight_diner.xm) |
+| Manic Miner: Grieg's "In the Hall of the Mountain King" (1875), the tune in the ZX Spectrum game, with a Spectrum tape-loading intro, half speed, a big build and a double-speed drop | [hex/microbit-TB-Manic-Miner.hex](hex/microbit-TB-Manic-Miner.hex) | https://makecode.microbit.org/S46227-98521-34187-17442 | [mods/manic_miner.xm](mods/manic_miner.xm) |
 
-All four have 8 tracks: the first 4 are the whole tune, the other 4 add drums and bass. The melodies are all out of copyright.
+All five have 8 tracks: the first 4 are the whole tune, the other 4 add drums and bass. The melodies are all out of copyright.
 
 ## Getting a tune onto the micro:bits
 
@@ -41,7 +42,7 @@ Pick a tune. Every micro:bit, the conductor included, needs the same tune: to pl
 
 | On a micro:bit | What it does |
 |---|---|
-| **A** | Picks the track this micro:bit plays (the display shows the number): **1** melody, **2** bass, **3** voice lane (tone phrases, claps, crashes, toms, pews, Hoover stabs), **4** drums, **5-8** extras: a second bass line (5), hats and snare (6), toms and claps (7), crashes, extra kicks and pews (8) |
+| **A** | Picks the track this micro:bit plays (the display shows the number). In Korobeiniki: **1** melody, **2** bass, **3** voice lane (tone phrases, claps, crashes, toms, pews, Hoover stabs), **4** drums, **5-8** extras: a second bass line (5), hats and snare (6), toms and claps (7), crashes, extra kicks and pews (8). The other tunes use their tracks in their own way |
 | **Logo** (touch it) | Makes this micro:bit the **conductor**: the display shows **0** |
 | **B** on the conductor | Plays the tune, and tells all the other micro:bits to join in by radio, while the conductor plays a metronome |
 | **B** on any other track | Plays just that track on its own (good for practising one part) |
@@ -57,7 +58,7 @@ Pick a tune. Every micro:bit, the conductor included, needs the same tune: to pl
 
 | | What it is |
 |---|---|
-| `korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py` | The Techno:bit program, one per tune: the code is the same in all four, only the tune's arrays are different |
+| `korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`, `manic_miner.py` | The Techno:bit program, one per tune: the code is the same in all five, only the tune's arrays are different (Manic Miner adds three noise sounds for its tape loading) |
 | [hex/](hex/) | The same programs, ready to flash |
 | [mods/](mods/) | The tunes as `.xm` files: open them in a tracker such as [OpenMPT](https://openmpt.org/) and change them |
 | [docs/](docs/) | [The tracker format](docs/tracker_format.md): how the music is stored (`tone D-6`, `wave kick`, `x`, `-`) and how the micro:bit plays it |
@@ -66,13 +67,13 @@ Pick a tune. Every micro:bit, the conductor included, needs the same tune: to pl
 
 ## How it works (the techie bit)
 
-- **The music is a tracker tune.** The tunes are written in a tracker ([OpenMPT](https://openmpt.org/)) as `.xm` files, then copied into the program as arrays: one array per pattern per track, one entry per row. A row lasts 200 ms (150 BPM) and a pattern is 32 rows (4 bars of 4/4; the waltz in Midnight Diner just lets its bars run on across patterns). Each entry is `tone D-6` (a note), `wave kick` (one of 12 drum and effect sounds), `x` (silence) or `-` (carry on). An order list says which pattern plays next. All the details are in [the tracker format](docs/tracker_format.md).
-- **Sounds:** notes come from a name-to-frequency lookup table (C-4 to B-6: the speaker can't do much lower). The drums and effects (kick, snare, clap, hats, crash, toms, pews, Hoover stabs) are MakeCode sound expressions.
+- **The music is a tracker tune.** The tunes are written in a tracker ([OpenMPT](https://openmpt.org/)) as `.xm` files, then copied into the program as arrays: one array per pattern per track, one entry per row. A row lasts 200 ms (150 BPM) and a pattern is 32 rows (4 bars of 4/4; the waltz in Midnight Diner just lets its bars run on across patterns). Each entry is `tone D-6` (a note), `wave kick` (one of 12 drum and effect sounds, plus any a tune adds), `x` (silence) or `-` (carry on). An order list says which pattern plays next. All the details are in [the tracker format](docs/tracker_format.md).
+- **Sounds:** notes come from a name-to-frequency lookup table (C-4 to B-6: the speaker can't do much lower). The drums and effects (kick, snare, clap, hats, crash, toms, pews, Hoover stabs) are MakeCode sound expressions. Since each tune is its own program, a tune can add its own sounds: Manic Miner adds three noise sounds for the screech of a Spectrum tape loading.
 - **Timing:** each row waits until 200 ms have passed on the clock since the row started, so the code's own speed doesn't make the beat drift.
 - **Radio:** the conductor sends each pattern's number as it starts. A number always interrupts whatever a board is playing, so every board starts the pattern together, a few milliseconds behind the conductor, with no gap. There are only three messages: a pattern number, `end song` and `stop`. A board that misses a number drops out for one pattern, and its top row glows dimly while it waits. Radio group 23, frequency band 24 (2424 MHz, between the busy Wi-Fi channels).
 - **LEDs:** one LED per note (not octave) or sound, with related sounds sharing an LED at different brightness; the top row shows the track.
 - **Blocks-friendly Python:** the code is kept to things MakeCode can show as real blocks (no hidden Python helpers), so the Python in GitHub and the Blocks in MakeCode are the same program.
-- **One program per tune:** all three tunes in one program filled a good part of the micro:bit V2's 512 KB flash, and made MakeCode crawl on student laptops (about 8,000 blocks). So each tune is its own program: the tracker code is identical, only the arrays (`track1_p00` ...) and the order list (`song`) change.
+- **One program per tune:** all three tunes in one program filled a good part of the micro:bit V2's 512 KB flash, and made MakeCode crawl on student laptops (about 8,000 blocks). So each tune is its own program: the tracker code is identical, only the arrays (`track1_p00` ...) and the order list (`song`) change, plus any extra sounds a tune needs.
 
 ## About this project
 
@@ -91,8 +92,8 @@ I started this to learn and to have a cool demo for the coding club, and I'm sti
 **Gemini** helped me investigate the timings for the sounds, radio, LEDs and so on, with examples of MakeCode Blocks I could use.
 
 **Claude** (an AI assistant from Anthropic, in the Claude app with access to this project) now writes a lot of the code and the music, and helps run the project:
-- **Music:** arranged the four tunes (old, out-of-copyright melodies) as techno `.xm` files, including the 8-track Korobeiniki, and turned them into the program's arrays.
-- **Code:** converted my program to the tracker format, wrote the 12 sound functions, and designed and tested the radio changes that keep the boards together (patterns that interrupt, no "start song", the B button fix, the dim waiting light).
+- **Music:** arranged the five tunes (old, out-of-copyright melodies) as techno `.xm` files, including the 8-track Korobeiniki, and turned them into the program's arrays.
+- **Code:** converted my program to the tracker format, wrote the 12 sound functions (and Manic Miner's 3 noise sounds), and designed and tested the radio changes that keep the boards together (patterns that interrupt, no "start song", the B button fix, the dim waiting light).
 - **Testing before the hardware:** checks its code on simulated micro:bits, including simulated radio with lost messages, before I try it on the real ones.
 - **Documentation and organisation:** wrote most of the docs, keeps our planning notes in `planning/NOTES.md`, and helped set up this folder structure.
 - **Other bits:** measured how much memory is left, shrank the demo video, and drafted a converter that turns an `.xm` tune into a program (paused for now).

@@ -3,60 +3,49 @@
 A running record of what we have decided and what is left to do. Claude keeps this file at
 `planning/NOTES.md`.
 
-Last updated: 5 November 2026, 00:20.
+Last updated: 5 November 2026, 01:35.
 
 ---
 
-## Summary: where we are (5 Nov 00:20)
+## Summary: where we are (5 Nov 01:35)
 
-**Everything promoted** (agreed 5 Nov 00:17: "good let's promote everything"; before that 4 Nov 22:19).
-`planning/` holds only these notes; nothing is pending.
+**Live: five tunes**, one program each, all 8 tracks: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
+`midnight_diner.py`, `manic_miner.py` (the same tracker code; `manic_miner.py` adds three noise sounds for its tape
+loading). Their `mods/*.xm`, `hex/microbit-TB-*.hex` (MakeCode's download names), `docs/tracker_format.md`, the
+front page `README.md` (= the guide, with "How to play") and `media/`. Controls: A = track, logo = conductor,
+B = play/stop.
 
-**Promoted 5 Nov 00:18: song 4, Midnight Diner.** `midnight_diner.py`, `mods/midnight_diner.xm`, `README.md` (four
-tunes, hex links with MakeCode's names) and `docs/tracker_format.md` (3/4 bars, any number of patterns, the Midnight
-Diner table): each matched its draft byte for byte, all links work, drafts removed. The hex
-`hex/microbit-TB-midnight-diner.hex` came from Russell's MakeCode project. **Still to do:** play it on the real boards.
+**Promoted 5 Nov 01:32** ("let's promote everything"): Manic Miner - `manic_miner.py`, `mods/manic_miner.xm`,
+`README.md` (five tunes, its row with hex and MakeCode link), `docs/tracker_format.md` (extra sounds a tune can
+bring, the noise waves, LEDs, XM instrument 11, its pattern table). Each matched its draft; all links work.
 
-**Promoted 5 Nov 00:24: a new README intro** ("the intro is weak - add that it's for teaching students about
-coding, but not lame"): a table of micro:bits playing techno as a band, the Amiga tracker roots kept, and why: it's
-for the coding club, the music is the hook for arrays, timing and radio, and it's all in Blocks to take apart.
+**Pending in `planning/`:**
+- (The four docs-check fixes were promoted 5 Nov 01:36: "promote".)
+- `mods/mountain_king.xm` (stomping build) and `mods/drunken_sailor.xm` (robot electro, double time halfway):
+  song candidates, not chosen yet (see "Song 5 candidates").
 
-**Live** (top level since 23:15): **one program per song, all 8 tracks**: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
-`midnight_diner.py`
-(same tracker code, generic names `track1_p00` ..., no song screen: A = track, logo = conductor, B = play/stop).
-The 8-channel `mods/*.xm`. `docs/guide.md` (for students), `docs/tracker_format.md`. Front page `README.md` with
-"How to play". The old 3-song `main.py` and `hex/techno-bit.hex` were removed (in git history, the commit before).
-
-**MakeCode projects** (made by Russell, 4 Nov 22:36; in the front page and the guide):
+**MakeCode projects** (made by Russell; all in the README):
 Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
 Canon https://makecode.microbit.org/S16435-66036-39782-77562 ,
-Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 .
-Midnight Diner https://makecode.microbit.org/S89025-71001-08778-34052 (made 5 Nov 00:07; in the README draft).
-**Hex names (5 Nov 00:15):** the hexes keep MakeCode's own download names: `hex/microbit-TB-Korobeiniki-Tetris.hex`,
-`microbit-TB-canon.hex`, `microbit-TB-ode_to_joy.hex`, `microbit-TB-midnight-diner.hex` (the first three are the same
-files as before, same md5, only renamed). README links updated; the old 3-song `microbit-Technobit.hex` is gone (settled).
+Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 ,
+Midnight Diner https://makecode.microbit.org/S89025-71001-08778-34052 ,
+Manic Miner https://makecode.microbit.org/S46227-98521-34187-17442 .
 (The original all-in-one project https://makecode.microbit.org/S26000-11508-29408-02742 is mentioned as history.)
 
 **Not yet tested on the real boards** (checked only on the mock micro:bit):
-1. Listen to the 8-track Canon and Ode to Joy in OpenMPT.
-2. MakeCode on a student laptop: the three projects exist now (links above) - is Blocks fast enough? (About 4,000 blocks each now: all three have 8 tracks.)
+1. The 8-track Canon and Ode to Joy, Midnight Diner (is the second bass loud enough?) and Manic Miner (does the
+   noise loading - the noise wave with a warble - sound like a Spectrum on the real speaker?).
+2. MakeCode on a student laptop: is Blocks fast enough? (About 4,000 blocks per tune.)
 3. The boards: 4 boards, 8 + a conductor, B on a single track.
-4. ~~Download the three hexes~~ Done 4 Nov 22:49: `techno-bit/hex/korobeiniki.hex`, `canon.hex`, `ode_to_joy.hex` (back to MakeCode's names 5 Nov 00:15)
-   (downloaded from the three MakeCode projects; renamed from MakeCode's `microbit-TB-...` names). Measured:
-   **about 111 KB free** in each (the 3-song hex had 46 KB). If something's wrong, the tested 3-song `main.py`
-   and its hex are in git history.
+Each song's hex has about 111 KB free (measured 4 Nov; Manic Miner's is a little smaller).
 
-**Song 4 (promoted 5 Nov 00:18; drafted 00:10):** Midnight Diner. Russell, 00:01: "that's pretty smooth". Drafts in `planning/`:
-`mods/midnight_diner.xm` (the sixth try), `midnight_diner.py` (built from it: the tracker code is identical to `canon.py`, checked
-by AST; on the mock micro:bit every track plays exactly what the XM says, 179.2 s, all tones found), `README.md`
-(a fourth row in the tunes table, "four tunes"; the MakeCode link says "to come") and `docs/tracker_format.md`
-(waltz bars across patterns, any number of patterns, a Midnight Diner pattern table). **Next:** Russell makes the
-MakeCode project from `planning/midnight_diner.py` and downloads `hex/microbit-TB-midnight-diner.hex`; Claude puts the link in, then we promote.
-Renamed 5 Nov 00:06 ("rename all the 'diner' to 'midnight diner'"): the tune is **Midnight Diner**, the files
-`midnight_diner.py`, `mods/midnight_diner.xm`, `hex/microbit-TB-midnight-diner.hex` (the XM's title too; older notes updated).
-
-**Song 5: Bella Ciao, Latin techno - dropped** (5 Nov 00:45, "that doesn't work as techno - reverse ferret and
-abandon all that"). The draft `.xm` is deleted (never committed); what was tried is under "Song 5" below.
+**Docs check (5 Nov 01:35, after promoting Manic Miner):** README and `docs/tracker_format.md` read against the
+five programs: pattern counts and song lengths (16/64 x3, Midnight Diner 19/28, Manic Miner 14/28), the Korobeiniki
+example bar, every LED position and brightness (`bright_dim` 128, `bright_wait` 30), radio group 23 / band 24 /
+power 7, the messages, the file list, links - all correct. Four small fixes drafted in `planning/`: the README's
+A-button track list is Korobeiniki's (now says so); "row 7 is the 7th entry" (it's the eighth: arrays count from
+0); tracks 5-8 "only add drums and bass" (Manic Miner's loading adds noise there too); "no effects" (cells have
+none, but the noise sounds' recipe uses a warble).
 
 **Next after that:** making tunes from `.xm` files - the converter and its rules doc (draft in git at
 `f50c8f5`, needs the new names; no template needed: any song's program and `.xm` serve as one). Later a web page.
@@ -73,7 +62,7 @@ command-line compiler; sound balance; more tempos and instruments.
 **The layout** (4 Nov 23:15: students' material at the top, planning in one folder off to the side):
 ```
 README.md          the GitHub front page = the guide: what it is, demo, the tunes, getting them on, how to play
-korobeiniki.py  canon.py  ode_to_joy.py  midnight_diner.py      one program per tune
+korobeiniki.py  canon.py  ode_to_joy.py  midnight_diner.py  manic_miner.py      one program per tune
 hex/  mods/  docs/  media/                   ready-to-flash files, .xm tunes, tracker_format.md, the video
 planning/          for us: NOTES.md (this file) + drafts of changes ("Not needed to play")
 ```
@@ -114,16 +103,17 @@ fix links); anything else in the project changes only by promoting (steps 4-5).
 
 ---
 
-## Where things are (5 Nov 00:20)
+## Where things are (5 Nov 01:35)
 
 ```
 README.md                         the front page and guide (merged 4 Nov 23:15; docs/guide.md folded into it)
-korobeiniki.py canon.py ode_to_joy.py midnight_diner.py   one program per song, 8 tracks each
-mods/   korobeiniki.xm canon.xm ode_to_joy.xm midnight_diner.xm   (all 8 channels)
-hex/    microbit-TB-Korobeiniki-Tetris.hex microbit-TB-canon.hex microbit-TB-ode_to_joy.hex microbit-TB-midnight-diner.hex
+korobeiniki.py canon.py ode_to_joy.py midnight_diner.py manic_miner.py   one program per song, 8 tracks each
+mods/   korobeiniki.xm canon.xm ode_to_joy.xm midnight_diner.xm manic_miner.xm   (all 8 channels)
+hex/    microbit-TB-Korobeiniki-Tetris.hex microbit-TB-canon.hex microbit-TB-ode_to_joy.hex
+        microbit-TB-midnight-diner.hex microbit-TB-Manic-Miner.hex
 docs/   tracker_format.md
 media/  technobit-demo.mp4
-planning/NOTES.md                 these notes (nothing else pending)
+planning/NOTES.md                 these notes, plus pending drafts (see the summary)
 ```
 (Until 4 Nov 23:10 the students' files were in a `techno-bit/` folder; NOTES entries before then use those paths.)
 
@@ -398,6 +388,160 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   drop Bella Ciao entirely, not just the half-speed intro. (Liked on the way: the Latin drops "when it gets going
   it's cool".) The draft was never committed; Claude's generator was in the session scratchpad only. Bella Ciao has
   now been tried three ways (chiptune techno, synthwave, Latin techno).
+
+### Song 5 candidates (5 Nov 01:10, drafts in `planning/mods/`, to listen to)
+- Russell: "everything I think of is copyrighted - from Red Dwarf to anything by the Chemical Brothers". Claude
+  suggested out-of-copyright tunes (composer dead 70+ years, the UK rule; only the melody, never a later
+  recording or arrangement): Mountain King, Bach's Toccata, Holst's Mars, Ravel's Bolero, Drunken Sailor, or an
+  original. Russell: "why not all of them! Create XMs first and I'll choose - and vary them, not just the same
+  style with different melodies".
+- **Not made:** Mars (5/4 with a triplet rhythm: triplets don't fit our fixed 200 ms rows) and Bolero (3/4 with
+  triplet snare rolls - a second waltz after Midnight Diner - and Claude unsure of the melody note for note).
+  Still possible later, as is an original tune.
+- **All three melodies are from memory: check by ear.** All checked: no rubs, no doubled drums, tones in range,
+  cells ok. Generators (Claude's scratchpad): a shared `tb_common.py` (samples, Section, writer, checks).
+- **`mountain_king.xm` - stomping build** (Grieg, Peer Gynt, 1875; B minor, 1.6 minutes, 11 patterns). The riff
+  starts on the BASS (track 2), plucked and alone, like Grieg's bassoons; it never drops, layers pile on. Grieg
+  speeds up but our rows can't, so the drums speed up instead: a kick every bar (a timpani tom), then 1 and 3,
+  every beat, then every row; then a snare on every row; a crashing end on B minor hits. Each section = the riff
+  in B minor then F# minor (as Grieg). Order: S1 S2 S3 S3 S4 S4 S5 END.
+- **`toccata.xm` - rave organ and breakbeat** (Bach, BWV 565, about 1704; D minor, 2.1 minutes, 7 patterns).
+  Organ chords spread across boards (one note per board); the diminished chord piles up board by board
+  (C# E G Bb) and resolves to D minor. Breakbeat drums (syncopated kick and snare, ghost snares), not four on the
+  floor. Bach's opening on track 1, the "A-G-A" hook and the run down in the drops with a bass on the kicks and
+  organ stabs; a fast figure in Bach's style (ours, not a quote: a held A against a falling line).
+  Order: OPA OPB BK BK FG FG BK OPB FG BK BK END.
+  - **Dropped** (5 Nov 01:10, "toccata doesn't work"): the draft deleted (never committed).
+- **`drunken_sailor.xm` - robot electro** (traditional shanty; D Dorian, 2.5 minutes, 11 patterns). A drum
+  machine: a skipping electro kick, the clap on 3 (half-time), straight 8th hats, laser zaps. Everything
+  staccato: two rows per eighth note, one on and one off, so the repeated notes ("what shall we do") are heard
+  separately (back-to-back rows of the same note run together on the micro:bit). The verse hands the tune
+  between boards line by line (track 1, 3, 1, 3); in the chorus track 3 answers each note an octave up in the
+  gap after it; a stutter breakdown (a machine-gun A); long smooth synth bass. Order: IN V C V C BR C OUT
+  (V and C are 4 patterns each).
+  - **Double time halfway** (5 Nov 01:05, "needs to go double time half way through"): after the stutter
+    breakdown, FV and FC play the verse and chorus at full speed (one row per eighth, 2 patterns each). So the
+    repeated notes don't run together, the tune **ping-pongs between tracks 1 and 3 note by note**, giving each
+    board a gap. The clap moves from beat 3 to 2 and 4 (track 4). Order: IN V C BR | FV FC FV FC FC OUT =
+    21 patterns, 2.2 minutes; 15 in the file. Checked: no rubs, no doubled drums, in range, cells ok.
+
+- **`manic_miner.xm` - Spectrum game techno** (5 Nov 01:10; Russell: "can we do the Manic Miner theme in techno").
+  The Manic Miner in-game music (ZX Spectrum, 1983) is Grieg's Mountain King, so only Grieg's notes are used,
+  nothing from the game (code, sounds or arrangement); the game-style touches are ours. Different from the
+  stomping Mountain King: full speed from the first note, looping like the game. LOAD: a tape-loading noise (a
+  held pilot tone, then "data": a random high note every row). GAME: the riff short and beepy on track 1, the
+  bass plucking the riff's note on each beat an octave down, a "walking" groove (kick, kick-kick, snare), pew
+  "jumps" at the end of each phrase. TECHNO: + four on the floor, claps on 2 and 4, the bass doubled, open hats,
+  toms. DIE: game over - boot stomps and a falling tone. Order: LOAD G G T T T T G T T DIE = 20 patterns,
+  2.1 minutes; 6 in the file. Checked: no rubs, no doubled drums, in range, cells ok.
+  - **Second try, half speed then double** (5 Nov 01:15): "that's still same speed - it needs to properly
+    double speed after a big build up and then drop double speed". GS: the riff at HALF speed (two rows a note,
+    one on and one off; 4 patterns), the walking groove and the bass at the same slow pace. BU: a big build
+    (2 patterns): the snare roll speeds up from every 8 rows to 4, 2, every row; the kick doubles; pews rise;
+    2 rows of silence. Then the DROP: TECHNO with the riff at double speed. Later BD (the slow riff and bass,
+    no drums), the build again, the drop again, game over. Order: LOAD GS BU T T T T BD BU T T T DIE =
+    26 patterns, 2.8 minutes; 14 in the file. Checked: no rubs, no doubled drums, in range, cells ok.
+  - **Third try, a proper Spectrum loading** (5 Nov 01:20): "an intro couple of patterns that mimic the ZX
+    Spectrum loading - the students won't get it, their parents won't, but some grandparents and cool aunts and
+    uncles will!". LOAD1-2 (about 13 s, track 1, hiss on track 6): the pilot tone (the real one is about 807 Hz;
+    G#5 = 831 Hz) for 3 s, a short header burst, a pause ("Program: MANICMINER"), the pilot again, then the long
+    data screech (the real data is a fast mix of about 1,000 and 2,000 Hz: C6 or B6 at random every row, never
+    3 the same), a beat of silence, then the game. 27 patterns, 2.9 minutes; 15 in the file. Checked again.
+  - **Fourth try, a proper screechy loading with an 11th instrument** (5 Nov 01:25): "it's kinda noise - we're
+    restricting ourselves with these 10 instruments aren't we? now we're one tune per hex we could have more
+    instruments. Let's try a proper screechy ZX Spectrum intro for 4 patterns - for an xm". New XM instrument
+    **11, "Spectrum data"** (cell `wave spectrum_data`): real Spectrum tape bits - random bits, each one square
+    pulse, a 0 = 855 T-states high + 855 low at 3.5 MHz (about 2,047 Hz), a 1 twice as long (about 1,023 Hz);
+    6.5 s long, never looping (each pattern starts it again, as the micro:bit stops all sound at a pattern
+    end). LOAD1-4 (about 26 s), all on track 1 (the Spectrum had one beeper): pilot tone 5 s (G#5), the header's
+    data 1 s, a pause, the pilot 2 s, the data screech, silence. 29 patterns, 3.1 minutes; 17 in the file.
+    **Needs code before it can play on the boards:** a 12th sound function for `wave spectrum_data` (idea: a
+    square-wave sound expression warbling between about 1,000 and 2,000 Hz), and the tracker format doc and
+    the converter would need to allow per-tune extra instruments. Only the XM for now.
+  - **Fifth try, a noise instrument** (5 Nov 01:30): "the first pattern is fine for the opening tone, but then
+    the Spectrum goes all noise - try a new noise instrument to mimic it". Instrument 11 is now **"Spectrum
+    noise"** (cell `wave spectrum_noise`): 1-bit noise - a square wave, only full up or full down like the
+    Spectrum's beeper, flipping at random moments (every 2 to 12 samples at 16,726 Hz: about 700-4,000 Hz), so no
+    pitch at all, loudest around 1,000-2,000 Hz like a tape. Same 4-pattern loading. On the micro:bit it would
+    be a sound expression with MakeCode's noise wave.
+  - **Sixth try, three noise pitches** (5 Nov 01:35): "when it loads the pitch varies all over the place - how
+    can we do that with our basic tracker? maybe 3 different noise pitches for 2 patterns before we pause and
+    kick into the Manic Miner theme". Instrument 11 now has three pitches, like the toms have two: **C-4 =
+    `wave noise_lo`** (about 1,000 Hz of screech), **G-4 = `noise_mid`** (about 1,600 Hz), **C-5 = `noise_hi`**
+    (about 2,000 Hz): the same 1-bit noise sample, played faster on a higher note. LOAD1-3: pattern 1 as before
+    (pilot, header, the pause begins), then the pilot again and two patterns of data, the pitch jumping between
+    the three every 1-4 rows at random, then a short pause and the game. 28 patterns, 3.0 minutes; 16 in the
+    file. Checked: no rubs, no doubled drums, in range, cells ok.
+  - **Seventh try, the noise on four boards** (5 Nov 01:40): "use multiple micro:bits for the loading sound - a
+    mix of the noises staggered". The data noise (header and data) now plays on tracks 1 and 3 (so 4 boards
+    still have it) and 6 and 8 (extras): each board starts a row after the last, changes pitch at its own random
+    moments, and never starts the same pitch as another board on the same row. The pilot tone stays on one
+    board (track 1). Checked again.
+
+### Earlier summary notes (moved here from the summary 5 Nov 01:35)
+**Everything promoted** (agreed 5 Nov 00:17: "good let's promote everything"; before that 4 Nov 22:19).
+`planning/` holds only these notes; nothing is pending.
+
+**Promoted 5 Nov 00:18: song 4, Midnight Diner.** `midnight_diner.py`, `mods/midnight_diner.xm`, `README.md` (four
+tunes, hex links with MakeCode's names) and `docs/tracker_format.md` (3/4 bars, any number of patterns, the Midnight
+Diner table): each matched its draft byte for byte, all links work, drafts removed. The hex
+`hex/microbit-TB-midnight-diner.hex` came from Russell's MakeCode project. **Still to do:** play it on the real boards.
+
+**Promoted 5 Nov 00:24: a new README intro** ("the intro is weak - add that it's for teaching students about
+coding, but not lame"): a table of micro:bits playing techno as a band, the Amiga tracker roots kept, and why: it's
+for the coding club, the music is the hook for arrays, timing and radio, and it's all in Blocks to take apart.
+
+**Live** (top level since 23:15): **one program per song, all 8 tracks**: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
+`midnight_diner.py`
+(same tracker code, generic names `track1_p00` ..., no song screen: A = track, logo = conductor, B = play/stop).
+The 8-channel `mods/*.xm`. `docs/guide.md` (for students), `docs/tracker_format.md`. Front page `README.md` with
+"How to play". The old 3-song `main.py` and `hex/techno-bit.hex` were removed (in git history, the commit before).
+
+**MakeCode projects** (made by Russell, 4 Nov 22:36; in the front page and the guide):
+Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
+Canon https://makecode.microbit.org/S16435-66036-39782-77562 ,
+Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 .
+Midnight Diner https://makecode.microbit.org/S89025-71001-08778-34052 (made 5 Nov 00:07; in the README draft).
+Manic Miner https://makecode.microbit.org/S46227-98521-34187-17442 (made 5 Nov 01:28; hex `hex/microbit-TB-Manic-Miner.hex`).
+**Hex names (5 Nov 00:15):** the hexes keep MakeCode's own download names: `hex/microbit-TB-Korobeiniki-Tetris.hex`,
+`microbit-TB-canon.hex`, `microbit-TB-ode_to_joy.hex`, `microbit-TB-midnight-diner.hex` (the first three are the same
+files as before, same md5, only renamed). README links updated; the old 3-song `microbit-Technobit.hex` is gone (settled).
+(The original all-in-one project https://makecode.microbit.org/S26000-11508-29408-02742 is mentioned as history.)
+
+**Not yet tested on the real boards** (checked only on the mock micro:bit):
+1. Listen to the 8-track Canon and Ode to Joy in OpenMPT.
+2. MakeCode on a student laptop: the three projects exist now (links above) - is Blocks fast enough? (About 4,000 blocks each now: all three have 8 tracks.)
+3. The boards: 4 boards, 8 + a conductor, B on a single track.
+4. ~~Download the three hexes~~ Done 4 Nov 22:49: `techno-bit/hex/korobeiniki.hex`, `canon.hex`, `ode_to_joy.hex` (back to MakeCode's names 5 Nov 00:15)
+   (downloaded from the three MakeCode projects; renamed from MakeCode's `microbit-TB-...` names). Measured:
+   **about 111 KB free** in each (the 3-song hex had 46 KB). If something's wrong, the tested 3-song `main.py`
+   and its hex are in git history.
+
+**Song 4 (promoted 5 Nov 00:18; drafted 00:10):** Midnight Diner. Russell, 00:01: "that's pretty smooth". Drafts in `planning/`:
+`mods/midnight_diner.xm` (the sixth try), `midnight_diner.py` (built from it: the tracker code is identical to `canon.py`, checked
+by AST; on the mock micro:bit every track plays exactly what the XM says, 179.2 s, all tones found), `README.md`
+(a fourth row in the tunes table, "four tunes"; the MakeCode link says "to come") and `docs/tracker_format.md`
+(waltz bars across patterns, any number of patterns, a Midnight Diner pattern table). **Next:** Russell makes the
+MakeCode project from `planning/midnight_diner.py` and downloads `hex/microbit-TB-midnight-diner.hex`; Claude puts the link in, then we promote.
+Renamed 5 Nov 00:06 ("rename all the 'diner' to 'midnight diner'"): the tune is **Midnight Diner**, the files
+`midnight_diner.py`, `mods/midnight_diner.xm`, `hex/microbit-TB-midnight-diner.hex` (the XM's title too; older notes updated).
+
+**Song 5: Bella Ciao, Latin techno - dropped** (5 Nov 00:45, "that doesn't work as techno - reverse ferret and
+abandon all that"). The draft `.xm` is deleted (never committed); what was tried is under "Song 5" below.
+
+**Song 5 (drafted 5 Nov 01:45): Manic Miner.** Russell, 01:22: "that's good - let's make the code and update
+documentation". Drafts in `planning/`: `manic_miner.py` (the tracker code + **three noise sound functions**
+`play_noise_lo/mid/hi` and their three lines in `play_note`; nothing else changed - checked by AST against
+`canon.py`; on the mock micro:bit every track plays exactly what the XM says, 179.2 s, and the noises play at
+1,000/1,600/2,000 Hz), `mods/manic_miner.xm` (14 patterns: the 2 unused breakdown patterns dropped, it plays
+exactly the same), `README.md` (five tunes, a Manic Miner row: hex and MakeCode "to come"; extra sounds per
+tune) and `docs/tracker_format.md` (extra sounds a tune can bring, the noise waves and LEDs, XM instrument 11,
+a Manic Miner pattern table). **Decided by Claude:** only `manic_miner.py` gets the noise sounds - the other four
+programs stay as they are, so their MakeCode projects don't need remaking. **Next:** Russell makes the MakeCode
+project from `planning/manic_miner.py`, downloads the hex, tests on the boards; then we promote. (MakeCode project
+and hex done 01:28; the README draft has both.)
+The other two candidates stay in `planning/mods/` for now: `mountain_king.xm` (stomping build) and
+`drunken_sailor.xm` (robot electro).
 
 ### No template (4 Nov 22:00)
 - No separate template program or template `.xm`: the song programs share identical tracker code, so **any song

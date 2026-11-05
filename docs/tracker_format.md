@@ -139,6 +139,17 @@ pitches. Giving each pitch its own name keeps every cell to two words:
 
 That makes **12 wave names** in all.
 
+**Extra sounds a tune can bring.** Each tune is its own program, so a tune can add sounds of its own, with a
+sound function for each. Only Manic Miner does so far: three noise sounds for the screech of a ZX Spectrum tape
+loading. They are one XM instrument (11) at three pitches, like the toms:
+
+| Cell | Sound | Tracker note it comes from |
+|---|---|---|
+| `wave noise_lo` / `wave noise_mid` / `wave noise_hi` | Tape-loading noise, low / middle / high (about 1,000 / 1,600 / 2,000 Hz) | C-4 / G-4 / C-5 |
+
+On the micro:bit each is a sound expression with the **noise** wave at its pitch, with a warble, for a second
+(the next sound cuts it short). Only `manic_miner.py` has them: the other programs don't need them.
+
 ---
 
 ## 6. What a cell does over time
@@ -174,7 +185,7 @@ The lead starts with `x` so it is silent at the start of the pattern.
 
 ### One array entry per cell
 
-Each cell is one entry in an array, so row 7 is the 7th entry. This reads like a tracker, a single cell can be
+Each cell is one entry in an array, so row 0 is the first entry and row 7 the eighth (arrays count from 0). This reads like a tracker, a single cell can be
 edited on its own, and you learn arrays and indexes without needing string splitting.
 
 ```
@@ -185,8 +196,9 @@ The only splitting left is turning one cell into its two words, for example `"to
 
 ### One array per pattern, plus an order list
 
-Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`): the tracker code is
-the same in all four, only the arrays change.
+Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`, `manic_miner.py`):
+the tracker code is the same in all five, only the arrays change (plus any extra sounds a tune brings: see
+section 5).
 
 - **A pattern array** holds the 32 cells of one pattern, named after its track and its pattern number:
   `track1_p00`, `track1_p01` ... `track1_p15` for track 1, `track2_p00` ... for track 2, and so on.
@@ -194,7 +206,7 @@ the same in all four, only the arrays change.
   `track0_patterns` is the conductor's metronome.
 - **`song_tracks`** holds all the lists, so `song_tracks[track][pattern]` is one pattern's array for one track.
 - **The order list**, `song`, is an array of numbers saying which pattern plays next. Each number is 6.4
-  seconds of music: our first three tunes are 64 numbers long (6 minutes 50 seconds), Midnight Diner 28 (3 minutes).
+  seconds of music: our first three tunes are 64 numbers long (6 minutes 50 seconds), Midnight Diner and Manic Miner 28 (3 minutes).
 - A tune can have **any number of patterns** (Midnight Diner has 19, `track1_p00` to `track1_p18`), as long as it
   fits in the micro:bit's memory.
 
@@ -205,7 +217,8 @@ one every 200 ms.
 
 Each micro:bit plays one track, chosen by its track number. Track 0 is the conductor, which keeps the beat and
 tells the others which pattern to play. Tracks 1 to 4 play the whole tune on their own. Tracks 5 to 8 are
-**extras** for up to 8 micro:bits: they only add drums and bass, so the tune still works with just 4.
+**extras** for up to 8 micro:bits: they only add drums and bass (and, in Manic Miner's tape loading, more
+noise), so the tune still works with just 4.
 
 | Track | In the code | What it plays (in Korobeiniki; other tunes use their tracks in their own way) |
 |---|---|---|
@@ -219,7 +232,7 @@ tells the others which pattern to play. Tracks 1 to 4 play the whole tune on the
 | 7 | `track7` | Extra: toms and claps |
 | 8 | `track8` | Extra: crashes, extra kicks, open hats and pews |
 
-All four of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
+All five of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
 because track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The code does this
 with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds `track1_p00`,
 `track1_p01` and so on.
@@ -320,6 +333,23 @@ micro:bit speaker can't do much bass on its own.
 
 The order is 0-11, then the drops 15-17, 12-14, 15-17, 12-14, 15-17, then 18.
 
+**Manic Miner (Spectrum game techno), patterns 0 to 13**
+
+The ZX Spectrum game Manic Miner (1983) plays Grieg's "In the Hall of the Mountain King" (1875). We use only
+Grieg's tune, in B minor and then (as Grieg does) F# minor; nothing from the game itself. It starts with a
+Spectrum tape loading, plays the riff at half speed, builds up, then drops into double speed.
+
+| Number | Part | What it is |
+|---|---|---|
+| 0-2 | `load` | A Spectrum tape loading: the pilot tone (track 1), the short header, a pause, the pilot again, then the data screech on four boards (tracks 1, 3, 6 and 8), each changing between the three noise pitches at its own random moments |
+| 3-6 | `gs` | The riff at half speed (two rows a note, one on and one off), the bass on the beats, a "walking" beat, pew "jumps" |
+| 7-8 | `bu` | The build: the snare roll speeds up from every 8 rows to every row, the kick doubles, pews rise, then two rows of silence |
+| 9-10 | `t` | The drop: the riff at double speed, four on the floor, claps, the bass doubled, toms |
+| 11-12 | `bd` | Breakdown: the riff at half speed with the bass, no drums |
+| 13 | `die` | Game over: three boot stomps and a falling tone |
+
+The order is 0-8, then the drop (9-10) four times, 11-12, the build 7-8 again, the drop three times, then 13.
+
 ### Keeping the blocks manageable
 
 In Blocks, right-click a pattern's array block and choose **Collapse Block**. Each pattern then shows as one
@@ -398,7 +428,7 @@ and the other at full brightness.
 | | x0 | x1 | x2 | x3 | x4 |
 |---|---|---|---|---|---|
 | **Row 1** | clap | tom (low dim, high bright) | hat (open hat dim) | snare | kick |
-| **Row 2** | | | crash | hoover (E dim, A bright) | pew (low dim, high bright) |
+| **Row 2** | noise (low dim, mid bright) | noise high | crash | hoover (E dim, A bright) | pew (low dim, high bright) |
 
 **Tones** light one LED for the note, on rows 4, 3 and 2:
 
@@ -408,6 +438,9 @@ and the other at full brightness.
 | **Row 3** | F | F# | G | G# | A |
 | **Row 2** | A# | B | | | |
 
+The noise LEDs (Manic Miner only) share row 2's x0 and x1 with the tones A# and B: a board plays one sound at
+a time, so it's still clear.
+
 The LED shows the note but not the octave. The half brightness is set by the variable `bright_dim` (128 out of 255).
 
 ---
@@ -415,13 +448,14 @@ The LED shows the note but not the octave. The half brightness is set by the var
 ## 11. Not in the format
 
 - **Volume:** there are no volume levels. Every note plays at its sound's own volume.
-- **Effects:** there are no effects (no slides, vibrato and so on).
+- **Effects:** cells have no effects (no slides, vibrato and so on). A sound's own recipe can use one: the noise
+  sounds' warble is part of their sound function, not of the cell.
 
 ---
 
 ## Appendix: where each wave comes from in the tracker file
 
-The `.xm` tune file numbers its instruments 1 to 10:
+The `.xm` tune file numbers its instruments 1 to 10 (and a tune's extra sounds from 11):
 
 | XM instrument | Cell |
 |---|---|
@@ -435,5 +469,6 @@ The `.xm` tune file numbers its instruments 1 to 10:
 | 8 | `wave tom_lo` (C-4) or `wave tom_hi` (G-4) |
 | 9 | `wave pew_lo` (C-4) or `wave pew_hi` (C-5) |
 | 10 | `wave hoover_e` (E-4) or `wave hoover_a` (A-4) |
+| 11 (Manic Miner) | `wave noise_lo` (C-4), `wave noise_mid` (G-4) or `wave noise_hi` (C-5) |
 
 A note-off in the tracker becomes `x`, and an empty cell becomes `-`.

@@ -3,15 +3,15 @@
 A running record of what we have decided and what is left to do. Claude keeps this file at
 `planning/NOTES.md`.
 
-Last updated: 5 November 2026, 02:05.
+Last updated: 5 November 2026, 18:05.
 
 ---
 
-## Summary: where we are (5 Nov 02:05)
+## Summary: where we are (5 Nov 18:05)
 
-**Live: five tunes**, one program each, all 8 tracks: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
-`midnight_diner.py`, `manic_miner.py` (the same tracker code; `manic_miner.py` adds three noise sounds for its tape
-loading). Their `mods/*.xm`, `hex/microbit-TB-*.hex` (MakeCode's download names), `docs/tracker_format.md`, the
+**Live: six tunes**, one program each, all 8 tracks: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
+`midnight_diner.py`, `manic_miner.py`, `major_general.py` (the same tracker code, notes C-3 to B-6;
+`manic_miner.py` adds three noise sounds for its tape loading). Their `mods/*.xm`, `hex/microbit-TB-*.hex` (MakeCode's download names), `docs/tracker_format.md`, the
 front page `README.md` (= the guide, with "How to play") and `media/`. Controls: A = track, logo = conductor,
 B = play/stop.
 
@@ -19,7 +19,43 @@ B = play/stop.
 `README.md` (five tunes, its row with hex and MakeCode link), `docs/tracker_format.md` (extra sounds a tune can
 bring, the noise waves, LEDs, XM instrument 11, its pattern table). Each matched its draft; all links work.
 
-**Nothing pending** (5 Nov 02:05): `planning/` holds only these notes, so everything is in step. Russell: "we are
+**PROMOTED 5 Nov 18:05** ("hex files updated - let's update docs and promote everything"): all six programs,
+all six XMs, `README.md` (the rewrite + six tunes + the G&S credit) and `docs/tracker_format.md`; each matched its
+draft, all links work, drafts removed. Hexes: all six re-downloaded by Russell (17:52-17:59), including the new
+`hex/microbit-TB-Major-General.hex`. **Still to come:** the G&S Archive MIDI (`pp13.mid`) as a reference copy. (The
+Major-General's MakeCode link was added to the README 18:01.)
+
+**The bass octave for every tune, and song 6** (drafted 18:05, now live): Russell: "that sounds ok with the extra
+octave lower available. Let's let all the songs do that - and make the code for all of them in suggestions along
+with their new xms". Drafts in `planning/`:
+- **The tracker code (all six programs):** the note table (`create_tones`: `note_names` / `note_hz`) now starts at
+  **C-3** (131 Hz) instead of C-4: 48 notes, C-3 to B-6. Nothing else in the code changes (checked by AST against
+  the live programs: only `create_tones` differs). The LEDs still work: they use the note's index modulo 12.
+- **The five tunes' XMs** (`planning/mods/*.xm`): **track 2 (the bass) an octave lower**, nothing else changed
+  (checked: every other track byte-identical in its cells, track 2 exactly 12 notes down, same order). Track 5 is
+  unchanged, so where it doubled the bass it now doubles it an octave up (the Major-General's trick). Track 2
+  ranges now: Korobeiniki C-3 to A-4, Canon D-3 to D-5, Ode C#3 to B-4, Midnight Diner C-3 to B-3, Manic Miner
+  F#3 to A-4. No new rubs (an octave can't add any; the few passing-note rubs in Korobeiniki, the Canon and Ode
+  were already in the originals).
+- **The six programs** (`planning/*.py`): built from those XMs with the new tracker code (`manic_miner.py` with
+  its noise sounds); `major_general.py` is new. On the mock micro:bit: every array matches its XM, every track
+  plays the XM's sounds, every tone finds its frequency (lowest 131 Hz); no non-block Python.
+- **Docs:** `planning/README.md` (the rewrite from 02:15, plus: a Major-General row - hex and MakeCode "to come" -
+  and the credit to the G&S Archive, CC BY-SA 4.0; notes C-3 to B-6; six programs) and
+  `planning/docs/tracker_format.md` (48 notes, an octave 3 column, "Octave 3, the bass octave", six programs, the
+  Major-General's pattern table).
+- **Tried on the boards** (5 Nov 17:46): "that range is better - even on devices it sort of works".
+- **Next:** Russell listens / tests on the boards; makes MakeCode projects - the five existing ones updated (paste
+  the new program into each) and a new one for the Major-General - and the hexes; then we promote.
+- (A tool bug found on the way, fixed: Claude's XM reader still had the abandoned Spectrum-loading instruments as
+  instrument 11; it is back to Manic Miner's noise sounds.)
+
+**Promoted 5 Nov 18:05 (drafted 02:15):** `README.md`, a rewrite of the front page as a proper README ("the readme has
+got clunky - 'about this project' starts 'plus i think' - fix it all to be a proper readme"): new "What you need";
+"What it is" folded into the intro and "How it works"; "About this project" rewritten from Russell's own words;
+same facts, links and sections otherwise. To read and agree, then promote.
+
+**Before that, nothing pending** (5 Nov 02:05): `planning/` holds only these notes, so everything is in step. Russell: "we are
 good with our 5 tunes as they are". The song 5 candidates (Mountain King, Drunken Sailor) were dropped - their XMs
 deleted from `planning/mods/` (they are in git at `b337ad6`) - and the more Spectrum-like Manic Miner loading was
 abandoned (see below).
@@ -29,7 +65,8 @@ Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
 Canon https://makecode.microbit.org/S16435-66036-39782-77562 ,
 Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 ,
 Midnight Diner https://makecode.microbit.org/S89025-71001-08778-34052 ,
-Manic Miner https://makecode.microbit.org/S46227-98521-34187-17442 .
+Manic Miner https://makecode.microbit.org/S46227-98521-34187-17442 ,
+The Modern Major-General https://makecode.microbit.org/S48230-90942-42245-11074 (5 Nov 18:01).
 (The original all-in-one project https://makecode.microbit.org/S26000-11508-29408-02742 is mentioned as history.)
 
 **Not yet tested on the real boards** (checked only on the mock micro:bit):
@@ -62,7 +99,7 @@ command-line compiler; sound balance; more tempos and instruments.
 **The layout** (4 Nov 23:15: students' material at the top, planning in one folder off to the side):
 ```
 README.md          the GitHub front page = the guide: what it is, demo, the tunes, getting them on, how to play
-korobeiniki.py  canon.py  ode_to_joy.py  midnight_diner.py  manic_miner.py      one program per tune
+korobeiniki.py  canon.py  ode_to_joy.py  midnight_diner.py  manic_miner.py  major_general.py   one program per tune
 hex/  mods/  docs/  media/                   ready-to-flash files, .xm tunes, tracker_format.md, the video
 planning/          for us: NOTES.md (this file) + drafts of changes ("Not needed to play")
 ```
@@ -103,14 +140,14 @@ fix links); anything else in the project changes only by promoting (steps 4-5).
 
 ---
 
-## Where things are (5 Nov 01:35)
+## Where things are (5 Nov 18:05)
 
 ```
 README.md                         the front page and guide (merged 4 Nov 23:15; docs/guide.md folded into it)
-korobeiniki.py canon.py ode_to_joy.py midnight_diner.py manic_miner.py   one program per song, 8 tracks each
-mods/   korobeiniki.xm canon.xm ode_to_joy.xm midnight_diner.xm manic_miner.xm   (all 8 channels)
+korobeiniki.py canon.py ode_to_joy.py midnight_diner.py manic_miner.py major_general.py   one program per song
+mods/   korobeiniki.xm canon.xm ode_to_joy.xm midnight_diner.xm manic_miner.xm major_general.xm   (all 8 channels)
 hex/    microbit-TB-Korobeiniki-Tetris.hex microbit-TB-canon.hex microbit-TB-ode_to_joy.hex
-        microbit-TB-midnight-diner.hex microbit-TB-Manic-Miner.hex
+        microbit-TB-midnight-diner.hex microbit-TB-Manic-Miner.hex microbit-TB-Major-General.hex
 docs/   tracker_format.md
 media/  technobit-demo.mp4
 planning/NOTES.md                 these notes (nothing pending)
@@ -477,6 +514,44 @@ they use the older `lead_00` names and need updating to `track1_p00`.
     still have it) and 6 and 8 (extras): each board starts a row after the last, changes pitch at its own random
     moments, and never starts the same pitch as another board on the same row. The pilot tone stays on one
     board (track 1). Checked again.
+
+### Song 6: Modern Major-General, patter drum'n'bass (5 Nov 17:45, draft `planning/mods/major_general.xm`)
+- Russell: "copyright is a pain - I want to show the students tunes from films or musicals, but even Les Mis is
+  copyrighted". Claude: out of copyright with film/musical fame - Also sprach Zarathustra (2001), Ride of the
+  Valkyries, The Entertainer, the William Tell finale, Carmen's Habanera, and Gilbert and Sullivan (Sullivan
+  died 1900). Les Mis (1980) and O Fortuna (Orff, d. 1982) are not. In the club, UK copyright's "illustration
+  for instruction" (CDPA s.32) may cover a short bit for teaching, never publishing. Russell: "Pirates you say?
+  Oh hella yes!"
+- **Source of the notes** (Russell: "if it's fair to use let's keep a reference copy - let's credit where it's
+  due"): flutetunes.com's flute + piano MIDI was looked at first, but its terms (non-commercial personal /
+  educational use only; no copying, distributing or deriving works) rule out keeping it or building on it, so
+  it is NOT used. Instead: the **Gilbert and Sullivan Archive**, Pirates No. 13
+  (https://gsarchive.net/pirates/web_op/pirates13.html), whose site is licensed **Creative Commons
+  Attribution-ShareAlike 4.0**: its MIDI / karaoke file has the Major-General's line, the four chorus parts and
+  piano as separate tracks, with the words. Claude read verse 1 of the Major-General's line (192 notes) and the
+  chorus soprano line from it (in Claude's scratchpad `sullivan_data.py`). Verses 2 and 3 are the same tune,
+  29,952 ticks apart. **Reference copy:** the browser can't save into the project, so Russell to download
+  `pp13.mid` (or `pp13.kar`) from that page into the project; credit it (G&S Archive, CC BY-SA 4.0) in the
+  README when the tune is promoted. CC BY-SA: anything we make FROM their file must carry the same licence -
+  we use only Sullivan's (public-domain) notes, but crediting them is right either way.
+- **The style:** drum'n'bass. Track 1 = the Major-General's patter (two octaves up, E-flat, one note a row,
+  exactly as Sullivan wrote it - checked: all 192 notes on their rows); track 3 = the chorus answering ("With
+  many cheerful facts", "He is the very model"); repeated notes are passed between tracks 1 and 3 so they don't
+  run together (checked: none left). A broken 2-step kick and snare, rolling hats, ghost snares (never four on
+  the floor); one long deep bass note a bar, chosen to fit Sullivan's harmony; pirate cannons (low tom + kick +
+  crash on three boards) start each section; drum fills where the piano plays between lines. Sullivan's eighth
+  note is about 156 ms; ours is 200 ms, so a bit slower.
+- Sections: INT (cannons, the beat builds) | VA verse 1, light (kick on 1 and 3, claps, the chorus with the
+  2-step) | VB the full drum'n'bass verse, played twice | OUT (cannons, an E-flat chord). Each verse is 312 rows
+  of Sullivan + 8 rows of fill = 10 patterns, so the verse patterns repeat. 33 patterns, 3.5 minutes; 23 in
+  the file. Checked: no rubs, no doubled drums, in range, cells ok.
+- **Second try, more bass** (5 Nov 17:50): "not bad - takes some time to recognise but the dnb underlying is
+  good. Can we try some more bassy notes? I know the micro:bit isn't great with its tiny speaker but let's try".
+  Track 2's bass is now an octave lower than any tune so far: **octave 3** (E-flat 3 = 156 Hz; notes used D#3,
+  A#3, G#3, G-3, C-4). The speaker can't play that pitch itself, but a square wave is full of overtones, and the
+  ear hears the low note from them (the "missing fundamental"). Track 5 doubles it an octave up on the kicks.
+  **Needs code if kept:** the note table (`note_names` / `note_hz`) extended down to C-3 in this tune's program
+  only, and the tracker format doc to say a tune may go below C-4. Checked: no rubs, no doubled drums, cells ok.
 
 ### Manic Miner: a real Spectrum loading (5 Nov 01:50) - abandoned 5 Nov 02:00
 - Russell: "it's a good start, but I want it to sound like the real Speccy loading - compare the basic micro:bit

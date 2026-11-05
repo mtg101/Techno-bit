@@ -72,7 +72,7 @@ Every note name is exactly **three characters**: a letter, a middle character, a
 |---|---|---|
 | Letter | The note: C D E F G A B | `D` |
 | Middle character | `-` for a plain (natural) note, `#` for a sharp | `-` or `#` |
-| Octave | 4, 5 or 6 (higher number = higher pitch) | `5` |
+| Octave | 3, 4, 5 or 6 (higher number = higher pitch) | `5` |
 
 So the plain notes are `C-4`, `D-4`, `E-4`, `F-4`, `G-4`, `A-4`, `B-4`, and the sharps (the black piano keys) are
 `C#4`, `D#4`, `F#4`, `G#4`, `A#4`. The `-` is not a minus sign or a flat: it only fills the middle slot so every
@@ -80,36 +80,40 @@ name has three characters. The tracker uses sharps only, so you will see `D#4` a
 
 In a cell the name follows the word `tone` and a space: `tone D-6`, `tone D#6`.
 
-All 36 names, lowest to highest:
+All 48 names, lowest to highest:
 
 ```
+C-3 C#3 D-3 D#3 E-3 F-3 F#3 G-3 G#3 A-3 A#3 B-3
 C-4 C#4 D-4 D#4 E-4 F-4 F#4 G-4 G#4 A-4 A#4 B-4
 C-5 C#5 D-5 D#5 E-5 F-5 F#5 G-5 G#5 A-5 A#5 B-5
 C-6 C#6 D-6 D#6 E-6 F-6 F#6 G-6 G#6 A-6 A#6 B-6
 ```
 
-The tune uses three octaves, **C-4 to B-6** (36 notes). Frequencies in Hz, rounded to whole numbers:
+The tunes use four octaves, **C-3 to B-6** (48 notes). Frequencies in Hz, rounded to whole numbers:
 
-| Note | Octave 4 | Octave 5 | Octave 6 |
-|---|---|---|---|
-| C | 262 | 523 | 1047 |
-| C# | 277 | 554 | 1109 |
-| D | 294 | 587 | 1175 |
-| D# | 311 | 622 | 1245 |
-| E | 330 | 659 | 1319 |
-| F | 349 | 698 | 1397 |
-| F# | 370 | 740 | 1480 |
-| G | 392 | 784 | 1568 |
-| G# | 415 | 831 | 1661 |
-| A | 440 | 880 | 1760 |
-| A# | 466 | 932 | 1865 |
-| B | 494 | 988 | 1976 |
+| Note | Octave 3 | Octave 4 | Octave 5 | Octave 6 |
+|---|---|---|---|---|
+| C | 131 | 262 | 523 | 1047 |
+| C# | 139 | 277 | 554 | 1109 |
+| D | 147 | 294 | 587 | 1175 |
+| D# | 156 | 311 | 622 | 1245 |
+| E | 165 | 330 | 659 | 1319 |
+| F | 175 | 349 | 698 | 1397 |
+| F# | 185 | 370 | 740 | 1480 |
+| G | 196 | 392 | 784 | 1568 |
+| G# | 208 | 415 | 831 | 1661 |
+| A | 220 | 440 | 880 | 1760 |
+| A# | 233 | 466 | 932 | 1865 |
+| B | 247 | 494 | 988 | 1976 |
 
 The formula behind the table: **Hz = 440 x 2^((n - 58) / 12)**, where *n* is the tracker's note number
-(C-4 = 49, A-4 = 58). Every 12 notes up doubles the frequency.
+(C-3 = 37, C-4 = 49, A-4 = 58). Every 12 notes up doubles the frequency.
 
-**Why nothing is lower than C-4:** the micro:bit V2's built-in speaker is tiny and gives out almost nothing
-below about 250 Hz.
+**Octave 3, the bass octave:** the micro:bit V2's built-in speaker is tiny and gives out almost nothing below
+about 250 Hz, so it can't really play octave 3 (131 to 247 Hz). It still works for bass, because a tone is a
+square wave, full of higher overtones, and the ear hears the low note from them (the "missing fundamental"). Our
+tunes use octave 3 for the bass on track 2; track 5 often plays the same notes an octave up, which the speaker
+can play properly. Nothing goes lower than C-3.
 
 ---
 
@@ -196,8 +200,8 @@ The only splitting left is turning one cell into its two words, for example `"to
 
 ### One array per pattern, plus an order list
 
-Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`, `manic_miner.py`):
-the tracker code is the same in all five, only the arrays change (plus any extra sounds a tune brings: see
+Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`, `manic_miner.py`,
+`major_general.py`): the tracker code is the same in all six, only the arrays change (plus any extra sounds a tune brings: see
 section 5).
 
 - **A pattern array** holds the 32 cells of one pattern, named after its track and its pattern number:
@@ -206,7 +210,7 @@ section 5).
   `track0_patterns` is the conductor's metronome.
 - **`song_tracks`** holds all the lists, so `song_tracks[track][pattern]` is one pattern's array for one track.
 - **The order list**, `song`, is an array of numbers saying which pattern plays next. Each number is 6.4
-  seconds of music: our first three tunes are 64 numbers long (6 minutes 50 seconds), Midnight Diner and Manic Miner 28 (3 minutes).
+  seconds of music: our first three tunes are 64 numbers long (6 minutes 50 seconds), Midnight Diner and Manic Miner 28 (3 minutes), the Modern Major-General 33 (3.5 minutes).
 - A tune can have **any number of patterns** (Midnight Diner has 19, `track1_p00` to `track1_p18`), as long as it
   fits in the micro:bit's memory.
 
@@ -232,7 +236,7 @@ noise), so the tune still works with just 4.
 | 7 | `track7` | Extra: toms and claps |
 | 8 | `track8` | Extra: crashes, extra kicks, open hats and pews |
 
-All five of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
+All six of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
 because track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The code does this
 with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds `track1_p00`,
 `track1_p01` and so on.
@@ -349,6 +353,25 @@ Spectrum tape loading, plays the riff at half speed, builds up, then drops into 
 | 13 | `die` | Game over: three boot stomps and a falling tone |
 
 The order is 0-8, then the drop (9-10) four times, 11-12, the build 7-8 again, the drop three times, then 13.
+
+**The Modern Major-General (patter drum'n'bass), patterns 0 to 22**
+
+Sullivan's "I am the very model of a modern Major-General" (*The Pirates of Penzance*, 1879), in E-flat. Track 1
+sings the Major-General's patter, exactly as Sullivan wrote it, one note a row, two octaves up; track 3 is the
+chorus answering. Where the tune repeats a note, the two boards pass it between them, so it doesn't run into one
+long note. Underneath: drum'n'bass, with a broken 2-step beat (never four on the floor), a deep bass in octave 3
+and pirate cannons (low tom, kick and crash on three boards at once). The notes were read from the Gilbert and
+Sullivan Archive's MIDI of the song (gsarchive.net, CC BY-SA 4.0).
+
+| Number | Part | What it is |
+|---|---|---|
+| 0-1 | `int` | Cannons, then the beat builds |
+| 2-11 | `va` | Verse 1, light: kick on 1 and 3, claps; the chorus comes in with the 2-step |
+| 12-21 | `vb` | The full drum'n'bass verse: 2-step, rolling hats, ghost snares, the bass doubled, cannons, fills |
+| 22 | `out` | Cannons and a last E-flat chord |
+
+The order is 0-1, 2-11, then 12-21 twice, then 22. Each verse is 312 rows of Sullivan plus 8 rows of drum fill,
+so it fills exactly 10 patterns and the patterns can repeat.
 
 ### Keeping the blocks manageable
 

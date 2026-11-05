@@ -56,6 +56,9 @@ A channel is a list of **cells**. Each cell is one **row** of time and says what
 - One row = one **eighth note**.
 - The tempo is **150 BPM**, so one row lasts **200 ms**.
 - A pattern is **32 rows** = **4 bars** (8 rows per bar, 2 rows per beat).
+- A tune in **3/4** (a waltz) can still use 32-row patterns: its bars just run on across the pattern ends.
+  Midnight Diner's slow waltz bars are 12 rows (3 beats of 4 rows) and its fast ones 6 rows (3 beats of 2 rows),
+  so 3 patterns (96 rows) hold exactly 8 slow bars or 16 fast ones.
 
 ---
 
@@ -182,16 +185,18 @@ The only splitting left is turning one cell into its two words, for example `"to
 
 ### One array per pattern, plus an order list
 
-Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`): the tracker code is the same in
-all three, only the arrays change.
+Each tune is its own program (`korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py`): the tracker code is
+the same in all four, only the arrays change.
 
 - **A pattern array** holds the 32 cells of one pattern, named after its track and its pattern number:
   `track1_p00`, `track1_p01` ... `track1_p15` for track 1, `track2_p00` ... for track 2, and so on.
 - **A track's list** puts that track's patterns in order: `track1_patterns` holds `track1_p00` to `track1_p15`.
   `track0_patterns` is the conductor's metronome.
 - **`song_tracks`** holds all the lists, so `song_tracks[track][pattern]` is one pattern's array for one track.
-- **The order list**, `song`, is an array of numbers saying which pattern plays next. Our tunes are 64
-  numbers long, which is 6 minutes 50 seconds of music.
+- **The order list**, `song`, is an array of numbers saying which pattern plays next. Each number is 6.4
+  seconds of music: our first three tunes are 64 numbers long (6 minutes 50 seconds), Midnight Diner 28 (3 minutes).
+- A tune can have **any number of patterns** (Midnight Diner has 19, `track1_p00` to `track1_p18`), as long as it
+  fits in the micro:bit's memory.
 
 To play it: take the next number from the order list, find that pattern's array, then step through its 32 entries,
 one every 200 ms.
@@ -214,7 +219,7 @@ tells the others which pattern to play. Tracks 1 to 4 play the whole tune on the
 | 7 | `track7` | Extra: toms and claps |
 | 8 | `track8` | Extra: crashes, extra kicks, open hats and pews |
 
-All three of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
+All four of our tunes have their own tracks 5 to 8. A tune can also have just 4 tracks: then nobody sits out,
 because track 5 plays track 1's part, 6 plays 2, 7 plays 3 and 8 plays 4 ("take away 4"). The code does this
 with the lists, not with extra logic: in a 4-track tune, `track5_patterns` simply holds `track1_p00`,
 `track1_p01` and so on.
@@ -295,6 +300,25 @@ verses are in A minor, the drops burst into A major, and the last drops go up a 
 | 13 | `br` | Breakdown: no drums, A minor, arpeggio and Hoover pad |
 | 14 | `bu` | Build: the roll speeds up, then a beat of silence |
 | 15 | `out` | Outro in B major: a held note, the beat falls away |
+
+**Midnight Diner (waltz techno in 3/4), patterns 0 to 18**
+
+The melody is the Irish air "Pretty Maid Milking Her Cow" (18th century), which the *Midnight Diner* theme is
+based on, in E minor. Its A and B parts are 16 bars each. The first half plays at the tune's own speed (a bar
+every 2.4 seconds); then it drops into double time (a bar every 1.2 seconds) for the techno. It is mostly melody
+and beats: track 2 plays the **bass notes**, and track 5 a **bass rumble** on the same notes, because one
+micro:bit speaker can't do much bass on its own.
+
+| Number | Part | What it is |
+|---|---|---|
+| 0-2 | `so` | Part A, first 8 bars: the melody alone |
+| 3-5 | `jn` | Part A, last 8 bars: the bass notes join |
+| 6-11 | `bu` | Part B, building: a kick, then claps and the rumble, then hats and toms, then a snare roll that speeds up, ending in a moment of silence |
+| 12-14 | `fb` | The drop, part B: double time, a kick on every beat, snare on 2, clap on 3, both basses, a Hoover stab every 4 bars |
+| 15-17 | `fa` | The drop, part A, ending in a drum roll |
+| 18 | `out` | The ending: the last two bars, slow, alone |
+
+The order is 0-11, then the drops 15-17, 12-14, 15-17, 12-14, 15-17, then 18.
 
 ### Keeping the blocks manageable
 

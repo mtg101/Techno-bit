@@ -1,6 +1,8 @@
 # Techno:bit
 
-Messing about with Micro:bits https://microbit.org/ to make tracker music, like back in the good old Amiga days. But with each Micro:bit playing a single track, and a conductor broadcasting radio signals to play patterns.
+A table full of [BBC micro:bits](https://microbit.org/) playing techno together. Each one plays a single track through its own little speaker, a conductor micro:bit keeps them in time by radio, and together they're a band. Tracker music, like back in the Amiga days, spread across nine tiny computers.
+
+It's for our coding club. Nobody gets excited about arrays, timing and radio messages on their own, but a techno Tetris tune is a different story. And the whole thing, the code and the music, is in MakeCode Blocks, so once students have heard it they can take it apart, change it and make it their own.
 
 ## Demo
 
@@ -13,24 +15,25 @@ https://github.com/user-attachments/assets/debd2a19-0f8b-4f12-831e-922c98faf1f4
 - **Several BBC micro:bit V2s play one tune together.** Each micro:bit plays one track (the melody, the bass, a voice lane, the drums ...) through its built-in speaker, and lights up an LED for every note or drum it plays.
 - **A conductor micro:bit keeps them together.** It broadcasts which pattern to play by radio, and plays a metronome.
 - **Up to 9 micro:bits:** a conductor plus 4 tracks for the whole tune, plus 4 more tracks of extra drums and bass. Every tune works with 4 players or 8.
-- **Three tunes so far:** Korobeiniki (the Tetris tune), Pachelbel's Canon in D and Beethoven's Ode to Joy, all with 8 tracks. All out of copyright. Each tune is its own program (`korobeiniki.py` and so on), with the same tracker code: flash all the micro:bits with the tune you want.
+- **Four tunes so far:** Korobeiniki (the Tetris tune), Pachelbel's Canon in D, Beethoven's Ode to Joy and Midnight Diner (the Irish folk tune behind the *Midnight Diner* theme), all with 8 tracks. All out of copyright. Each tune is its own program (`korobeiniki.py` and so on), with the same tracker code: flash all the micro:bits with the tune you want.
 - **It's written in MakeCode Blocks**, so students can see and change everything, including the music: every pattern of every track is an array you can edit.
 
 ## The tunes
 
 | Tune | Ready to flash | MakeCode project | The tune (.xm) |
 |---|---|---|---|
-| Korobeiniki (the Tetris tune), techno | [hex/korobeiniki.hex](hex/korobeiniki.hex) | https://makecode.microbit.org/S54592-76373-74001-91871 | [mods/korobeiniki.xm](mods/korobeiniki.xm) |
-| Pachelbel's Canon in D (about 1700), bhangra techno | [hex/canon.hex](hex/canon.hex) | https://makecode.microbit.org/S16435-66036-39782-77562 | [mods/canon.xm](mods/canon.xm) |
-| Beethoven's Ode to Joy (1824), drum-heavy synthwave with a key change | [hex/ode_to_joy.hex](hex/ode_to_joy.hex) | https://makecode.microbit.org/S92579-43021-82836-81182 | [mods/ode_to_joy.xm](mods/ode_to_joy.xm) |
+| Korobeiniki (the Tetris tune), techno | [hex/microbit-TB-Korobeiniki-Tetris.hex](hex/microbit-TB-Korobeiniki-Tetris.hex) | https://makecode.microbit.org/S54592-76373-74001-91871 | [mods/korobeiniki.xm](mods/korobeiniki.xm) |
+| Pachelbel's Canon in D (about 1700), bhangra techno | [hex/microbit-TB-canon.hex](hex/microbit-TB-canon.hex) | https://makecode.microbit.org/S16435-66036-39782-77562 | [mods/canon.xm](mods/canon.xm) |
+| Beethoven's Ode to Joy (1824), drum-heavy synthwave with a key change | [hex/microbit-TB-ode_to_joy.hex](hex/microbit-TB-ode_to_joy.hex) | https://makecode.microbit.org/S92579-43021-82836-81182 | [mods/ode_to_joy.xm](mods/ode_to_joy.xm) |
+| Midnight Diner: "Pretty Maid Milking Her Cow" (Irish, 18th century, the folk tune behind the TV show's theme), waltz techno in 3/4 | [hex/microbit-TB-midnight-diner.hex](hex/microbit-TB-midnight-diner.hex) | https://makecode.microbit.org/S89025-71001-08778-34052 | [mods/midnight_diner.xm](mods/midnight_diner.xm) |
 
-All three have 8 tracks: the first 4 are the whole tune, the other 4 add drums and bass. The melodies are all out of copyright.
+All four have 8 tracks: the first 4 are the whole tune, the other 4 add drums and bass. The melodies are all out of copyright.
 
 ## Getting a tune onto the micro:bits
 
 Pick a tune. Every micro:bit, the conductor included, needs the same tune: to play a different one, flash them all again.
 
-- **Quickest:** plug in a micro:bit and copy the tune's `.hex` file (for example `hex/canon.hex`) onto the MICROBIT drive. Do this for every micro:bit.
+- **Quickest:** plug in a micro:bit and copy the tune's `.hex` file (for example `hex/microbit-TB-canon.hex`: MakeCode names them `microbit-TB-` and the project's name) onto the MICROBIT drive. Do this for every micro:bit.
 - **To see and change the code:** open the tune's MakeCode project (in the table above), click **Edit Code** to make your own copy, then download it and flash every micro:bit.
 - **Or start from the Python file:** in [MakeCode](https://makecode.microbit.org/), start a new project, switch to Python, paste in the tune's program (for example `canon.py`; MakeCode will still call it `main.py`), then switch back to Blocks. Download it and flash every micro:bit.
 
@@ -54,7 +57,7 @@ Pick a tune. Every micro:bit, the conductor included, needs the same tune: to pl
 
 | | What it is |
 |---|---|
-| `korobeiniki.py`, `canon.py`, `ode_to_joy.py` | The Techno:bit program, one per tune: the code is the same in all three, only the tune's arrays are different |
+| `korobeiniki.py`, `canon.py`, `ode_to_joy.py`, `midnight_diner.py` | The Techno:bit program, one per tune: the code is the same in all four, only the tune's arrays are different |
 | [hex/](hex/) | The same programs, ready to flash |
 | [mods/](mods/) | The tunes as `.xm` files: open them in a tracker such as [OpenMPT](https://openmpt.org/) and change them |
 | [docs/](docs/) | [The tracker format](docs/tracker_format.md): how the music is stored (`tone D-6`, `wave kick`, `x`, `-`) and how the micro:bit plays it |
@@ -63,7 +66,7 @@ Pick a tune. Every micro:bit, the conductor included, needs the same tune: to pl
 
 ## How it works (the techie bit)
 
-- **The music is a tracker tune.** The tunes are written in a tracker ([OpenMPT](https://openmpt.org/)) as `.xm` files, then copied into the program as arrays: one array per pattern per track, one entry per row. A row lasts 200 ms (150 BPM) and a pattern is 32 rows (4 bars). Each entry is `tone D-6` (a note), `wave kick` (one of 12 drum and effect sounds), `x` (silence) or `-` (carry on). An order list says which pattern plays next. All the details are in [the tracker format](docs/tracker_format.md).
+- **The music is a tracker tune.** The tunes are written in a tracker ([OpenMPT](https://openmpt.org/)) as `.xm` files, then copied into the program as arrays: one array per pattern per track, one entry per row. A row lasts 200 ms (150 BPM) and a pattern is 32 rows (4 bars of 4/4; the waltz in Midnight Diner just lets its bars run on across patterns). Each entry is `tone D-6` (a note), `wave kick` (one of 12 drum and effect sounds), `x` (silence) or `-` (carry on). An order list says which pattern plays next. All the details are in [the tracker format](docs/tracker_format.md).
 - **Sounds:** notes come from a name-to-frequency lookup table (C-4 to B-6: the speaker can't do much lower). The drums and effects (kick, snare, clap, hats, crash, toms, pews, Hoover stabs) are MakeCode sound expressions.
 - **Timing:** each row waits until 200 ms have passed on the clock since the row started, so the code's own speed doesn't make the beat drift.
 - **Radio:** the conductor sends each pattern's number as it starts. A number always interrupts whatever a board is playing, so every board starts the pattern together, a few milliseconds behind the conductor, with no gap. There are only three messages: a pattern number, `end song` and `stop`. A board that misses a number drops out for one pattern, and its top row glows dimly while it waits. Radio group 23, frequency band 24 (2424 MHz, between the busy Wi-Fi channels).
@@ -88,7 +91,7 @@ I started this to learn and to have a cool demo for the coding club, and I'm sti
 **Gemini** helped me investigate the timings for the sounds, radio, LEDs and so on, with examples of MakeCode Blocks I could use.
 
 **Claude** (an AI assistant from Anthropic, in the Claude app with access to this project) now writes a lot of the code and the music, and helps run the project:
-- **Music:** arranged the three tunes (old, out-of-copyright melodies) as techno `.xm` files, including the 8-track Korobeiniki, and turned them into the program's arrays.
+- **Music:** arranged the four tunes (old, out-of-copyright melodies) as techno `.xm` files, including the 8-track Korobeiniki, and turned them into the program's arrays.
 - **Code:** converted my program to the tracker format, wrote the 12 sound functions, and designed and tested the radio changes that keep the boards together (patterns that interrupt, no "start song", the B button fix, the dim waiting light).
 - **Testing before the hardware:** checks its code on simulated micro:bits, including simulated radio with lost messages, before I try it on the real ones.
 - **Documentation and organisation:** wrote most of the docs, keeps our planning notes in `planning/NOTES.md`, and helped set up this folder structure.

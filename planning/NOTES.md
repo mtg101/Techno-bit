@@ -3,16 +3,26 @@
 A running record of what we have decided and what is left to do. Claude keeps this file at
 `planning/NOTES.md`.
 
-Last updated: 4 November 2026, 18:10.
+Last updated: 5 November 2026, 00:20.
 
 ---
 
-## Summary: where we are (4 Nov 22:25)
+## Summary: where we are (5 Nov 00:20)
 
-**Everything promoted** (agreed 22:19: "promote everything and get everything in step"). `planning/` holds only
-these notes; nothing is pending.
+**Everything promoted** (agreed 5 Nov 00:17: "good let's promote everything"; before that 4 Nov 22:19).
+`planning/` holds only these notes; nothing is pending.
 
-**Live** (top level since 23:15): **one program per song, all 8 tracks**: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`
+**Promoted 5 Nov 00:18: song 4, Midnight Diner.** `midnight_diner.py`, `mods/midnight_diner.xm`, `README.md` (four
+tunes, hex links with MakeCode's names) and `docs/tracker_format.md` (3/4 bars, any number of patterns, the Midnight
+Diner table): each matched its draft byte for byte, all links work, drafts removed. The hex
+`hex/microbit-TB-midnight-diner.hex` came from Russell's MakeCode project. **Still to do:** play it on the real boards.
+
+**Promoted 5 Nov 00:24: a new README intro** ("the intro is weak - add that it's for teaching students about
+coding, but not lame"): a table of micro:bits playing techno as a band, the Amiga tracker roots kept, and why: it's
+for the coding club, the music is the hook for arrays, timing and radio, and it's all in Blocks to take apart.
+
+**Live** (top level since 23:15): **one program per song, all 8 tracks**: `korobeiniki.py`, `canon.py`, `ode_to_joy.py`,
+`midnight_diner.py`
 (same tracker code, generic names `track1_p00` ..., no song screen: A = track, logo = conductor, B = play/stop).
 The 8-channel `mods/*.xm`. `docs/guide.md` (for students), `docs/tracker_format.md`. Front page `README.md` with
 "How to play". The old 3-song `main.py` and `hex/techno-bit.hex` were removed (in git history, the commit before).
@@ -21,16 +31,29 @@ The 8-channel `mods/*.xm`. `docs/guide.md` (for students), `docs/tracker_format.
 Korobeiniki https://makecode.microbit.org/S54592-76373-74001-91871 ,
 Canon https://makecode.microbit.org/S16435-66036-39782-77562 ,
 Ode to Joy https://makecode.microbit.org/S92579-43021-82836-81182 .
+Midnight Diner https://makecode.microbit.org/S89025-71001-08778-34052 (made 5 Nov 00:07; in the README draft).
+**Hex names (5 Nov 00:15):** the hexes keep MakeCode's own download names: `hex/microbit-TB-Korobeiniki-Tetris.hex`,
+`microbit-TB-canon.hex`, `microbit-TB-ode_to_joy.hex`, `microbit-TB-midnight-diner.hex` (the first three are the same
+files as before, same md5, only renamed). README links updated; the old 3-song `microbit-Technobit.hex` is gone (settled).
 (The original all-in-one project https://makecode.microbit.org/S26000-11508-29408-02742 is mentioned as history.)
 
 **Not yet tested on the real boards** (checked only on the mock micro:bit):
 1. Listen to the 8-track Canon and Ode to Joy in OpenMPT.
 2. MakeCode on a student laptop: the three projects exist now (links above) - is Blocks fast enough? (About 4,000 blocks each now: all three have 8 tracks.)
 3. The boards: 4 boards, 8 + a conductor, B on a single track.
-4. ~~Download the three hexes~~ Done 4 Nov 22:49: `techno-bit/hex/korobeiniki.hex`, `canon.hex`, `ode_to_joy.hex`
+4. ~~Download the three hexes~~ Done 4 Nov 22:49: `techno-bit/hex/korobeiniki.hex`, `canon.hex`, `ode_to_joy.hex` (back to MakeCode's names 5 Nov 00:15)
    (downloaded from the three MakeCode projects; renamed from MakeCode's `microbit-TB-...` names). Measured:
    **about 111 KB free** in each (the 3-song hex had 46 KB). If something's wrong, the tested 3-song `main.py`
    and its hex are in git history.
+
+**Song 4 (promoted 5 Nov 00:18; drafted 00:10):** Midnight Diner. Russell, 00:01: "that's pretty smooth". Drafts in `planning/`:
+`mods/midnight_diner.xm` (the sixth try), `midnight_diner.py` (built from it: the tracker code is identical to `canon.py`, checked
+by AST; on the mock micro:bit every track plays exactly what the XM says, 179.2 s, all tones found), `README.md`
+(a fourth row in the tunes table, "four tunes"; the MakeCode link says "to come") and `docs/tracker_format.md`
+(waltz bars across patterns, any number of patterns, a Midnight Diner pattern table). **Next:** Russell makes the
+MakeCode project from `planning/midnight_diner.py` and downloads `hex/microbit-TB-midnight-diner.hex`; Claude puts the link in, then we promote.
+Renamed 5 Nov 00:06 ("rename all the 'diner' to 'midnight diner'"): the tune is **Midnight Diner**, the files
+`midnight_diner.py`, `mods/midnight_diner.xm`, `hex/microbit-TB-midnight-diner.hex` (the XM's title too; older notes updated).
 
 **Next after that:** making tunes from `.xm` files - the converter and its rules doc (draft in git at
 `f50c8f5`, needs the new names; no template needed: any song's program and `.xm` serve as one). Later a web page.
@@ -47,7 +70,7 @@ command-line compiler; sound balance; more tempos and instruments.
 **The layout** (4 Nov 23:15: students' material at the top, planning in one folder off to the side):
 ```
 README.md          the GitHub front page = the guide: what it is, demo, the tunes, getting them on, how to play
-korobeiniki.py  canon.py  ode_to_joy.py      one program per tune
+korobeiniki.py  canon.py  ode_to_joy.py  midnight_diner.py      one program per tune
 hex/  mods/  docs/  media/                   ready-to-flash files, .xm tunes, tracker_format.md, the video
 planning/          for us: NOTES.md (this file) + drafts of changes ("Not needed to play")
 ```
@@ -88,13 +111,13 @@ fix links); anything else in the project changes only by promoting (steps 4-5).
 
 ---
 
-## Where things are (4 Nov 23:15)
+## Where things are (5 Nov 00:20)
 
 ```
 README.md                         the front page and guide (merged 4 Nov 23:15; docs/guide.md folded into it)
-korobeiniki.py canon.py ode_to_joy.py         one program per song, 8 tracks each
-mods/   korobeiniki.xm canon.xm ode_to_joy.xm   (all 8 channels)
-hex/    korobeiniki.hex canon.hex ode_to_joy.hex   (about 111 KB free each) + microbit-Technobit.hex (old 3-song: keep?)
+korobeiniki.py canon.py ode_to_joy.py midnight_diner.py   one program per song, 8 tracks each
+mods/   korobeiniki.xm canon.xm ode_to_joy.xm midnight_diner.xm   (all 8 channels)
+hex/    microbit-TB-Korobeiniki-Tetris.hex microbit-TB-canon.hex microbit-TB-ode_to_joy.hex microbit-TB-midnight-diner.hex
 docs/   tracker_format.md
 media/  technobit-demo.mp4
 planning/NOTES.md                 these notes (nothing else pending)
@@ -263,6 +286,83 @@ they use the older `lead_00` names and need updating to `track1_p00`.
   (`pause 1`), not in `forever` (which only runs every 20 ms). "end song" is sent **after** the last number.
 - Simulated result: no missed patterns, no gap, boards 1-5 ms behind the conductor. Confirmed on the real
   boards: "keeps things running nicely without the wait".
+
+### Song 4: Midnight Diner (4 Nov 23:30, draft: `planning/mods/midnight_diner.xm`, to listen to)
+- The Midnight Diner opening theme "Omoide" (Tsunekichi Suzuki) is his reworking of the Irish air "Pretty Girl /
+  Pretty Maid Milking Her Cow" ("Cailín Deas Crúite na mBó", 18th century, public domain; JASRAC lists the song
+  as based on an Irish folk song). We use **only the traditional melody**; Suzuki's lyrics and arrangement are
+  his. (Earlier, on 1 Nov, Omoide was ruled out as copyrighted: the traditional air is the way round that.)
+- Melody: Ed Wosik's ABC transcription ("Pretty Maid Milking Her Cow", folktunefinder.com tune 17902), a waltz
+  in E minor, A and B parts of 16 bars, a D-E-F# pick-up; played an octave up (D5-F#6). Two bars in the ABC were
+  a beat short (A7 "E4D", B9 "d2 Bcd"): filled as E4 D2 and d2 B c d2. **Russell to check by ear against the
+  Omoide opening.**
+- "Start traditional, add drums, speed up until it's techno": a waltz bar is squeezed into our bar as 3 + 3 + 2
+  rows (beats on rows 0, 3, 6); the slow sections use 16-row bars (6 + 6 + 4).
+  INT (arpeggio + bass, the pick-up), S1 (the tune, no drums), S2 (soft kick), S3 (+ hats), S4 (+ claps, tom
+  pick-up) = the first 8 bars, slow; BU = full-speed build ending on the pick-up alone; A1-A4, B1-B4 = the whole
+  A and B parts at full speed, four-on-the-floor; BR = breakdown, no drums; OUT = slow again, fading.
+  Order: INT S1-S4 BU AA BB | BR S1 S2 BU A B A | BR S3 S4 BU AA BB | A S4 OUT (64 slots, 6.8 min).
+- Chords (E minor) per bar: A = Em D D D G D Em Em Em D Em G C D Em Em; B = G G Em D C Bm Em Em G C D Em C D Em Em.
+- 8 tracks: 1 melody, 2 bass (3+3+2 in the drops), 3 a guitar-like arpeggio (slow) / claps, pings and Hoover
+  stabs (drops), 4 drums; 5-8 the usual drums-and-bass extras (add_8ch_extras.py, song "diner"), almost silent
+  in the traditional opening (about 2 sounds a pattern), growing through S2-S4, full in the drops.
+- Checked: the melody is the ABC note for note in every pattern; tones in range; no semitone rubs anywhere
+  (tracks 2 and 3 pick another chord note if one would rub); no drum doubled; same 10 instruments; every extra
+  pattern has sound; the pick-up into each drop plays alone.
+- **First try rejected (4 Nov 23:31):** "not identifiable as the theme, too similar to the other tunes with the
+  beepy backing; it needs to start slow, a single sound (shame it can't be a guitar), then gradually move to
+  techno". Likely causes: the 3+3+2 squeeze bent the waltz rhythm; the usual backing from bar 1.
+- **New plan:** keep it a **waltz all the way** - patterns don't have to line up with bars (12-row slow bars or
+  6-row fast bars run on across patterns: 3 patterns = 8 slow or 16 fast bars). Open with the melody **alone**,
+  plucked (notes cut about half way, like a picked string); then a bass note per bar; a soft kick on 1; the tune
+  at double speed (same notes and rhythm); then **techno in 3** (a kick on every beat, hats between, claps), and
+  the full 8 tracks. Boards 2-8 stay silent in the solo opening (on purpose here). The song may be shorter than
+  64 patterns (about 4 minutes).
+- **Step 1 now:** `planning/mods/midnight_diner.xm` is a **melody-only test** (replaced the first try): the A and B parts
+  then A again, slow (one eighth = 2 rows), a straight waltz, plucked, nothing else; 12 patterns, 18 in the order,
+  about 2 minutes; no pick-up at the start. If the melody isn't recognisably Omoide, the transcription is the
+  wrong version and needs another source.
+- **"It's 3/4... this isn't going to work, is it?"** Options: (1) techno in 3, (2) stretch each bar into 4/4
+  (4+2+2), (3) a different tune. Russell: "3 is probably the right answer but let's try 3/4 techno (option 1)".
+- **Second try, waltz techno in 3** (4 Nov 23:40, `planning/mods/midnight_diner.xm`, to listen to): a waltz throughout,
+  bars running on across patterns (slow 12-row bars, fast 6-row bars; 3 patterns = 8 slow / 16 fast bars):
+  SO1-3 solo (the first 8 bars, slow, melody alone, plucked); JN1-3 joining (the next 8 bars, slow: + a held bass
+  note each bar, a soft kick on 1 from bar 4, a hat from bar 6); WT1-3 waltz techno (the A part fast: kick on 1,
+  "oom-pah-pah" stabs on beats 2 and 3, hats; the extras begin small); FB1-3 full techno in 3 (the B part: a kick
+  on every beat, the bass pumping every row, a clap on beat 3, Hoover hits, all 8 tracks); FA1-3 the same with
+  the A part and a roll at the end; OUT the last two bars slow and alone.
+  Order: SO JN WT FB FA FB FA | SO WT FB FA | OUT = 34 patterns, 3.6 minutes.
+  Bar 11's half-eighth F#-E turn is one F# at full speed. Tones held over a pattern boundary are struck again
+  at row 0 (the micro:bit stops all sound at a pattern's end); the plucked lead just stops.
+  Checked: the melody is the ABC note for note in every section; in range; no semitone rubs between any of the
+  8 tracks; no drum doubled; the same 10 instruments; the solo really is the melody alone.
+  Boards 2-8 are silent in the solo (on purpose, agreed), and 3-8 mostly in the joining section.
+- **Third try, melody and beats** (4 Nov 23:45, `planning/mods/midnight_diner.xm`): "3/4 techno is cool! But I don't like
+  the extra notes/tones, counterpoint to chords - stick to single melody plus drums, maybe a little chords".
+  Now the only tones are the melody (track 1) and **one bass note a bar** (track 2); a **Hoover hit every 4 bars**
+  in the full techno is the "little chord". Everything else is drums: waltz techno = kick on 1, "oom-pah-pah" on
+  claps (beats 2 and 3), hats; full techno = a kick on every beat, snare on 2, clap on 3, hats; tracks 5-8 = toms,
+  hats and snare, more toms, crashes and extra kicks. Checked: no rubs, no doubled drums, cells ok.
+- **Fourth try, two basses** (4 Nov 23:50, `planning/mods/midnight_diner.xm`, to listen to): "bass I like - bass melody
+  plus drums", then "maybe double bass - two types - as my micro:bits will struggle with bass: melody, bass
+  rumble, bass notes, plus drums". Track 2 = **bass notes**, a smooth line (the chord's root on beats 1-2, its
+  fifth on beat 3, no gaps; the whole bar in waltz techno). Track 5 = **bass rumble**, the same note low down,
+  rolling between two octaves on every row in full techno, short notes on "pah pah" in waltz techno (its toms
+  moved to track 7). Melody, bass notes, kick and hats unchanged. Checked: no rubs, no doubled drums, cells ok.
+- **Fifth try, theme speed then the drop** (4 Nov 23:55, `planning/mods/midnight_diner.xm`, to listen to): "trying to start
+  slow and speed up doesn't work - start at the normal theme tune speed, then ramp up some drums and drop into
+  double time". The first half stays at **theme speed** (a 3/4 bar every 12 rows = 2.4 s, about 75 beats a
+  minute): A alone (SO), A with the bass (JN), then B with the **drums building** (BU, 6 patterns, 4 bars a
+  stage: kick; + claps and rumble; + hats and toms; + a snare roll getting faster, then 2 rows of silence).
+  Then the **drop into double time** (6-row bars): FA FB FA FB FA, then the slow ending. The fast waltz section
+  (WT) is gone. Order: SO JN BU FA FB FA FB FA OUT = 28 patterns, 3.0 minutes; 19 patterns in the file.
+  Checked: no rubs, no doubled drums, cells ok.
+- **Sixth try, less twiddly** (4 Nov 23:59, `planning/mods/midnight_diner.xm`, to listen to): "too much twiddly backing
+  melody - makes it sound too similar to our previous tunes". In double time the rumble no longer rolls between
+  octaves: it plays the bass's own note, low, as a short pulse on each beat with the kick (two boards on one note
+  = a louder bass). The bass notes' fifth on beat 3 now goes below the root when it fits, so both basses stay in
+  the bottom octave (nothing above B-4). Melody, drums and the build-up unchanged. Checked: no rubs, no doubled
+  drums, cells ok.
 
 ### No template (4 Nov 22:00)
 - No separate template program or template `.xm`: the song programs share identical tracker code, so **any song

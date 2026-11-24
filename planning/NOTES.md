@@ -19,6 +19,9 @@ B = play/stop.
 `README.md` (five tunes, its row with hex and MakeCode link), `docs/tracker_format.md` (extra sounds a tune can
 bring, the noise waves, LEDs, XM instrument 11, its pattern table). Each matched its draft; all links work.
 
+**Pending (5 Nov 19:35):** `planning/mods/arirang.xm` - song 7, Arirang K-pop style: to listen to (see "Song 7"
+below). Then: an app/script to automate tune-making (Russell, 19:18: "one more song before we make an app/script").
+
 **PROMOTED 5 Nov 18:05** ("hex files updated - let's update docs and promote everything"): all six programs,
 all six XMs, `README.md` (the rewrite + six tunes + the G&S credit) and `docs/tracker_format.md`; each matched its
 draft, all links work, drafts removed. Hexes: all six re-downloaded by Russell (17:52-17:59), including the new
@@ -514,6 +517,24 @@ they use the older `lead_00` names and need updating to `track1_p00`.
     still have it) and 6 and 8 (extras): each board starts a row after the last, changes pitch at its own random
     moments, and never starts the same pitch as another board on the same row. The pilot tone stays on one
     board (track 1). Checked again.
+
+### Song 7: Arirang, K-pop style (5 Nov 19:35, draft `planning/mods/arirang.xm`, to listen to)
+- Russell: "one more song before we make an app/script to automate this. Any Japanese or Korean songs that might
+  be well known?" Claude offered Sakura Sakura, Soran Bushi (taiko techno), Kojo no Tsuki (Taki, d. 1903),
+  Yuyake Koyake (d. 1948), Arirang, Doraji Taryeong; ruled out Sukiyaki (1961), Gangnam Style and Baby Shark
+  (Pinkfong's version; Russell: "I'm avoiding Baby Shark for other reasons!"). Russell: "Shame we can't Gangnam
+  style" - copyright covers tunes, not styles - "Oppa Arirang style!"
+- **Melody:** traditional Korean, from folktunefinder.com tune 7558 (ABC, "trad Korea", 3/4, G major
+  pentatonic, 16 bars); a public-domain folk tune, so nothing to license.
+- **The style:** K-pop. The 3/4 tune straightened into 4/4 (each bar keeps its long-short-short lilt; the triplet
+  becomes three quick notes); chunky "horse dance" synth stabs on track 3 (rows 0, 3, 4, 6, alternating the
+  chord's 3rd and 5th so they don't run together); a minimal verse (kick on 1 and the "and" of 3, a snap on 3,
+  a sub bass in octave 3); the pre-chorus build (the tune's high second half, the snare speeding up, pews) cuts
+  to two rows of silence - "OPPA!" - into the drop: four on the floor, the bass bouncing on the offbeats (octave
+  3, track 5 doubling on the beats an octave up), trap-style hat rolls, claps; a breakdown; and the last drop a
+  tone up (G to A major), very K-pop. Nothing from any K-pop song is used.
+- Order: INT(2) V(4) BU(2) D(4) BR(2) BU(2) DK(4) DK(4) OUT = 25 patterns, 2.7 minutes; 19 in the file.
+  Checked: no rubs, no doubled drums, in range (bass from C-3), cells ok, no repeated note back-to-back on one board.
 
 ### Song 6: Modern Major-General, patter drum'n'bass (5 Nov 17:45, draft `planning/mods/major_general.xm`)
 - Russell: "copyright is a pain - I want to show the students tunes from films or musicals, but even Les Mis is
